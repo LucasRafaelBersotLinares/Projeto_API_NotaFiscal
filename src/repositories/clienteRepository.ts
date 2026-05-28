@@ -20,6 +20,10 @@ export class ClienteRepository {
         return this.clienteList.find(cliente => cliente.id_cliente === id)
     }
 
+    cpfRepetido(cpf: string): Cliente | undefined{
+        return this.clienteList.find(cliente => cliente.cpf === cpf)
+    }
+
     insereCliente(cliente: Cliente) {
         this.clienteList.push(cliente)
     }
