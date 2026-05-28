@@ -11,4 +11,29 @@ export class ClienteRepository {
         }
         return this.instance
     }
+
+    listaClientes(): Cliente[] {
+        return this.clienteList
+    }
+
+    listaClienteID(id: number): Cliente | undefined {
+        return this.clienteList.find(cliente => cliente.id_cliente === id)
+    }
+
+    insereCliente(cliente: Cliente) {
+        this.clienteList.push(cliente)
+    }
+
+    atualizaCliente(id: number, cliente: Cliente): Cliente | undefined {
+        let clienteIndex: number = this.clienteList.findIndex((cliente => cliente.id_cliente === id))
+
+        if(clienteIndex === -1){
+            return undefined
+        }
+        this.clienteList[clienteIndex] = cliente
+    }
+
+    deletaCliente(id: number): Cliente[] | undefined {
+        return this.clienteList = this.clienteList.filter(cliente => cliente.id_cliente != id)
+    }
 }
