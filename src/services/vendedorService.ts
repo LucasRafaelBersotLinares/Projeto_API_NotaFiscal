@@ -8,7 +8,7 @@ export class VendedorService {
         if(!vendedorBody.nome || !vendedorBody.matricula || !vendedorBody.comissao_percentual){
             throw new Error("Dados obrigatórios faltantes!!! [Nome, Matricula, Comissao_percentual]")
         }
-        if(this.vendedorRepository.matriculaRepetida(vendedorBody.cpf) === -1){
+        if(this.vendedorRepository.matriculaRepetida(vendedorBody.matricula) === -1){
             return this.vendedorRepository.insereVendedor(vendedorBody)
         }
         throw new Error("Sistema ja possui um vendedor cadastrado nesta matricula")
