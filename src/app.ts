@@ -8,3 +8,5 @@ app.use(express.json())
 function serverOn(){
     console.log(`API está sendo executada no endereço: http:localhost:${PORT}`)
 }
+
+app.post("/clientes",insereCliente)
