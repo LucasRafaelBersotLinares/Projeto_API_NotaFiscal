@@ -3,3 +3,16 @@ import { VendedorService } from "../services/vendedorService"
 
 const vendedorService = new VendedorService()
 
+export function insereVendedor(req: Request, res: Response){
+    try {
+        const newVendedor = vendedorService.insereVendedor(req.body)
+        res.status(201).json(
+        {
+            message: "Vendedor cadastrado com sucesso!!!",
+            vendedor: newVendedor
+        }
+        )
+    } catch( error: any){
+        res.status(400).json({message: error.message})
+    }
+}
