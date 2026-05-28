@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.insereCliente = insereCliente;
+exports.listaClientes = listaClientes;
 const clienteService_1 = require("../services/clienteService");
 const clienteService = new clienteService_1.ClienteService();
 function insereCliente(req, res) {
@@ -9,6 +10,17 @@ function insereCliente(req, res) {
         res.status(201).json({
             message: "Cliente cadastrado com sucesso!!!",
             cliente: newCliente
+        });
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+function listaClientes(req, res) {
+    try {
+        const clientesList = clienteService.listaClientes();
+        res.status(200).json({
+            clientesList
         });
     }
     catch (error) {

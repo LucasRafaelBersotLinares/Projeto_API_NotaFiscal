@@ -14,6 +14,12 @@ class ClienteService {
         }
         throw new Error("Sistema ja possui um cliente cadastrado neste CPF");
     }
+    listaClientes() {
+        if (this.clienteRepository.listaClientes() === undefined) {
+            throw new Error("Nenhum Cleinte cadastrado.");
+        }
+        return this.clienteRepository.listaClientes();
+    }
 }
 exports.ClienteService = ClienteService;
 //# sourceMappingURL=clienteService.js.map
