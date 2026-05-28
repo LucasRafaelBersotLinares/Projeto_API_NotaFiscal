@@ -3,6 +3,5 @@ import { ClienteRepository } from "../repositories/clienteRepository"
 export class ClienteService {
     clienteRepository: ClienteRepository = ClienteRepository.getInstance()
 
-
-
+    
 }
