@@ -30,3 +30,17 @@ export function listaClientes(req: Request, res: Response){
     }
 }
 
+export function listaClienteID(req: Request, res: Response){
+    try{
+        const clienteID: any = clienteService.listaClienteID(req.params.id)
+        res.status(200).json(
+        {
+            message: "Cliente:",
+            clienteID
+        }
+        )
+    } catch(error: any){
+        res.status(400).json({message: error.message})
+    }
+}
+
