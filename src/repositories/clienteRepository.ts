@@ -16,7 +16,7 @@ export class ClienteRepository {
         return this.clienteList
     }
 
-    listaClienteID(id: number): Cliente | undefined {
+    listaClienteID(id: number): Cliente | undefined{
         return this.clienteList.find(cliente => cliente.id_cliente === id)
     }
 

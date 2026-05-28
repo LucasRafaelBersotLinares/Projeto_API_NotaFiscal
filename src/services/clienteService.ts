@@ -20,4 +20,11 @@ export class ClienteService {
         }
         return this.clienteRepository.listaClientes()
     }
+
+    listaClienteID(id: number): Cliente | undefined {
+        if(this.clienteRepository.listaClienteID(id) === undefined){
+            throw new Error("Cliente com este ID não existe no sistema.")
+        }
+        return this.clienteRepository.listaClienteID(id)
+    }   
 }
