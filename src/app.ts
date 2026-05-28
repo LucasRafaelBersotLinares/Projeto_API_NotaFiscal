@@ -10,3 +10,4 @@ function serverOn(){
 }
 
 app.post("/clientes",insereCliente)
+app.listen(PORT, serverOn)

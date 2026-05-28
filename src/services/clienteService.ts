@@ -3,12 +3,13 @@ import { ClienteRepository } from "../repositories/clienteRepository"
 export class ClienteService {
     clienteRepository: ClienteRepository = ClienteRepository.getInstance()
 
-    insereCliente(clienteBody: any){
+    insereCliente(clienteBody: any): Cliente{
         if(!clienteBody.nome || !clienteBody.cpf || !clienteBody.telefone){
             throw new Error("Dados obrigatórios faltantes!!!\n[Nome, CPF, Telefone]")
         }
-        if(this.clienteRepository.cpfRepetido(clienteBody.cpf) === undefined){
+        if(this.clienteRepository.cpfRepetido(clienteBody.cpf) === -1){
             this.clienteRepository.insereCliente(clienteBody)
+            return clienteBody
         }
         throw new Error("Sistema ja possui um cliente cadastrado neste CPF")
     }

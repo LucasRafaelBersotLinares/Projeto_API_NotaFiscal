@@ -9,7 +9,7 @@ export function insereCliente(req: Request, res: Response){
         res.status(201).json(
         {
             message: "Cliente cadastrado com sucesso!!!",
-            produto: newCliente
+            cliente: newCliente
         }
         )
     } catch( error: any){

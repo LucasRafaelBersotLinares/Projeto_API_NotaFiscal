@@ -20,8 +20,8 @@ export class ClienteRepository {
         return this.clienteList.find(cliente => cliente.id_cliente === id)
     }
 
-    cpfRepetido(cpf: string): Cliente | undefined{
-        return this.clienteList.find(cliente => cliente.cpf === cpf)
+    cpfRepetido(cpf: string): number{
+        return this.clienteList.findIndex(cliente => cliente.cpf === cpf)
     }
 
     insereCliente(cliente: Cliente) {
