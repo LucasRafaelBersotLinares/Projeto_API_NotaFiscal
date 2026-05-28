@@ -30,13 +30,13 @@ export class ClienteRepository {
         return newCliente
     }
 
-    atualizaCliente(id: number, cliente: Cliente): Cliente | undefined {
+    atualizaCliente(id: number, clienteBody: any): Cliente | undefined {
         let clienteIndex: number = this.clienteList.findIndex((cliente => cliente.id_cliente === id))
 
         if(clienteIndex === -1){
             return undefined
         }
-        this.clienteList[clienteIndex] = cliente
+        return this.clienteList[clienteIndex] = clienteBody
     }
 
     deletaCliente(id: number): Cliente[] | undefined {
