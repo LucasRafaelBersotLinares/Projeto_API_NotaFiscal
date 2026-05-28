@@ -25,6 +25,12 @@ class ClienteService {
         }
         return this.clienteRepository.listaClienteID(Number(id));
     }
+    atualizaCliente(id, clienteBody) {
+        if (this.clienteRepository.atualizaCliente(Number(id), clienteBody) === undefined) {
+            throw new Error("Cliente com este ID não existe no sistema.");
+        }
+        return this.clienteRepository.atualizaCliente(Number(id), clienteBody);
+    }
 }
 exports.ClienteService = ClienteService;
 //# sourceMappingURL=clienteService.js.map

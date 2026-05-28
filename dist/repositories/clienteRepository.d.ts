@@ -8,7 +8,7 @@ export declare class ClienteRepository {
     listaClienteID(id: number): Cliente | undefined;
     cpfRepetido(cpf: string): number;
     insereCliente(cliente: Cliente): Cliente;
-    atualizaCliente(id: number, cliente: Cliente): Cliente | undefined;
+    atualizaCliente(id: number, clienteBody: any): Cliente | undefined;
     deletaCliente(id: number): Cliente[] | undefined;
 }
 //# sourceMappingURL=clienteRepository.d.ts.map

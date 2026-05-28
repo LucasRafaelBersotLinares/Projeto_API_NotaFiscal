@@ -26,12 +26,12 @@ class ClienteRepository {
         this.clienteList.push(newCliente);
         return newCliente;
     }
-    atualizaCliente(id, cliente) {
+    atualizaCliente(id, clienteBody) {
         let clienteIndex = this.clienteList.findIndex((cliente => cliente.id_cliente === id));
         if (clienteIndex === -1) {
             return undefined;
         }
-        this.clienteList[clienteIndex] = cliente;
+        return this.clienteList[clienteIndex] = clienteBody;
     }
     deletaCliente(id) {
         return this.clienteList = this.clienteList.filter(cliente => cliente.id_cliente != id);

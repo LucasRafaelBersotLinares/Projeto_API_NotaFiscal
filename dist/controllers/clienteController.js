@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.insereCliente = insereCliente;
 exports.listaClientes = listaClientes;
 exports.listaClienteID = listaClienteID;
+exports.atualizaCliente = atualizaCliente;
 const clienteService_1 = require("../services/clienteService");
 const clienteService = new clienteService_1.ClienteService();
 function insereCliente(req, res) {
@@ -34,6 +35,18 @@ function listaClienteID(req, res) {
         res.status(200).json({
             message: "Cliente:",
             clienteID
+        });
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+function atualizaCliente(req, res) {
+    try {
+        const clienteAtualizado = clienteService.atualizaCliente(req.params.id, req.body);
+        res.status(200).json({
+            message: "Cliente Atualizado: ",
+            clienteAtualizado
         });
     }
     catch (error) {

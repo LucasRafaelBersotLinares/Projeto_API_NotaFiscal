@@ -36,7 +36,12 @@ export class ClienteRepository {
         if(clienteIndex === -1){
             return undefined
         }
-        return this.clienteList[clienteIndex] = clienteBody
+        this.clienteList[clienteIndex]!.nome = clienteBody.nome ?? this.clienteList[clienteIndex]!.nome
+        this.clienteList[clienteIndex]!.cpf = clienteBody.cpf ?? this.clienteList[clienteIndex]!.cpf
+        this.clienteList[clienteIndex]!.email = clienteBody.email ?? this.clienteList[clienteIndex]!.email
+        this.clienteList[clienteIndex]!.cidade = clienteBody.cidade ?? this.clienteList[clienteIndex]!.cidade
+        this.clienteList[clienteIndex]!.telefone = clienteBody.telefone ?? this.clienteList[clienteIndex]!.telefone
+        return this.clienteList[clienteIndex]
     }
 
     deletaCliente(id: number): Cliente[] | undefined {
