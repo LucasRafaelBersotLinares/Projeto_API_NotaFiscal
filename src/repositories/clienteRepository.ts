@@ -24,8 +24,10 @@ export class ClienteRepository {
         return this.clienteList.findIndex(cliente => cliente.cpf === cpf)
     }
 
-    insereCliente(cliente: Cliente) {
-        this.clienteList.push(cliente)
+    insereCliente(cliente: Cliente): Cliente {
+        const newCliente = new Cliente(cliente.nome,cliente.cpf,cliente.telefone,cliente.email,cliente.cidade)
+        this.clienteList.push(newCliente)
+        return newCliente
     }
 
     atualizaCliente(id: number, cliente: Cliente): Cliente | undefined {

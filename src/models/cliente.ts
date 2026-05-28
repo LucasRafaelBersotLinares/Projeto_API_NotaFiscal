@@ -6,7 +6,7 @@ export class Cliente {
     email: string
     cidade: string
 
-    constructor(id_cliente: number, nome: string, cpf: string, telefone: string, email: string, cidade: string){
+    constructor(nome: string, cpf: string, telefone: string, email: string, cidade: string){
         this.id_cliente = this.geraId()
         this.nome = nome
         this.cpf = cpf

@@ -9,8 +9,7 @@ class ClienteService {
             throw new Error("Dados obrigatórios faltantes!!!\n[Nome, CPF, Telefone]");
         }
         if (this.clienteRepository.cpfRepetido(clienteBody.cpf) === -1) {
-            this.clienteRepository.insereCliente(clienteBody);
-            return clienteBody;
+            return this.clienteRepository.insereCliente(clienteBody);
         }
         throw new Error("Sistema ja possui um cliente cadastrado neste CPF");
     }
@@ -19,6 +18,12 @@ class ClienteService {
             throw new Error("Nenhum Cleinte cadastrado.");
         }
         return this.clienteRepository.listaClientes();
+    }
+    listaClienteID(id) {
+        if (this.clienteRepository.listaClienteID(Number(id)) === undefined) {
+            throw new Error("Cliente com este ID não existe no sistema.");
+        }
+        return this.clienteRepository.listaClienteID(Number(id));
     }
 }
 exports.ClienteService = ClienteService;

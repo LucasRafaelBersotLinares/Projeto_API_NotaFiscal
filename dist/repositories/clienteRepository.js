@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ClienteRepository = void 0;
+const cliente_1 = require("../models/cliente");
 class ClienteRepository {
     static instance;
     clienteList = [];
@@ -21,7 +22,9 @@ class ClienteRepository {
         return this.clienteList.findIndex(cliente => cliente.cpf === cpf);
     }
     insereCliente(cliente) {
-        this.clienteList.push(cliente);
+        const newCliente = new cliente_1.Cliente(cliente.nome, cliente.cpf, cliente.telefone, cliente.email, cliente.cidade);
+        this.clienteList.push(newCliente);
+        return newCliente;
     }
     atualizaCliente(id, cliente) {
         let clienteIndex = this.clienteList.findIndex((cliente => cliente.id_cliente === id));

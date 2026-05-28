@@ -7,7 +7,7 @@ export declare class ClienteRepository {
     listaClientes(): Cliente[];
     listaClienteID(id: number): Cliente | undefined;
     cpfRepetido(cpf: string): number;
-    insereCliente(cliente: Cliente): void;
+    insereCliente(cliente: Cliente): Cliente;
     atualizaCliente(id: number, cliente: Cliente): Cliente | undefined;
     deletaCliente(id: number): Cliente[] | undefined;
 }

@@ -8,7 +8,7 @@ class Cliente {
     telefone;
     email;
     cidade;
-    constructor(id_cliente, nome, cpf, telefone, email, cidade) {
+    constructor(nome, cpf, telefone, email, cidade) {
         this.id_cliente = this.geraId();
         this.nome = nome;
         this.cpf = cpf;

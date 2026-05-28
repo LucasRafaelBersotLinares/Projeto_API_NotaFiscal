@@ -13,5 +13,6 @@ function serverOn() {
 }
 app.post("/clientes", clienteController_1.insereCliente);
 app.get("/clientes", clienteController_1.listaClientes);
+app.get("/clientes/:id", clienteController_1.listaClienteID);
 app.listen(PORT, serverOn);
 //# sourceMappingURL=app.js.map

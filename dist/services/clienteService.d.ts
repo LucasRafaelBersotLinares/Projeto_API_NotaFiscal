@@ -4,5 +4,6 @@ export declare class ClienteService {
     clienteRepository: ClienteRepository;
     insereCliente(clienteBody: any): Cliente;
     listaClientes(): Cliente[];
+    listaClienteID(id: any): Cliente | undefined;
 }
 //# sourceMappingURL=clienteService.d.ts.map
