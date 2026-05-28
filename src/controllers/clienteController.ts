@@ -17,4 +17,16 @@ export function insereCliente(req: Request, res: Response){
     }
 }
 
+export function listaClientes(req: Request, res: Response){
+    try{
+        const clientesList = clienteService.listaClientes()
+        res.status(200).json(
+        {
+            clientesList
+        }
+        )
+    } catch(error : any){
+        res.status(400).json({message: error.message})
+    }
+}
 
