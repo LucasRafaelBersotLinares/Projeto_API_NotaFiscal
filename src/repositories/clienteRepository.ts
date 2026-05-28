@@ -1,13 +1,13 @@
 import { Cliente } from "../models/cliente"
 
-export class clienteRepository {
-    private static instance: clienteRepository
+export class ClienteRepository {
+    private static instance: ClienteRepository
     private clienteList: Cliente[] = []
     private constructor() {}
 
-    public static getInstance(): clienteRepository {
+    public static getInstance(): ClienteRepository {
         if(!this.instance){
-            this.instance = new clienteRepository()
+            this.instance = new ClienteRepository()
         }
         return this.instance
     }
