@@ -13,4 +13,11 @@ export class ClienteService {
         }
         throw new Error("Sistema ja possui um cliente cadastrado neste CPF")
     }
+
+    listaClientes(): Cliente[] {
+        if(this.clienteRepository.listaClientes() === undefined){
+            throw new Error("Nenhum Cleinte cadastrado.")
+        }
+        return this.clienteRepository.listaClientes()
+    }
 }
