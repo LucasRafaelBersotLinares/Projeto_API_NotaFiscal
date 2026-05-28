@@ -44,3 +44,16 @@ export function listaClienteID(req: Request, res: Response){
     }
 }
 
+export function atualizaCliente(req: Request, res: Response){
+    try{
+        const clienteAtualizado = clienteService.atualizaCliente(req.params.id,req.body)
+        res.status(200).json(
+        {
+            message: "Cliente Atualizado: ",
+            clienteAtualizado
+        }
+        )
+    } catch(error: any){
+        res.status(400).json({message: error.message})
+    }
+}
