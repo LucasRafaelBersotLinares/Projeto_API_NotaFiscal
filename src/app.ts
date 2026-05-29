@@ -19,4 +19,6 @@ app.post("/vendedores",insereVendedor)
 app.get("/vendedores",listaVendedores)
 app.get("/vendedores/:id",listaVendedorID)
 app.put("/vendedores/:id",atualizaVendedor)
+
+
 app.listen(PORT, serverOn)
