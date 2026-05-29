@@ -22,5 +22,8 @@ export class VendedorRepository {
         return this.vendedorList.findIndex(vendedor => vendedor.matricula === matricula)
     }
 
+    listaVendedor(): Vendedor[] {
+        return this.vendedorList
+    }
 
 }
