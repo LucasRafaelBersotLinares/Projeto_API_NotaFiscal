@@ -18,4 +18,8 @@ export class NotaFiscalRepository {
         return newNota
     }
 
+    notaDuplicada(numero: any): number {
+        return this.notaList.findIndex(nota => nota.numero_nota === numero)
+    }
+
 }

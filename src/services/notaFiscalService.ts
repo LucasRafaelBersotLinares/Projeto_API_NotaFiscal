@@ -26,7 +26,7 @@ export class NotaFiscalService {
         }
     }
     
-    emiteNota(notaBody: any): NotaFiscal {
+    emiteNota(notaBody: any): NotaFiscal | undefined{
         const dataAtual: string = new Date().toISOString()
         const dataEntrada: string = new Date(notaBody.data_entrada).toISOString()
 
@@ -42,7 +42,18 @@ export class NotaFiscalService {
         if(this.verificarExistencia("id_carro", notaBody.id_carro) === -1 || this.verificarExistencia("id_vendedor", notaBody.id_vendedor) === -1 || this.verificarExistencia("id_cliente", notaBody.id_carro) === -1 ){
             throw new Error("O ID Carro, ID Vendedor e ID Cliente devem já estar previamente cadastrados no sistema.")
         }
-        if()
+        const estoqueCarro = this.estoqueRepository.listaEstoqueIDCarro(notaBody.id_carro)
+        if(estoqueCarro === undefined){
+            throw new Error("O Carro deve estar cadastrado no estoque.")
+        }
+        if(estoqueCarro.quantidade > 0){
+            this.estoqueRepository.diminuirEstoque(estoqueCarro.id_estoque)
+            if(this.notaRepository.notaDuplicada(notaBody.numero_nota) === -1){
+                return this.notaRepository.emiteNota(notaBody)
+            }
+            throw new Error("Esse núemro de nota está vinculada a uma existente.")
+        }
+        throw new Error("A quantidade do carro que está no estoque é igual a 0, não pode vender esse carro.")
 
 
 

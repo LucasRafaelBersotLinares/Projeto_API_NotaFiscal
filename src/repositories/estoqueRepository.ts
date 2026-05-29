@@ -54,4 +54,11 @@ export class EstoqueRepository {
         return this.estoqueList
     }
 
+    diminuirEstoque(id: number){
+        let estoqueIndex: number = this.estoqueList.findIndex(estoque => estoque.id_estoque === id)
+        this.estoqueList[estoqueIndex]!.quantidade -= 1
+    }
+
+
+
 }
