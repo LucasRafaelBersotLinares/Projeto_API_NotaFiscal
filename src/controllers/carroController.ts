@@ -29,3 +29,17 @@ export function listaCarros(req: Request, res: Response){
         res.status(400).json({message: error.message})
     }
 }
+
+export function listaCarroID(req: Request, res: Response){
+    try{
+        const carroID: any = carroService.listaCarroID(req.params.id)
+        res.status(200).json(
+        {
+            message: "Carro:",
+            carroID
+        }
+        )
+    } catch(error: any){
+        res.status(400).json({message: error.message})
+    }
+}

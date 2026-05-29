@@ -1,7 +1,7 @@
 import express from "express"
 import { insereCliente, listaClientes, listaClienteID, atualizaCliente} from "./controllers/clienteController"
 import { insereVendedor, listaVendedores, listaVendedorID, atualizaVendedor } from "./controllers/vendedorController"
-import { insereCarro, listaCarros } from "./controllers/carroController"
+import { insereCarro, listaCarros, listaCarroID } from "./controllers/carroController"
 
 const app = express()
 const PORT = process.env.PORT ?? 3000
@@ -23,4 +23,5 @@ app.put("/vendedores/:id",atualizaVendedor)
 
 app.post("/carros",insereCarro)
 app.get("/carros",listaCarros)
+app.get("/carros/:id",listaCarroID)
 app.listen(PORT, serverOn)

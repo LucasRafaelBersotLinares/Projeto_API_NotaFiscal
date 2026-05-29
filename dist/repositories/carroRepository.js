@@ -15,6 +15,9 @@ class CarroRepository {
     listaCarros() {
         return this.carroList;
     }
+    listaCarroID(id) {
+        return this.carroList.find(carro => carro.id_carro === id);
+    }
     placaRepetida(placa) {
         return this.carroList.findIndex(carro => carro.placa === placa);
     }

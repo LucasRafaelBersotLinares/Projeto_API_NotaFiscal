@@ -5,6 +5,7 @@ export declare class CarroRepository {
     private constructor();
     static getInstance(): CarroRepository;
     listaCarros(): Carro[];
+    listaCarroID(id: number): Carro | undefined;
     placaRepetida(placa: string): number;
     insereCarro(carro: Carro): Carro;
 }

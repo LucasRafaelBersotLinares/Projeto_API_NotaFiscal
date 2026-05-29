@@ -16,6 +16,10 @@ export class CarroRepository {
         return this.carroList
     }
 
+    listaCarroID(id: number): Carro | undefined{
+        return this.carroList.find(carro => carro.id_carro === id)
+    }
+
     placaRepetida(placa: string): number{
         return this.carroList.findIndex(carro => carro.placa === placa)
     }

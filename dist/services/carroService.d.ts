@@ -4,5 +4,6 @@ export declare class CarroService {
     carroRepository: CarroRepository;
     insereCarro(carroBody: any): Carro;
     listaCarros(): Carro[];
+    listaCarroID(id: any): Carro | undefined;
 }
 //# sourceMappingURL=carroService.d.ts.map

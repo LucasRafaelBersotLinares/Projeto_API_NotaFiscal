@@ -28,4 +28,11 @@ export class CarroService {
         }
         return this.carroRepository.listaCarros()
     }
+
+    listaCarroID(id: any): Carro | undefined {
+        if(this.carroRepository.listaCarroID(Number(id)) === undefined){
+            throw new Error("Carro com este ID não existe no sistema.")
+        }
+        return this.carroRepository.listaCarroID(Number(id))
+    }  
 }
