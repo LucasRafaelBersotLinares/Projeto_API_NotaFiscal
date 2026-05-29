@@ -3,5 +3,6 @@ import { VendedorRepository } from "../repositories/vendedorRepository";
 export declare class VendedorService {
     vendedorRepository: VendedorRepository;
     insereVendedor(vendedorBody: any): Vendedor;
+    listaVendedores(): Vendedor[];
 }
 //# sourceMappingURL=vendedorService.d.ts.map

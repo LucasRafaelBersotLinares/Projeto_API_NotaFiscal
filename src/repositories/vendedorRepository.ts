@@ -12,6 +12,10 @@ export class VendedorRepository {
         return this.instance
     }
 
+    listaVendedores(): Vendedor[] {
+        return this.vendedorList
+    }
+
     insereVendedor(vendedor: Vendedor): Vendedor {
         const newVendedor = new Vendedor(vendedor.nome,vendedor.matricula,vendedor.comissao_percentual)
         this.vendedorList.push(newVendedor)
@@ -22,8 +26,5 @@ export class VendedorRepository {
         return this.vendedorList.findIndex(vendedor => vendedor.matricula === matricula)
     }
 
-    listaVendedor(): Vendedor[] {
-        return this.vendedorList
-    }
 
 }

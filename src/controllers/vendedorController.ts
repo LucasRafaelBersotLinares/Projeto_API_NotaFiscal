@@ -16,3 +16,16 @@ export function insereVendedor(req: Request, res: Response){
         res.status(400).json({message: error.message})
     }
 }
+
+export function listaVendedores(req: Request, res: Response){
+    try{
+        const vendedorList = vendedorService.listaVendedores()
+        res.status(200).json(
+        {
+            vendedorList
+        }
+        )
+    } catch(error : any){
+        res.status(400).json({message: error.message})
+    }
+}

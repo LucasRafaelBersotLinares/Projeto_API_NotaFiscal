@@ -17,5 +17,6 @@ app.get("/clientes", clienteController_1.listaClientes);
 app.get("/clientes/:id", clienteController_1.listaClienteID);
 app.put("/clientes/:id", clienteController_1.atualizaCliente);
 app.post("/vendedores", vendedorController_1.insereVendedor);
+app.get("/vendedores", vendedorController_1.listaVendedores);
 app.listen(PORT, serverOn);
 //# sourceMappingURL=app.js.map

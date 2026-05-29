@@ -12,6 +12,9 @@ class VendedorRepository {
         }
         return this.instance;
     }
+    listaVendedores() {
+        return this.vendedorList;
+    }
     insereVendedor(vendedor) {
         const newVendedor = new vendedor_1.Vendedor(vendedor.nome, vendedor.matricula, vendedor.comissao_percentual);
         this.vendedorList.push(newVendedor);

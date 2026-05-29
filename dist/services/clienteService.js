@@ -15,7 +15,7 @@ class ClienteService {
     }
     listaClientes() {
         if (this.clienteRepository.listaClientes() === undefined) {
-            throw new Error("Nenhum Cleinte cadastrado.");
+            throw new Error("Nenhum Cliente cadastrado.");
         }
         return this.clienteRepository.listaClientes();
     }

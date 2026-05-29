@@ -14,4 +14,11 @@ export class VendedorService {
         throw new Error("Sistema ja possui um vendedor cadastrado nesta matricula")
     }
 
+    listaVendedores(): Vendedor[] {
+        if(this.vendedorRepository.listaVendedores() === undefined){
+            throw new Error("Nenhum Vendedor cadastrado.")
+        }
+        return this.vendedorRepository.listaVendedores()
+    }
+
 }

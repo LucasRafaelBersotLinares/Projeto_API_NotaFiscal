@@ -4,6 +4,7 @@ export declare class VendedorRepository {
     private vendedorList;
     private constructor();
     static getInstance(): VendedorRepository;
+    listaVendedores(): Vendedor[];
     insereVendedor(vendedor: Vendedor): Vendedor;
     matriculaRepetida(matricula: string): number;
 }
