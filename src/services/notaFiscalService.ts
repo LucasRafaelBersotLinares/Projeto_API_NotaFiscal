@@ -3,29 +3,30 @@ import { NotaFiscalRepository } from "../repositories/notaFiscalRepository"
 import { CarroRepository } from "../repositories/carroRepository"
 import { VendedorRepository } from "../repositories/vendedorRepository"
 import { ClienteRepository } from "../repositories/clienteRepository"
+import { EstoqueRepository } from "../repositories/estoqueRepository"
 
 
 export class NotaFiscalService {
     notaRepository: NotaFiscalRepository = NotaFiscalRepository.getInstance()
+    carroRepository = CarroRepository.getInstance()
+    vendedorRepository = VendedorRepository.getInstance()
+    clienteRepository = ClienteRepository.getInstance()
+    estoqueRepository = EstoqueRepository.getInstance()
 
     verificarExistencia( tabela: string, valor: any): number {
-        const carroRepository = CarroRepository.getInstance()
-        const vendedorRepository = VendedorRepository.getInstance()
-        const clienteRepository = ClienteRepository.getInstance()
-
         switch(tabela){
             case "id_carro":
-                return carroRepository.indexCarro(valor)
+                return this.carroRepository.indexCarro(valor)
             case "id_vendedor":
-                return vendedorRepository.indexVendedor(valor)
+                return this.vendedorRepository.indexVendedor(valor)
             case "id_cliente":
-                return clienteRepository.indexCliente(valor)
+                return this.clienteRepository.indexCliente(valor)
             default:
                 return -1
         }
     }
     
-    emiteNota(notaBody: any): NotaFiscal{
+    emiteNota(notaBody: any): NotaFiscal {
         const dataAtual: string = new Date().toISOString()
         const dataEntrada: string = new Date(notaBody.data_entrada).toISOString()
 
@@ -38,10 +39,11 @@ export class NotaFiscalService {
         if(dataEntrada > dataAtual){
             throw new Error("A data de emissao nao pode ser uma data futura, coloque a data real que a nota foi emitida.")
         }
-        if(this.verificarExistencia("id_carro", notaBody.id_carro) === -1 || this.verificarExistencia("id_vendedor", notaBody.id_vendedor) === -1 || this.verificarExistencia("id_cliente", notaBody.id_carro) === -1){
+        if(this.verificarExistencia("id_carro", notaBody.id_carro) === -1 || this.verificarExistencia("id_vendedor", notaBody.id_vendedor) === -1 || this.verificarExistencia("id_cliente", notaBody.id_carro) === -1 ){
             throw new Error("O ID Carro, ID Vendedor e ID Cliente devem já estar previamente cadastrados no sistema.")
         }
-        
+        if()
+
 
 
 
