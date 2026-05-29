@@ -16,3 +16,16 @@ export function insereEstoque(req: Request, res: Response){
         res.status(400).json({message: error.message})
     }
 }
+
+export function listaEstoque(req: Request, res: Response){
+    try{
+        const estoqueList = estoqueService.listaEstoque()
+        res.status(200).json(
+        {
+            estoqueList
+        }
+        )
+    } catch(error : any){
+        res.status(400).json({message: error.message})
+    }
+}

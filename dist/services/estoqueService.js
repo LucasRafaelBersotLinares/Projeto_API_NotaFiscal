@@ -7,8 +7,8 @@ class EstoqueService {
     estoqueRepository = estoqueRepository_1.EstoqueRepository.getInstance();
     carroRepository = carroRepository_1.CarroRepository.getInstance();
     insereEstoque(estoqueBody) {
-        const dataAtual = new Date();
-        const dataEntrada = new Date(estoqueBody.data_entrada);
+        const dataAtual = new Date().toISOString();
+        const dataEntrada = new Date(estoqueBody.data_entrada).toISOString();
         if (!estoqueBody.id_carro || estoqueBody.quantidade === undefined || !estoqueBody.localizacao_patio || !estoqueBody.data_entrada) {
             throw new Error("Dados obrigatórios faltantes!!! [ID_carro, Quantidade, Localizacao_patio, Data_entrada]");
         }
@@ -25,6 +25,12 @@ class EstoqueService {
             throw new Error("Carro ja possui um estoque tivo com esse ID");
         }
         throw new Error("Quantidade deve ser maior ou igual a 0, numeros negativos nao sao aceitos.");
+    }
+    listaEstoque() {
+        if (this.estoqueRepository.listaEstoque() === undefined) {
+            throw new Error("Nenhum Estoque cadastrado.");
+        }
+        return this.estoqueRepository.listaEstoque();
     }
 }
 exports.EstoqueService = EstoqueService;

@@ -6,5 +6,6 @@ export declare class EstoqueRepository {
     static getInstance(): EstoqueRepository;
     insereEstoque(estoque: any): Estoque;
     idCarroDuplicado(id: number): number;
+    listaEstoque(): Estoque[];
 }
 //# sourceMappingURL=estoqueRepository.d.ts.map

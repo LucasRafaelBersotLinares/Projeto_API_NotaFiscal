@@ -1,1 +1,1 @@
-{"version":3,"file":"estoqueController.d.ts","sourceRoot":"","sources":["../../src/controllers/estoqueController.ts"],"names":[],"mappings":"AAAA,OAAO,EAAC,OAAO,EAAE,QAAQ,EAAC,MAAM,SAAS,CAAA;AAKzC,wBAAgB,aAAa,CAAC,GAAG,EAAE,OAAO,EAAE,GAAG,EAAE,QAAQ,QAYxD"}
+{"version":3,"file":"estoqueController.d.ts","sourceRoot":"","sources":["../../src/controllers/estoqueController.ts"],"names":[],"mappings":"AAAA,OAAO,EAAC,OAAO,EAAE,QAAQ,EAAC,MAAM,SAAS,CAAA;AAKzC,wBAAgB,aAAa,CAAC,GAAG,EAAE,OAAO,EAAE,GAAG,EAAE,QAAQ,QAYxD;AAED,wBAAgB,YAAY,CAAC,GAAG,EAAE,OAAO,EAAE,GAAG,EAAE,QAAQ,QAWvD"}

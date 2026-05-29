@@ -5,5 +5,6 @@ export declare class EstoqueService {
     estoqueRepository: EstoqueRepository;
     carroRepository: CarroRepository;
     insereEstoque(estoqueBody: any): Estoque;
+    listaEstoque(): Estoque[];
 }
 //# sourceMappingURL=estoqueService.d.ts.map

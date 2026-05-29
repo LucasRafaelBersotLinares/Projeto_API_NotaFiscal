@@ -7,8 +7,8 @@ export class EstoqueService {
     carroRepository: CarroRepository = CarroRepository.getInstance()
 
     insereEstoque(estoqueBody: any): Estoque {
-        const dataAtual: Date = new Date()
-        const dataEntrada: Date = new Date(estoqueBody.data_entrada)
+        const dataAtual: string = new Date().toISOString()
+        const dataEntrada: string = new Date(estoqueBody.data_entrada).toISOString()
 
         if(!estoqueBody.id_carro || estoqueBody.quantidade === undefined || !estoqueBody.localizacao_patio || !estoqueBody.data_entrada){
             throw new Error("Dados obrigatórios faltantes!!! [ID_carro, Quantidade, Localizacao_patio, Data_entrada]")
@@ -26,6 +26,13 @@ export class EstoqueService {
             throw new Error("Carro ja possui um estoque tivo com esse ID")
         }
         throw new Error("Quantidade deve ser maior ou igual a 0, numeros negativos nao sao aceitos.")
+    }
+
+    listaEstoque(): Estoque[] {
+        if(this.estoqueRepository.listaEstoque() === undefined){
+            throw new Error("Nenhum Estoque cadastrado.")
+        }
+        return this.estoqueRepository.listaEstoque()
     }
 
 

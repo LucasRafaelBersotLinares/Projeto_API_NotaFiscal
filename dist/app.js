@@ -27,5 +27,6 @@ app.get("/carros", carroController_1.listaCarros);
 app.get("/carros/:id", carroController_1.listaCarroID);
 app.put("/carros/:id", carroController_1.atualizaCarro);
 app.post("/estoque", estoqueController_1.insereEstoque);
+app.get("/estoque", estoqueController_1.listaEstoque);
 app.listen(PORT, serverOn);
 //# sourceMappingURL=app.js.map

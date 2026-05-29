@@ -20,6 +20,9 @@ class EstoqueRepository {
     idCarroDuplicado(id) {
         return this.estoqueList.findIndex(estoque => estoque.id_carro === id);
     }
+    listaEstoque() {
+        return this.estoqueList;
+    }
 }
 exports.EstoqueRepository = EstoqueRepository;
 //# sourceMappingURL=estoqueRepository.js.map

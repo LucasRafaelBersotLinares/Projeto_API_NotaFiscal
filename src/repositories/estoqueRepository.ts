@@ -22,6 +22,10 @@ export class EstoqueRepository {
         return this.estoqueList.findIndex(estoque => estoque.id_carro === id)
     }
 
+    listaEstoque(): Estoque[] {
+        return this.estoqueList
+    }
+
 
 
 
