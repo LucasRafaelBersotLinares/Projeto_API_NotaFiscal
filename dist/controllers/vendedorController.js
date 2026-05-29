@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.insereVendedor = insereVendedor;
 exports.listaVendedores = listaVendedores;
+exports.listaVendedorID = listaVendedorID;
 const vendedorService_1 = require("../services/vendedorService");
 const vendedorService = new vendedorService_1.VendedorService();
 function insereVendedor(req, res) {
@@ -21,6 +22,18 @@ function listaVendedores(req, res) {
         const vendedorList = vendedorService.listaVendedores();
         res.status(200).json({
             vendedorList
+        });
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+function listaVendedorID(req, res) {
+    try {
+        const vendedorID = vendedorService.listaVendedorID(req.params.id);
+        res.status(200).json({
+            message: "Vendedor:",
+            vendedorID
         });
     }
     catch (error) {

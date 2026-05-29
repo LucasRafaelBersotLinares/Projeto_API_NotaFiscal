@@ -24,4 +24,11 @@ export class VendedorService {
         return this.vendedorRepository.listaVendedores()
     }
 
+    listaVendedorID(id: any): Vendedor| undefined {
+        if(this.vendedorRepository.listaVendedorID(Number(id)) === undefined){
+            throw new Error("Vendedor com este ID não existe no sistema.")
+        }
+        return this.vendedorRepository.listaVendedorID(Number(id))
+    }  
+
 }

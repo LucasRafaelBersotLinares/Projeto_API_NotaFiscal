@@ -5,6 +5,7 @@ export declare class VendedorRepository {
     private constructor();
     static getInstance(): VendedorRepository;
     listaVendedores(): Vendedor[];
+    listaVendedorID(id: number): Vendedor | undefined;
     insereVendedor(vendedor: Vendedor): Vendedor;
     matriculaRepetida(matricula: string): number;
 }

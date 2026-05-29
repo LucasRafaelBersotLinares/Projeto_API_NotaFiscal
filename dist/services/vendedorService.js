@@ -22,6 +22,12 @@ class VendedorService {
         }
         return this.vendedorRepository.listaVendedores();
     }
+    listaVendedorID(id) {
+        if (this.vendedorRepository.listaVendedorID(Number(id)) === undefined) {
+            throw new Error("Vendedor com este ID não existe no sistema.");
+        }
+        return this.vendedorRepository.listaVendedorID(Number(id));
+    }
 }
 exports.VendedorService = VendedorService;
 //# sourceMappingURL=vendedorService.js.map

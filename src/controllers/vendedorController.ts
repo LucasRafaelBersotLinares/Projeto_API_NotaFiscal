@@ -29,3 +29,17 @@ export function listaVendedores(req: Request, res: Response){
         res.status(400).json({message: error.message})
     }
 }
+
+export function listaVendedorID(req: Request, res: Response){
+    try{
+        const vendedorID: any = vendedorService.listaVendedorID(req.params.id)
+        res.status(200).json(
+        {
+            message: "Vendedor:",
+            vendedorID
+        }
+        )
+    } catch(error: any){
+        res.status(400).json({message: error.message})
+    }
+}

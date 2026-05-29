@@ -16,6 +16,10 @@ export class VendedorRepository {
         return this.vendedorList
     }
 
+    listaVendedorID(id: number): Vendedor | undefined{
+        return this.vendedorList.find(vendedor => vendedor.id_vendedor === id)
+    }
+
     insereVendedor(vendedor: Vendedor): Vendedor {
         const newVendedor = new Vendedor(vendedor.nome,vendedor.matricula,vendedor.comissao_percentual)
         this.vendedorList.push(newVendedor)
