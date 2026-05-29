@@ -11,7 +11,11 @@ export class EstoqueRepository {
         }
         return this.instance
     }
-    
+
+    insereEstoque(estoque: any): Estoque | undefined {
+
+
+    }
 
 
 

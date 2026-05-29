@@ -24,7 +24,7 @@ export class VendedorRepository {
         return this.vendedorList.findIndex(vendedor => vendedor.matricula === matricula)
     }
 
-    insereVendedor(vendedor: Vendedor): Vendedor {
+    insereVendedor(vendedor: any): Vendedor {
         const newVendedor = new Vendedor(vendedor.nome,vendedor.matricula,vendedor.comissao_percentual)
         this.vendedorList.push(newVendedor)
         return newVendedor

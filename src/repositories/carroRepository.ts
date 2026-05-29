@@ -24,7 +24,7 @@ export class CarroRepository {
         return this.carroList.findIndex(carro => carro.placa === placa)
     }
 
-    insereCarro(carro: Carro): Carro {
+    insereCarro(carro: any): Carro {
         const newCarro = new Carro(carro.marca,carro.modelo,carro.ano,carro.placa,carro.preco,carro.cor)
         this.carroList.push(newCarro)
         return newCarro
