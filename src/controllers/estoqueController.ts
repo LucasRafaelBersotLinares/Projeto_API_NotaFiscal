@@ -64,8 +64,22 @@ export function atualizaEstoque(req: Request, res: Response){
         const estoqueAtualizado = estoqueService.atualizaEstoque(req.params.id,req.body)
         res.status(200).json(
         {
-            message: "Cliente Atualizado: ",
+            message: "Estoque Atualizado: ",
             estoqueAtualizado
+        }
+        )
+    } catch(error: any){
+        res.status(400).json({message: error.message})
+    }
+}
+
+export function deletaEstoque(req: Request, res: Response){
+    try{
+        const estoqueDelete = estoqueService.deletaEstoque(req.params.id)
+        res.status(200).json(
+        {
+            message: "Lista de Estoque Restantes: ",
+            estoqueDelete
         }
         )
     } catch(error: any){

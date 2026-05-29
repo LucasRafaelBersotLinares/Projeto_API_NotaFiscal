@@ -9,5 +9,6 @@ export declare class EstoqueService {
     listaEstoqueID(id: any): Estoque | undefined;
     listaEstoqueIDCarro(id: any): Estoque | undefined;
     atualizaEstoque(id: any, estoqueBody: any): Estoque | undefined;
+    deletaEstoque(id: any): Estoque[] | undefined;
 }
 //# sourceMappingURL=estoqueService.d.ts.map

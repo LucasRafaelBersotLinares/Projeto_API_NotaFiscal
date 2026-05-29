@@ -31,5 +31,6 @@ app.get("/estoque", estoqueController_1.listaEstoque);
 app.get("/estoque/:id", estoqueController_1.listaEstoqueID);
 app.get("/estoque/carro/:id", estoqueController_1.listaEstoqueIDCarro);
 app.put("/estoque/:id", estoqueController_1.atualizaEstoque);
+app.delete("/estoque/:id", estoqueController_1.deletaEstoque);
 app.listen(PORT, serverOn);
 //# sourceMappingURL=app.js.map

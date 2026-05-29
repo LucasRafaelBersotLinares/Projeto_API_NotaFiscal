@@ -38,6 +38,14 @@ class EstoqueRepository {
         this.estoqueList[estoqueIndex].localizacao_patio = estoqueBody.localizacao_patio ?? this.estoqueList[estoqueIndex].localizacao_patio;
         return this.estoqueList[estoqueIndex];
     }
+    deletaEstoque(id) {
+        let estoqueIndex = this.estoqueList.findIndex((estoque => estoque.id_estoque === id));
+        if (estoqueIndex === -1) {
+            return undefined;
+        }
+        this.estoqueList = this.estoqueList.filter(estoque => estoque.id_estoque != id);
+        return this.estoqueList;
+    }
 }
 exports.EstoqueRepository = EstoqueRepository;
 //# sourceMappingURL=estoqueRepository.js.map

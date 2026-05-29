@@ -45,5 +45,13 @@ export class EstoqueRepository {
         return this.estoqueList[estoqueIndex]
     }
 
+    deletaEstoque(id: number): Estoque[] | undefined {
+        let estoqueIndex: number = this.estoqueList.findIndex((estoque => estoque.id_estoque === id))
+        if(estoqueIndex === -1){
+            return undefined
+        }
+        this.estoqueList = this.estoqueList.filter(estoque => estoque.id_estoque != id)
+        return this.estoqueList
+    }
 
 }
