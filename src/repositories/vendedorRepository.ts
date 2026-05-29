@@ -30,6 +30,11 @@ export class VendedorRepository {
         return newVendedor
     }
 
+    indexVendedor(id: any){
+        return this.vendedorList.findIndex((vendedor => vendedor.id_vendedor === id))
+    }
+
+
     atualizaVendedor(id: number, vendedorBody: any): Vendedor | undefined {
         let vendedorIndex: number = this.vendedorList.findIndex((vendedor => vendedor.id_vendedor === id))
 

@@ -30,6 +30,10 @@ export class CarroRepository {
         return newCarro
     }
 
+    indexCarro(id: any){
+        return this.carroList.findIndex((carro => carro.id_carro === id))
+    }
+
     atualizaCarro(id: number, carroBody: any): Carro | undefined {
         let carroIndex: number = this.carroList.findIndex((carro => carro.id_carro === id))
 

@@ -11,4 +11,11 @@ export class NotaFiscalRepository {
         }
         return this.instance
     }
+
+    emiteNota(nota: any): NotaFiscal {
+        const newNota = new NotaFiscal(nota.numero_nota,nota.data_emissao,nota.valor_total,nota.id_cliente,nota.id_vendedor,nota.id_carro)
+        this.notaList.push(newNota)
+        return newNota
+    }
+
 }
