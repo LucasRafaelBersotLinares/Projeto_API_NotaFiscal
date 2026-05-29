@@ -15,20 +15,14 @@ export class NotaFiscalService {
 
         switch(tabela){
             case "id_carro":
-                return carroRepository.carroList.findIndex(carro => carro.id_carro === valor)
-                break
+                return carroRepository.indexCarro(valor)
             case "id_vendedor":
-
-                break
+                return vendedorRepository.indexVendedor(valor)
             case "id_cliente":
-
-                break
-
-
+                return clienteRepository.indexCliente(valor)
+            default:
+                return -1
         }
-
-
-        return 0
     }
     
     emiteNota(notaBody: any): NotaFiscal{
@@ -44,9 +38,10 @@ export class NotaFiscalService {
         if(dataEntrada > dataAtual){
             throw new Error("A data de emissao nao pode ser uma data futura, coloque a data real que a nota foi emitida.")
         }
-        if(this.verificarExistencia("id_carro", notaBody.id_carro) === -1 && this.verificarExistencia("id_vendedor", notaBody.id_vendedor) === -1 && this.verificarExistencia("id_cliente", notaBody.id_carro) === -1){
+        if(this.verificarExistencia("id_carro", notaBody.id_carro) === -1 || this.verificarExistencia("id_vendedor", notaBody.id_vendedor) === -1 || this.verificarExistencia("id_cliente", notaBody.id_carro) === -1){
             throw new Error("O ID Carro, ID Vendedor e ID Cliente devem já estar previamente cadastrados no sistema.")
         }
+        
 
 
 
