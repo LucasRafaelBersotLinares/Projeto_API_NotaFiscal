@@ -7,7 +7,7 @@ class CarroService {
     insereCarro(carroBody) {
         const anoAtual = new Date();
         if (!carroBody.marca || !carroBody.modelo || !carroBody.ano || !carroBody.placa || !carroBody.preco || !carroBody.cor) {
-            throw new Error("Dados obrigatórios faltantes!!!\n[Marca, Modelo, Ano, Placa, Preco, Cor]");
+            throw new Error("Dados obrigatórios faltantes!!! [Marca, Modelo, Ano, Placa, Preco, Cor]");
         }
         if (this.carroRepository.placaRepetida(carroBody.placa) === -1) {
             if (carroBody.ano >= 1950 && carroBody.ano <= (anoAtual.getFullYear() + 1)) {

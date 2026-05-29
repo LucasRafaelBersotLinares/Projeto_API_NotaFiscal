@@ -5,7 +5,7 @@ export class ClienteService {
 
     insereCliente(clienteBody: any): Cliente{
         if(!clienteBody.nome || !clienteBody.cpf || !clienteBody.telefone){
-            throw new Error("Dados obrigatórios faltantes!!!\n[Nome, CPF, Telefone]")
+            throw new Error("Dados obrigatórios faltantes!!! [Nome, CPF, Telefone]")
         }
         if(this.clienteRepository.cpfRepetido(clienteBody.cpf) === -1){
             return this.clienteRepository.insereCliente(clienteBody)

@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 const clienteController_1 = require("./controllers/clienteController");
 const vendedorController_1 = require("./controllers/vendedorController");
 const carroController_1 = require("./controllers/carroController");
+const estoqueController_1 = require("./controllers/estoqueController");
 const app = (0, express_1.default)();
 const PORT = process.env.PORT ?? 3000;
 app.use(express_1.default.json());
@@ -25,5 +26,6 @@ app.post("/carros", carroController_1.insereCarro);
 app.get("/carros", carroController_1.listaCarros);
 app.get("/carros/:id", carroController_1.listaCarroID);
 app.put("/carros/:id", carroController_1.atualizaCarro);
+app.post("/estoque", estoqueController_1.insereEstoque);
 app.listen(PORT, serverOn);
 //# sourceMappingURL=app.js.map

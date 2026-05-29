@@ -7,7 +7,7 @@ class Estoque {
     quantidade;
     localizacao_patio;
     data_entrada;
-    constructor(id_estoque, id_carro, quantidade, localizacao_patio, data_entrada) {
+    constructor(id_carro, quantidade, localizacao_patio, data_entrada) {
         this.id_estoque = this.geraId();
         this.id_carro = id_carro;
         this.quantidade = quantidade;

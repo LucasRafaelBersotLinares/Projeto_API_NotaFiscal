@@ -7,7 +7,7 @@ export declare class CarroRepository {
     listaCarros(): Carro[];
     listaCarroID(id: number): Carro | undefined;
     placaRepetida(placa: string): number;
-    insereCarro(carro: Carro): Carro;
+    insereCarro(carro: any): Carro;
     atualizaCarro(id: number, carroBody: any): Carro | undefined;
 }
 //# sourceMappingURL=carroRepository.d.ts.map

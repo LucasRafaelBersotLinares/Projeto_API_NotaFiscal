@@ -7,7 +7,7 @@ export declare class VendedorRepository {
     listaVendedores(): Vendedor[];
     listaVendedorID(id: number): Vendedor | undefined;
     matriculaRepetida(matricula: string): number;
-    insereVendedor(vendedor: Vendedor): Vendedor;
+    insereVendedor(vendedor: any): Vendedor;
     atualizaVendedor(id: number, vendedorBody: any): Vendedor | undefined;
 }
 //# sourceMappingURL=vendedorRepository.d.ts.map
