@@ -2,7 +2,7 @@ import { Carro } from "../models/carro"
 
 export class CarroRepository {
     private static instance: CarroRepository
-    private carroeList: Carro[] = []
+    private carroList: Carro[] = []
     private constructor() {}
 
     public static getInstance(): CarroRepository {
@@ -12,7 +12,18 @@ export class CarroRepository {
         return this.instance
     }
 
+    listaCarros(): Carro[] {
+        return this.carroList
+    }
 
+    insereCarro(carro: Carro): Carro {
+        const newCarro = new Carro(carro.marca,carro.modelo,carro.ano,carro.placa,carro.preco,carro.cor)
+        this.carroList.push(newCarro)
+        return newCarro
+    }
 
-    
+    placaRepetida(placa: string): number{
+        return this.carroList.findIndex(carro => carro.placa === placa)
+    }
+
 }

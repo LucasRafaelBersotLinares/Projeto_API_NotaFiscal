@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const clienteController_1 = require("./controllers/clienteController");
 const vendedorController_1 = require("./controllers/vendedorController");
+const carroController_1 = require("./controllers/carroController");
 const app = (0, express_1.default)();
 const PORT = process.env.PORT ?? 3000;
 app.use(express_1.default.json());
@@ -20,5 +21,6 @@ app.post("/vendedores", vendedorController_1.insereVendedor);
 app.get("/vendedores", vendedorController_1.listaVendedores);
 app.get("/vendedores/:id", vendedorController_1.listaVendedorID);
 app.put("/vendedores/:id", vendedorController_1.atualizaVendedor);
+app.post("/carros", carroController_1.insereCarro);
 app.listen(PORT, serverOn);
 //# sourceMappingURL=app.js.map

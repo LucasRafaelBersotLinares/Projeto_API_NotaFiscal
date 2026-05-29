@@ -9,7 +9,7 @@ class Carro {
     placa;
     preco;
     cor;
-    constructor(id_carro, marca, modelo, ano, placa, preco, cor) {
+    constructor(marca, modelo, ano, placa, preco, cor) {
         this.id_carro = this.geraId();
         this.marca = marca;
         this.modelo = modelo;
