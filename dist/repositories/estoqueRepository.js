@@ -23,6 +23,9 @@ class EstoqueRepository {
     listaEstoque() {
         return this.estoqueList;
     }
+    listaEstoqueID(id) {
+        return this.estoqueList.find(estoque => estoque.id_estoque === id);
+    }
 }
 exports.EstoqueRepository = EstoqueRepository;
 //# sourceMappingURL=estoqueRepository.js.map

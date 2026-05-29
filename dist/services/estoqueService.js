@@ -32,6 +32,12 @@ class EstoqueService {
         }
         return this.estoqueRepository.listaEstoque();
     }
+    listaEstoqueID(id) {
+        if (this.estoqueRepository.listaEstoqueID(Number(id)) === undefined) {
+            throw new Error("Estoque com este ID não existe no sistema.");
+        }
+        return this.estoqueRepository.listaEstoqueID(Number(id));
+    }
 }
 exports.EstoqueService = EstoqueService;
 //# sourceMappingURL=estoqueService.js.map

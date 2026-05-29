@@ -26,6 +26,9 @@ export class EstoqueRepository {
         return this.estoqueList
     }
 
+    listaEstoqueID(id: number): Estoque | undefined{
+        return this.estoqueList.find(estoque => estoque.id_estoque === id)
+    }
 
 
 

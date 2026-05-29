@@ -29,3 +29,17 @@ export function listaEstoque(req: Request, res: Response){
         res.status(400).json({message: error.message})
     }
 }
+
+export function listaEstoqueID(req: Request, res: Response){
+    try{
+        const estoqueID: any = estoqueService.listaEstoqueID(req.params.id)
+        res.status(200).json(
+        {
+            message: "Estoque:",
+            estoqueID
+        }
+        )
+    } catch(error: any){
+        res.status(400).json({message: error.message})
+    }
+}
