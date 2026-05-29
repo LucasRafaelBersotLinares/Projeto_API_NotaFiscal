@@ -8,5 +8,6 @@ export declare class CarroRepository {
     listaCarroID(id: number): Carro | undefined;
     placaRepetida(placa: string): number;
     insereCarro(carro: Carro): Carro;
+    atualizaCarro(id: number, carroBody: any): Carro | undefined;
 }
 //# sourceMappingURL=carroRepository.d.ts.map

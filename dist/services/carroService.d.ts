@@ -5,5 +5,6 @@ export declare class CarroService {
     insereCarro(carroBody: any): Carro;
     listaCarros(): Carro[];
     listaCarroID(id: any): Carro | undefined;
+    atualizaCarro(id: any, carroBody: any): Carro | undefined;
 }
 //# sourceMappingURL=carroService.d.ts.map

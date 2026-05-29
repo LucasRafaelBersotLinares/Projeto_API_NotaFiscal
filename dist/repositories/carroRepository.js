@@ -26,6 +26,19 @@ class CarroRepository {
         this.carroList.push(newCarro);
         return newCarro;
     }
+    atualizaCarro(id, carroBody) {
+        let carroIndex = this.carroList.findIndex((carro => carro.id_carro === id));
+        if (carroIndex === -1) {
+            return undefined;
+        }
+        this.carroList[carroIndex].marca = carroBody.marca ?? this.carroList[carroIndex].marca;
+        this.carroList[carroIndex].modelo = carroBody.modelo ?? this.carroList[carroIndex].modelo;
+        this.carroList[carroIndex].ano = carroBody.ano ?? this.carroList[carroIndex].ano;
+        this.carroList[carroIndex].placa = carroBody.placa ?? this.carroList[carroIndex].placa;
+        this.carroList[carroIndex].preco = carroBody.preco ?? this.carroList[carroIndex].preco;
+        this.carroList[carroIndex].cor = carroBody.cor ?? this.carroList[carroIndex].cor;
+        return this.carroList[carroIndex];
+    }
 }
 exports.CarroRepository = CarroRepository;
 //# sourceMappingURL=carroRepository.js.map

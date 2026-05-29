@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.insereCarro = insereCarro;
 exports.listaCarros = listaCarros;
 exports.listaCarroID = listaCarroID;
+exports.atualizaCarro = atualizaCarro;
 const carroService_1 = require("../services/carroService");
 const carroService = new carroService_1.CarroService();
 function insereCarro(req, res) {
@@ -34,6 +35,18 @@ function listaCarroID(req, res) {
         res.status(200).json({
             message: "Carro:",
             carroID
+        });
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+function atualizaCarro(req, res) {
+    try {
+        const carroAtualizado = carroService.atualizaCarro(req.params.id, req.body);
+        res.status(200).json({
+            message: "Carro Atualizado: ",
+            carroAtualizado
         });
     }
     catch (error) {

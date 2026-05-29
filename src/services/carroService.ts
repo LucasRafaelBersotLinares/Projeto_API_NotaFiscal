@@ -34,5 +34,12 @@ export class CarroService {
             throw new Error("Carro com este ID não existe no sistema.")
         }
         return this.carroRepository.listaCarroID(Number(id))
-    }  
+    } 
+
+    atualizaCarro(id: any, carroBody: any): Carro | undefined {
+        if(this.carroRepository.atualizaCarro(Number(id),carroBody) === undefined){
+            throw new Error("Carro com este ID não existe no sistema.")
+        }
+        return this.carroRepository.atualizaCarro(Number(id),carroBody)
+    }
 }

@@ -32,6 +32,12 @@ class CarroService {
         }
         return this.carroRepository.listaCarroID(Number(id));
     }
+    atualizaCarro(id, carroBody) {
+        if (this.carroRepository.atualizaCarro(Number(id), carroBody) === undefined) {
+            throw new Error("Carro com este ID não existe no sistema.");
+        }
+        return this.carroRepository.atualizaCarro(Number(id), carroBody);
+    }
 }
 exports.CarroService = CarroService;
 //# sourceMappingURL=carroService.js.map

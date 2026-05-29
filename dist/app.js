@@ -24,5 +24,6 @@ app.put("/vendedores/:id", vendedorController_1.atualizaVendedor);
 app.post("/carros", carroController_1.insereCarro);
 app.get("/carros", carroController_1.listaCarros);
 app.get("/carros/:id", carroController_1.listaCarroID);
+app.put("/carros/:id", carroController_1.atualizaCarro);
 app.listen(PORT, serverOn);
 //# sourceMappingURL=app.js.map

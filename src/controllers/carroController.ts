@@ -43,3 +43,17 @@ export function listaCarroID(req: Request, res: Response){
         res.status(400).json({message: error.message})
     }
 }
+
+export function atualizaCarro(req: Request, res: Response){
+    try{
+        const carroAtualizado = carroService.atualizaCarro(req.params.id,req.body)
+        res.status(200).json(
+        {
+            message: "Carro Atualizado: ",
+            carroAtualizado
+        }
+        )
+    } catch(error: any){
+        res.status(400).json({message: error.message})
+    }
+}
