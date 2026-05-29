@@ -20,15 +20,25 @@ export class VendedorRepository {
         return this.vendedorList.find(vendedor => vendedor.id_vendedor === id)
     }
 
+    matriculaRepetida(matricula: string): number{
+        return this.vendedorList.findIndex(vendedor => vendedor.matricula === matricula)
+    }
+
     insereVendedor(vendedor: Vendedor): Vendedor {
         const newVendedor = new Vendedor(vendedor.nome,vendedor.matricula,vendedor.comissao_percentual)
         this.vendedorList.push(newVendedor)
         return newVendedor
     }
 
-    matriculaRepetida(matricula: string): number{
-        return this.vendedorList.findIndex(vendedor => vendedor.matricula === matricula)
+    atualizaVendedor(id: number, vendedorBody: any): Vendedor | undefined {
+        let vendedorIndex: number = this.vendedorList.findIndex((vendedor => vendedor.id_vendedor === id))
+
+        if(vendedorIndex === -1){
+            return undefined
+        }
+        this.vendedorList[vendedorIndex]!.nome = vendedorBody.nome ?? this.vendedorList[vendedorIndex]!.nome
+        this.vendedorList[vendedorIndex]!.matricula = vendedorBody.matricula ?? this.vendedorList[vendedorIndex]!.matricula
+        this.vendedorList[vendedorIndex]!.comissao_percentual = vendedorBody.comissao_percentual ?? this.vendedorList[vendedorIndex]!.comissao_percentual
+        return this.vendedorList[vendedorIndex]
     }
-
-
 }

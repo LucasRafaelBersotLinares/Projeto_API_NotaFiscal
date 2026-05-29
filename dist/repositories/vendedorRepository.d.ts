@@ -6,7 +6,8 @@ export declare class VendedorRepository {
     static getInstance(): VendedorRepository;
     listaVendedores(): Vendedor[];
     listaVendedorID(id: number): Vendedor | undefined;
-    insereVendedor(vendedor: Vendedor): Vendedor;
     matriculaRepetida(matricula: string): number;
+    insereVendedor(vendedor: Vendedor): Vendedor;
+    atualizaVendedor(id: number, vendedorBody: any): Vendedor | undefined;
 }
 //# sourceMappingURL=vendedorRepository.d.ts.map

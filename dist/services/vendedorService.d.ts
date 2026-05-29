@@ -5,5 +5,6 @@ export declare class VendedorService {
     insereVendedor(vendedorBody: any): Vendedor;
     listaVendedores(): Vendedor[];
     listaVendedorID(id: any): Vendedor | undefined;
+    atualizaVendedor(id: any, vendedorBody: any): Vendedor | undefined;
 }
 //# sourceMappingURL=vendedorService.d.ts.map

@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.insereVendedor = insereVendedor;
 exports.listaVendedores = listaVendedores;
 exports.listaVendedorID = listaVendedorID;
+exports.atualizaVendedor = atualizaVendedor;
 const vendedorService_1 = require("../services/vendedorService");
 const vendedorService = new vendedorService_1.VendedorService();
 function insereVendedor(req, res) {
@@ -34,6 +35,18 @@ function listaVendedorID(req, res) {
         res.status(200).json({
             message: "Vendedor:",
             vendedorID
+        });
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+function atualizaVendedor(req, res) {
+    try {
+        const vendedorAtualizado = vendedorService.atualizaVendedor(req.params.id, req.body);
+        res.status(200).json({
+            message: "Vendedor Atualizado: ",
+            vendedorAtualizado
         });
     }
     catch (error) {
