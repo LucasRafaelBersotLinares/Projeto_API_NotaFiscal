@@ -30,6 +30,16 @@ export class EstoqueRepository {
         return this.estoqueList.find(estoque => estoque.id_estoque === id)
     }
 
+    atualizaEstoque(id: number, estoqueBody: any): Estoque | undefined {
+        let estoqueIndex: number = this.estoqueList.findIndex((estoque => estoque.id_estoque === id))
+
+        if(estoqueIndex === -1){
+            return undefined
+        }
+        this.estoqueList[estoqueIndex]!.quantidade = estoqueBody.quantidade ?? this.estoqueList[estoqueIndex]!.quantidade
+        this.estoqueList[estoqueIndex]!.localizacao_patio = estoqueBody.localizacao_patio ?? this.estoqueList[estoqueIndex]!.localizacao_patio
+        return this.estoqueList[estoqueIndex]
+    }
 
 
 }

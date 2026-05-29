@@ -7,5 +7,6 @@ export declare class EstoqueService {
     insereEstoque(estoqueBody: any): Estoque;
     listaEstoque(): Estoque[];
     listaEstoqueID(id: any): Estoque | undefined;
+    atualizaEstoque(id: any, estoqueBody: any): Estoque | undefined;
 }
 //# sourceMappingURL=estoqueService.d.ts.map

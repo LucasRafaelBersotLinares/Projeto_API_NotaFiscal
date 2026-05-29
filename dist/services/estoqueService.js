@@ -38,6 +38,12 @@ class EstoqueService {
         }
         return this.estoqueRepository.listaEstoqueID(Number(id));
     }
+    atualizaEstoque(id, estoqueBody) {
+        if (this.estoqueRepository.atualizaEstoque(Number(id), estoqueBody) === undefined) {
+            throw new Error("Cliente com este ID não existe no sistema.");
+        }
+        return this.estoqueRepository.atualizaEstoque(Number(id), estoqueBody);
+    }
 }
 exports.EstoqueService = EstoqueService;
 //# sourceMappingURL=estoqueService.js.map

@@ -42,5 +42,11 @@ export class EstoqueService {
         return this.estoqueRepository.listaEstoqueID(Number(id))
     }   
 
+    atualizaEstoque(id: any, estoqueBody: any): Estoque | undefined {
+        if(this.estoqueRepository.atualizaEstoque(Number(id),estoqueBody) === undefined){
+            throw new Error("Cliente com este ID não existe no sistema.")
+        }
+        return this.estoqueRepository.atualizaEstoque(Number(id),estoqueBody)
+    }
 
 }
