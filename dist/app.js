@@ -8,6 +8,7 @@ const clienteController_1 = require("./controllers/clienteController");
 const vendedorController_1 = require("./controllers/vendedorController");
 const carroController_1 = require("./controllers/carroController");
 const estoqueController_1 = require("./controllers/estoqueController");
+const notaFiscalController_1 = require("./controllers/notaFiscalController");
 const app = (0, express_1.default)();
 const PORT = process.env.PORT ?? 3000;
 app.use(express_1.default.json());
@@ -32,5 +33,6 @@ app.get("/estoque/:id", estoqueController_1.listaEstoqueID);
 app.get("/estoque/carro/:id", estoqueController_1.listaEstoqueIDCarro);
 app.put("/estoque/:id", estoqueController_1.atualizaEstoque);
 app.delete("/estoque/:id", estoqueController_1.deletaEstoque);
+app.post("/notas", notaFiscalController_1.emiteNota);
 app.listen(PORT, serverOn);
 //# sourceMappingURL=app.js.map

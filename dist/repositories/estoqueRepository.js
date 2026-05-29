@@ -46,6 +46,10 @@ class EstoqueRepository {
         this.estoqueList = this.estoqueList.filter(estoque => estoque.id_estoque != id);
         return this.estoqueList;
     }
+    diminuirEstoque(id) {
+        let estoqueIndex = this.estoqueList.findIndex(estoque => estoque.id_estoque === id);
+        this.estoqueList[estoqueIndex].quantidade -= 1;
+    }
 }
 exports.EstoqueRepository = EstoqueRepository;
 //# sourceMappingURL=estoqueRepository.js.map

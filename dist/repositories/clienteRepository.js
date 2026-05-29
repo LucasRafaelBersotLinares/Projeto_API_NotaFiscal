@@ -26,6 +26,9 @@ class ClienteRepository {
         this.clienteList.push(newCliente);
         return newCliente;
     }
+    indexCliente(id) {
+        return this.clienteList.findIndex((cliente => cliente.id_cliente === id));
+    }
     atualizaCliente(id, clienteBody) {
         let clienteIndex = this.clienteList.findIndex((cliente => cliente.id_cliente === id));
         if (clienteIndex === -1) {

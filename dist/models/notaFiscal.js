@@ -9,7 +9,7 @@ class NotaFiscal {
     id_cliente;
     id_vendedor;
     id_carro;
-    constructor(id_nota, numero_nota, data_emissao, valor_total, id_cliente, id_vendedor, id_carro) {
+    constructor(numero_nota, data_emissao, valor_total, id_cliente, id_vendedor, id_carro) {
         this.id_nota = this.geraId();
         this.numero_nota = numero_nota;
         this.data_emissao = data_emissao;

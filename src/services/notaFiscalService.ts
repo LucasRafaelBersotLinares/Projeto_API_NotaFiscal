@@ -28,7 +28,7 @@ export class NotaFiscalService {
     
     emiteNota(notaBody: any): NotaFiscal | undefined{
         const dataAtual: string = new Date().toISOString()
-        const dataEntrada: string = new Date(notaBody.data_entrada).toISOString()
+        const dataEntrada: string = new Date(notaBody.data_emissao).toISOString()
 
         if(!notaBody.numero_nota || !notaBody.data_emissao || !notaBody.valor_total || !notaBody.id_cliente || !notaBody.id_vendedor || !notaBody.id_carro){
             throw new Error("Dados obrigatórios faltantes!!! [Numero da nota, Data emissao, Valor total, ID Cliente, ID Vendedor, ID Carro")

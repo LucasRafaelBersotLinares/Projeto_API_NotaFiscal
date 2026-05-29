@@ -26,6 +26,9 @@ class CarroRepository {
         this.carroList.push(newCarro);
         return newCarro;
     }
+    indexCarro(id) {
+        return this.carroList.findIndex((carro => carro.id_carro === id));
+    }
     atualizaCarro(id, carroBody) {
         let carroIndex = this.carroList.findIndex((carro => carro.id_carro === id));
         if (carroIndex === -1) {

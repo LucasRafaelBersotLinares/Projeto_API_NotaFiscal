@@ -11,5 +11,6 @@ export declare class EstoqueRepository {
     listaEstoqueIDCarro(id_carro: number): Estoque | undefined;
     atualizaEstoque(id: number, estoqueBody: any): Estoque | undefined;
     deletaEstoque(id: number): Estoque[] | undefined;
+    diminuirEstoque(id: number): void;
 }
 //# sourceMappingURL=estoqueRepository.d.ts.map

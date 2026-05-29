@@ -8,6 +8,7 @@ export declare class VendedorRepository {
     listaVendedorID(id: number): Vendedor | undefined;
     matriculaRepetida(matricula: string): number;
     insereVendedor(vendedor: any): Vendedor;
+    indexVendedor(id: any): number;
     atualizaVendedor(id: number, vendedorBody: any): Vendedor | undefined;
 }
 //# sourceMappingURL=vendedorRepository.d.ts.map

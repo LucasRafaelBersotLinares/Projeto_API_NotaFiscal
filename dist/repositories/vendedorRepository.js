@@ -26,6 +26,9 @@ class VendedorRepository {
         this.vendedorList.push(newVendedor);
         return newVendedor;
     }
+    indexVendedor(id) {
+        return this.vendedorList.findIndex((vendedor => vendedor.id_vendedor === id));
+    }
     atualizaVendedor(id, vendedorBody) {
         let vendedorIndex = this.vendedorList.findIndex((vendedor => vendedor.id_vendedor === id));
         if (vendedorIndex === -1) {
