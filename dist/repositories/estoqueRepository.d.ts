@@ -8,6 +8,7 @@ export declare class EstoqueRepository {
     idCarroDuplicado(id: number): number;
     listaEstoque(): Estoque[];
     listaEstoqueID(id: number): Estoque | undefined;
+    listaEstoqueIDCarro(id_carro: number): Estoque | undefined;
     atualizaEstoque(id: number, estoqueBody: any): Estoque | undefined;
 }
 //# sourceMappingURL=estoqueRepository.d.ts.map

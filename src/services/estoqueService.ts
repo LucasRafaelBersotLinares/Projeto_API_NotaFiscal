@@ -40,7 +40,14 @@ export class EstoqueService {
             throw new Error("Estoque com este ID não existe no sistema.")
         }
         return this.estoqueRepository.listaEstoqueID(Number(id))
-    }   
+    }  
+    
+    listaEstoqueIDCarro(id: any): Estoque | undefined {
+        if(this.estoqueRepository.listaEstoqueIDCarro(Number(id)) === undefined){
+            throw new Error("Estoque com este ID de carro não existe no sistema.")
+        }
+        return this.estoqueRepository.listaEstoqueIDCarro(Number(id))
+    }
 
     atualizaEstoque(id: any, estoqueBody: any): Estoque | undefined {
         if(this.estoqueRepository.atualizaEstoque(Number(id),estoqueBody) === undefined){

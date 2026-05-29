@@ -30,6 +30,10 @@ export class EstoqueRepository {
         return this.estoqueList.find(estoque => estoque.id_estoque === id)
     }
 
+    listaEstoqueIDCarro(id_carro: number): Estoque | undefined{
+        return this.estoqueList.find(estoque => estoque.id_carro === id_carro)
+    }
+
     atualizaEstoque(id: number, estoqueBody: any): Estoque | undefined {
         let estoqueIndex: number = this.estoqueList.findIndex((estoque => estoque.id_estoque === id))
 
