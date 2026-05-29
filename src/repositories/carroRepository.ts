@@ -16,14 +16,14 @@ export class CarroRepository {
         return this.carroList
     }
 
+    placaRepetida(placa: string): number{
+        return this.carroList.findIndex(carro => carro.placa === placa)
+    }
+
     insereCarro(carro: Carro): Carro {
         const newCarro = new Carro(carro.marca,carro.modelo,carro.ano,carro.placa,carro.preco,carro.cor)
         this.carroList.push(newCarro)
         return newCarro
-    }
-
-    placaRepetida(placa: string): number{
-        return this.carroList.findIndex(carro => carro.placa === placa)
     }
 
 }

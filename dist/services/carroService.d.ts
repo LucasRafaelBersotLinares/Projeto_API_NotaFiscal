@@ -3,5 +3,6 @@ import { CarroRepository } from "../repositories/carroRepository";
 export declare class CarroService {
     carroRepository: CarroRepository;
     insereCarro(carroBody: any): Carro;
+    listaCarros(): Carro[];
 }
 //# sourceMappingURL=carroService.d.ts.map

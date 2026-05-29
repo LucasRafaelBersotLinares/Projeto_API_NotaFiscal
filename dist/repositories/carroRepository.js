@@ -15,13 +15,13 @@ class CarroRepository {
     listaCarros() {
         return this.carroList;
     }
+    placaRepetida(placa) {
+        return this.carroList.findIndex(carro => carro.placa === placa);
+    }
     insereCarro(carro) {
         const newCarro = new carro_1.Carro(carro.marca, carro.modelo, carro.ano, carro.placa, carro.preco, carro.cor);
         this.carroList.push(newCarro);
         return newCarro;
-    }
-    placaRepetida(placa) {
-        return this.carroList.findIndex(carro => carro.placa === placa);
     }
 }
 exports.CarroRepository = CarroRepository;

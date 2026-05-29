@@ -21,4 +21,11 @@ export class CarroService {
         }
         throw new Error("Sistema ja possui um carro cadastrado nesta placa")
     }
+
+    listaCarros(): Carro[] {
+        if(this.carroRepository.listaCarros() === undefined){
+            throw new Error("Nenhum Carro cadastrado.")
+        }
+        return this.carroRepository.listaCarros()
+    }
 }

@@ -5,7 +5,7 @@ export declare class CarroRepository {
     private constructor();
     static getInstance(): CarroRepository;
     listaCarros(): Carro[];
-    insereCarro(carro: Carro): Carro;
     placaRepetida(placa: string): number;
+    insereCarro(carro: Carro): Carro;
 }
 //# sourceMappingURL=carroRepository.d.ts.map
