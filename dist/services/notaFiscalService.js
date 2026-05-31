@@ -36,7 +36,7 @@ class NotaFiscalService {
         if (dataEntrada > dataAtual) {
             throw new Error("A data de emissao nao pode ser uma data futura, coloque a data real que a nota foi emitida.");
         }
-        if (this.verificarExistencia("id_carro", notaBody.id_carro) === -1 || this.verificarExistencia("id_vendedor", notaBody.id_vendedor) === -1 || this.verificarExistencia("id_cliente", notaBody.id_carro) === -1) {
+        if (this.verificarExistencia("id_carro", notaBody.id_carro) === -1 || this.verificarExistencia("id_vendedor", notaBody.id_vendedor) === -1 || this.verificarExistencia("id_cliente", notaBody.id_cliente) === -1) {
             throw new Error("O ID Carro, ID Vendedor e ID Cliente devem já estar previamente cadastrados no sistema.");
         }
         const estoqueCarro = this.estoqueRepository.listaEstoqueIDCarro(notaBody.id_carro);
