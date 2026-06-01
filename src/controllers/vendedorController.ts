@@ -71,3 +71,17 @@ export function deletaVendedor(req: Request, res: Response){
         res.status(400).json({message: error.message})
     }
 }
+
+export function listaNotasVendedor(req: Request, res: Response){
+    try{
+        const notasID = vendedorService.listaNotasVendedor(req.params.id)
+        res.status(200).json(
+        {
+            message: "Notas do Vendedor:",
+            notasID
+        }
+        )
+    } catch(error: any){
+        res.status(400).json({message: error.message})
+    }
+}

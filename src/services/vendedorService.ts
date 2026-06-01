@@ -1,6 +1,7 @@
 import { Vendedor } from "../models/vendedor"
 import { VendedorRepository } from "../repositories/vendedorRepository"
 import { NotaFiscalRepository } from "../repositories/notaFiscalRepository"
+import { NotaFiscal } from "../models/notaFiscal"
 
 export class VendedorService {
     vendedorRepository: VendedorRepository = VendedorRepository.getInstance()
@@ -48,6 +49,13 @@ export class VendedorService {
             throw new Error("Vendedor não pode ser excluído por conta que tem nota emitida.")
         }
         return this.vendedorRepository.deletaVendedor(id)
+    }
+
+    listaNotasVendedor(id: any): NotaFiscal[] | undefined {
+        if(this.notaRepository.listaNotasporTabela(id,"vendedor")!.length === 0){
+            throw new Error("Vendedor não possuí notas emitidas no sistema.")
+        }
+        return this.notaRepository.listaNotasporTabela(id,"vendedor")
     }
 
 }

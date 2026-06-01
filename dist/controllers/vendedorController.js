@@ -5,6 +5,7 @@ exports.listaVendedores = listaVendedores;
 exports.listaVendedorID = listaVendedorID;
 exports.atualizaVendedor = atualizaVendedor;
 exports.deletaVendedor = deletaVendedor;
+exports.listaNotasVendedor = listaNotasVendedor;
 const vendedorService_1 = require("../services/vendedorService");
 const vendedorService = new vendedorService_1.VendedorService();
 function insereVendedor(req, res) {
@@ -60,6 +61,18 @@ function deletaVendedor(req, res) {
         res.status(200).json({
             message: "Lista de vendedores restantes:",
             vendedorDelete
+        });
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+function listaNotasVendedor(req, res) {
+    try {
+        const notasID = vendedorService.listaNotasVendedor(req.params.id);
+        res.status(200).json({
+            message: "Notas do Vendedor:",
+            notasID
         });
     }
     catch (error) {

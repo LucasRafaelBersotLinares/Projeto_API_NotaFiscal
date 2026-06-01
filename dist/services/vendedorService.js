@@ -45,6 +45,12 @@ class VendedorService {
         }
         return this.vendedorRepository.deletaVendedor(id);
     }
+    listaNotasVendedor(id) {
+        if (this.notaRepository.listaNotasporTabela(id, "vendedor").length === 0) {
+            throw new Error("Vendedor não possuí notas emitidas no sistema.");
+        }
+        return this.notaRepository.listaNotasporTabela(id, "vendedor");
+    }
 }
 exports.VendedorService = VendedorService;
 //# sourceMappingURL=vendedorService.js.map
