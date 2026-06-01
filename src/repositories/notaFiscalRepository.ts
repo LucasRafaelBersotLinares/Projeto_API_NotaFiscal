@@ -42,5 +42,15 @@ export class NotaFiscalRepository {
         }
     }
 
+    listaNotasporTabela(id: any, tabela: string): NotaFiscal[] | undefined{
+        switch(tabela){
+            case "cliente":
+                return this.notaList.filter(nota => nota.id_cliente == id)
+            case "vendedor":
+                return this.notaList.filter(nota => nota.id_vendedor == id)
+            default:
+                return undefined
+        }
+    }
 
 }

@@ -18,6 +18,7 @@ function serverOn() {
 app.post("/clientes", clienteController_1.insereCliente);
 app.get("/clientes", clienteController_1.listaClientes);
 app.get("/clientes/:id", clienteController_1.listaClienteID);
+app.get("/clientes/notas/:id", clienteController_1.listaNotasCliente);
 app.put("/clientes/:id", clienteController_1.atualizaCliente);
 app.delete("/clientes/:id", clienteController_1.deletaCliente);
 app.post("/vendedores", vendedorController_1.insereVendedor);
@@ -36,6 +37,6 @@ app.put("/estoque/:id", estoqueController_1.atualizaEstoque);
 app.delete("/estoque/:id", estoqueController_1.deletaEstoque);
 app.post("/notas", notaFiscalController_1.emiteNota);
 app.get("/notas", notaFiscalController_1.listaNotas);
-app.get("/notas/:id", notaFiscalController_1.listaNotaIDporTabela);
+app.get("/notas/:id", notaFiscalController_1.listaNotaID);
 app.listen(PORT, serverOn);
 //# sourceMappingURL=app.js.map

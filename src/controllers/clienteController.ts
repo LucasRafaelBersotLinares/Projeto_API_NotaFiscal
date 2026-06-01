@@ -70,7 +70,18 @@ export function deletaCliente(req: Request, res: Response){
     } catch(error: any){
         res.status(400).json({message: error.message})
     }
+}
 
-
-
+export function listaNotasCliente(req: Request, res: Response){
+    try{
+        const notasID = clienteService.listaNotasCliente(req.params.id)
+        res.status(200).json(
+        {
+            message: "Notas do Cliente:",
+            notasID
+        }
+        )
+    } catch(error: any){
+        res.status(400).json({message: error.message})
+    }
 }

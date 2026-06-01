@@ -5,6 +5,7 @@ exports.listaClientes = listaClientes;
 exports.listaClienteID = listaClienteID;
 exports.atualizaCliente = atualizaCliente;
 exports.deletaCliente = deletaCliente;
+exports.listaNotasCliente = listaNotasCliente;
 const clienteService_1 = require("../services/clienteService");
 const clienteService = new clienteService_1.ClienteService();
 function insereCliente(req, res) {
@@ -60,6 +61,18 @@ function deletaCliente(req, res) {
         res.status(200).json({
             message: "Lista de clientes restantes:",
             clienteDelete
+        });
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+function listaNotasCliente(req, res) {
+    try {
+        const notasID = clienteService.listaNotasCliente(req.params.id);
+        res.status(200).json({
+            message: "Notas do Cliente:",
+            notasID
         });
     }
     catch (error) {

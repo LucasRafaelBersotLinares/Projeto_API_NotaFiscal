@@ -42,6 +42,12 @@ class ClienteService {
         }
         return this.clienteRepository.deletaCliente(id);
     }
+    listaNotasCliente(id) {
+        if (this.notaRepository.listaNotasporTabela(id, "cliente").length === 0) {
+            throw new Error("Cliente não possuí notas emitidas no sistema.");
+        }
+        return this.notaRepository.listaNotasporTabela(id, "cliente");
+    }
 }
 exports.ClienteService = ClienteService;
 //# sourceMappingURL=clienteService.js.map

@@ -1,5 +1,5 @@
 import express from "express"
-import { insereCliente, listaClientes, listaClienteID, atualizaCliente, deletaCliente} from "./controllers/clienteController"
+import { insereCliente, listaClientes, listaClienteID, atualizaCliente, deletaCliente, listaNotasCliente} from "./controllers/clienteController"
 import { insereVendedor, listaVendedores, listaVendedorID, atualizaVendedor } from "./controllers/vendedorController"
 import { insereCarro, listaCarros, listaCarroID, atualizaCarro} from "./controllers/carroController"
 import { insereEstoque, listaEstoque, listaEstoqueID, atualizaEstoque, listaEstoqueIDCarro, deletaEstoque } from "./controllers/estoqueController"
@@ -16,6 +16,7 @@ function serverOn(){
 app.post("/clientes",insereCliente)
 app.get("/clientes",listaClientes)
 app.get("/clientes/:id",listaClienteID)
+app.get("/clientes/notas/:id",listaNotasCliente)
 app.put("/clientes/:id",atualizaCliente)
 app.delete("/clientes/:id", deletaCliente)
 

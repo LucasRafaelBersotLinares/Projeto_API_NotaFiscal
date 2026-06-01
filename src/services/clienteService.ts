@@ -1,6 +1,7 @@
 import { Cliente } from "../models/cliente"
 import { ClienteRepository } from "../repositories/clienteRepository"
 import { NotaFiscalRepository } from "../repositories/notaFiscalRepository"
+import { NotaFiscal } from "../models/notaFiscal"
 export class ClienteService {
     clienteRepository: ClienteRepository = ClienteRepository.getInstance()
     notaRepository: NotaFiscalRepository = NotaFiscalRepository.getInstance()
@@ -46,4 +47,10 @@ export class ClienteService {
         return this.clienteRepository.deletaCliente(id)
     }
 
+    listaNotasCliente(id: any): NotaFiscal[] | undefined {
+        if(this.notaRepository.listaNotasporTabela(id,"cliente")!.length === 0){
+            throw new Error("Cliente não possuí notas emitidas no sistema.")
+        }
+        return this.notaRepository.listaNotasporTabela(id,"cliente")
+    }
 }

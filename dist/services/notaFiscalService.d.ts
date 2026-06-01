@@ -13,6 +13,6 @@ export declare class NotaFiscalService {
     verificarExistencia(tabela: string, valor: any): number;
     emiteNota(notaBody: any): NotaFiscal | undefined;
     listaNotas(): NotaFiscal[];
-    listaNotaIDporTabela(id: any): NotaFiscal | undefined;
+    listaNotaID(id: any): NotaFiscal | undefined;
 }
 //# sourceMappingURL=notaFiscalService.d.ts.map

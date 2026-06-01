@@ -23,20 +23,8 @@ class NotaFiscalRepository {
     listaNotas() {
         return this.notaList;
     }
-    listaNotaIDporTabela(id, tabela) {
-        switch (tabela) {
-            case "nota":
-                return this.notaList.find(nota => nota.id_nota === id);
-                break;
-            case "vendedor":
-                return this.notaList.find(nota => nota.id_vendedor === id);
-                break;
-            case "cliente":
-                return this.notaList.find(nota => nota.id_cliente === id);
-                break;
-            default:
-                return undefined;
-        }
+    listaNotaID(id) {
+        return this.notaList.find(nota => nota.id_nota === id);
     }
     verificaNotaIDtabela(id, tabela) {
         switch (tabela) {
@@ -48,6 +36,16 @@ class NotaFiscalRepository {
                 break;
             default:
                 return -1;
+        }
+    }
+    listaNotasporTabela(id, tabela) {
+        switch (tabela) {
+            case "cliente":
+                return this.notaList.filter(nota => nota.id_cliente == id);
+            case "vendedor":
+                return this.notaList.filter(nota => nota.id_vendedor == id);
+            default:
+                return undefined;
         }
     }
 }
