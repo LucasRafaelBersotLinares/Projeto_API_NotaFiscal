@@ -1,7 +1,9 @@
 import { Request, Response } from "express"
 import { CarroService } from "../services/carroService"
+import { ErroStatusRepository } from "../repositories/erroStatusRepository"
 
 const carroService = new CarroService()
+const erroStatus = ErroStatusRepository.getInstance()
 
 export function insereCarro(req: Request, res: Response){
     try {
@@ -13,7 +15,7 @@ export function insereCarro(req: Request, res: Response){
         }
         )
     } catch( error: any){
-        res.status(400).json({message: error.message})
+        res.status(erroStatus.mostraErro()).json({message: error.message})
     }
 }
 
@@ -27,7 +29,7 @@ export function listaCarros(req: Request, res: Response){
         }
         )
     } catch(error : any){
-        res.status(400).json({message: error.message})
+        res.status(erroStatus.mostraErro()).json({message: error.message})
     }
 }
 
@@ -41,7 +43,7 @@ export function listaCarroID(req: Request, res: Response){
         }
         )
     } catch(error: any){
-        res.status(400).json({message: error.message})
+        res.status(erroStatus.mostraErro()).json({message: error.message})
     }
 }
 
@@ -55,7 +57,7 @@ export function atualizaCarro(req: Request, res: Response){
         }
         )
     } catch(error: any){
-        res.status(400).json({message: error.message})
+        res.status(erroStatus.mostraErro()).json({message: error.message})
     }
 }
 
@@ -69,6 +71,6 @@ export function deletaCarro(req: Request, res: Response){
         }
         )
     } catch(error: any){
-        res.status(400).json({message: error.message})
+        res.status(erroStatus.mostraErro()).json({message: error.message})
     }
 }

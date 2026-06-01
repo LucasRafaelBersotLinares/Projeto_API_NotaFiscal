@@ -6,7 +6,9 @@ exports.listaCarroID = listaCarroID;
 exports.atualizaCarro = atualizaCarro;
 exports.deletaCarro = deletaCarro;
 const carroService_1 = require("../services/carroService");
+const erroStatusRepository_1 = require("../repositories/erroStatusRepository");
 const carroService = new carroService_1.CarroService();
+const erroStatus = erroStatusRepository_1.ErroStatusRepository.getInstance();
 function insereCarro(req, res) {
     try {
         const newCarro = carroService.insereCarro(req.body);
@@ -16,7 +18,7 @@ function insereCarro(req, res) {
         });
     }
     catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(erroStatus.mostraErro()).json({ message: error.message });
     }
 }
 function listaCarros(req, res) {
@@ -28,7 +30,7 @@ function listaCarros(req, res) {
         });
     }
     catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(erroStatus.mostraErro()).json({ message: error.message });
     }
 }
 function listaCarroID(req, res) {
@@ -40,7 +42,7 @@ function listaCarroID(req, res) {
         });
     }
     catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(erroStatus.mostraErro()).json({ message: error.message });
     }
 }
 function atualizaCarro(req, res) {
@@ -52,7 +54,7 @@ function atualizaCarro(req, res) {
         });
     }
     catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(erroStatus.mostraErro()).json({ message: error.message });
     }
 }
 function deletaCarro(req, res) {
@@ -64,7 +66,7 @@ function deletaCarro(req, res) {
         });
     }
     catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(erroStatus.mostraErro()).json({ message: error.message });
     }
 }
 //# sourceMappingURL=carroController.js.map
