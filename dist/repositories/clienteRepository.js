@@ -30,10 +30,7 @@ class ClienteRepository {
         return this.clienteList.findIndex((cliente => cliente.id_cliente === id));
     }
     atualizaCliente(id, clienteBody) {
-        let clienteIndex = this.clienteList.findIndex((cliente => cliente.id_cliente === id));
-        if (clienteIndex === -1) {
-            return undefined;
-        }
+        let clienteIndex = this.indexCliente(id);
         this.clienteList[clienteIndex].nome = clienteBody.nome ?? this.clienteList[clienteIndex].nome;
         this.clienteList[clienteIndex].cpf = clienteBody.cpf ?? this.clienteList[clienteIndex].cpf;
         this.clienteList[clienteIndex].email = clienteBody.email ?? this.clienteList[clienteIndex].email;

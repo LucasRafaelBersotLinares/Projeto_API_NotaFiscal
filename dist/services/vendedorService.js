@@ -7,7 +7,7 @@ class VendedorService {
     vendedorRepository = vendedorRepository_1.VendedorRepository.getInstance();
     notaRepository = notaFiscalRepository_1.NotaFiscalRepository.getInstance();
     insereVendedor(vendedorBody) {
-        if (!vendedorBody.nome || !vendedorBody.matricula || !vendedorBody.comissao_percentual) {
+        if (!vendedorBody.nome || !vendedorBody.matricula || vendedorBody.comissao_percentual === undefined) {
             throw new Error("Dados obrigatórios faltantes!!! [Nome, Matricula, Comissao_percentual]");
         }
         if (this.vendedorRepository.matriculaRepetida(vendedorBody.matricula) === -1) {
@@ -31,15 +31,12 @@ class VendedorService {
         return this.vendedorRepository.listaVendedorID(Number(id));
     }
     atualizaVendedor(id, vendedorBody) {
-        if (this.vendedorRepository.atualizaVendedor(Number(id), vendedorBody) === undefined) {
+        if (this.vendedorRepository.indexVendedor(Number(id)) === -1)
             throw new Error("Vendedor com este ID não existe no sistema.");
-        }
-        if (this.vendedorRepository.matriculaRepetida(vendedorBody.matricula) === -1) {
+        if (this.vendedorRepository.matriculaRepetida(vendedorBody.matricula) != -1)
             throw new Error("Não pode ter um vendedor com uma matrícula já cadastrada. Atualize com outra matrícula.");
-        }
-        if (!(vendedorBody.comissao_percentual >= 0 && vendedorBody.comissao_percentual <= 30)) {
+        if (!(vendedorBody.comissao_percentual >= 0 && vendedorBody.comissao_percentual <= 30))
             throw new Error("A comissão percentual tem que ser um valor entre 0 a 30");
-        }
         return this.vendedorRepository.atualizaVendedor(Number(id), vendedorBody);
     }
     deletaVendedor(id) {

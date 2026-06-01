@@ -43,7 +43,7 @@ export class CarroService {
 
     atualizaCarro(id: any, carroBody: any): Carro | undefined {
         const anoAtual: Date = new Date()
-        if(this.carroRepository.atualizaCarro(Number(id),carroBody) === undefined)
+        if(this.carroRepository.indexCarro(Number(id)) === -1)
             throw new Error("Carro com este ID não existe no sistema.")
         if(this.carroRepository.placaRepetida(carroBody.placa) != -1)
             throw new Error("Não pode colocar uma placa de uma carro já registrado no sistema. Coloque uma outra placa!")

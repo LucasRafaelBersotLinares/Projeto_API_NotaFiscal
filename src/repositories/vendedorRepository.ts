@@ -36,11 +36,8 @@ export class VendedorRepository {
 
 
     atualizaVendedor(id: number, vendedorBody: any): Vendedor | undefined {
-        let vendedorIndex: number = this.vendedorList.findIndex((vendedor => vendedor.id_vendedor === id))
+        let vendedorIndex: number = this.indexVendedor(id)
 
-        if(vendedorIndex === -1){
-            return undefined
-        }
         this.vendedorList[vendedorIndex]!.nome = vendedorBody.nome ?? this.vendedorList[vendedorIndex]!.nome
         this.vendedorList[vendedorIndex]!.matricula = vendedorBody.matricula ?? this.vendedorList[vendedorIndex]!.matricula
         this.vendedorList[vendedorIndex]!.comissao_percentual = vendedorBody.comissao_percentual ?? this.vendedorList[vendedorIndex]!.comissao_percentual

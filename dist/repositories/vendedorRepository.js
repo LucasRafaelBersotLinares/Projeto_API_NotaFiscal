@@ -30,10 +30,7 @@ class VendedorRepository {
         return this.vendedorList.findIndex((vendedor => vendedor.id_vendedor === id));
     }
     atualizaVendedor(id, vendedorBody) {
-        let vendedorIndex = this.vendedorList.findIndex((vendedor => vendedor.id_vendedor === id));
-        if (vendedorIndex === -1) {
-            return undefined;
-        }
+        let vendedorIndex = this.indexVendedor(id);
         this.vendedorList[vendedorIndex].nome = vendedorBody.nome ?? this.vendedorList[vendedorIndex].nome;
         this.vendedorList[vendedorIndex].matricula = vendedorBody.matricula ?? this.vendedorList[vendedorIndex].matricula;
         this.vendedorList[vendedorIndex].comissao_percentual = vendedorBody.comissao_percentual ?? this.vendedorList[vendedorIndex].comissao_percentual;

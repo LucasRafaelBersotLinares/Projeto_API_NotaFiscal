@@ -28,12 +28,10 @@ class ClienteService {
         return this.clienteRepository.listaClienteID(Number(id));
     }
     atualizaCliente(id, clienteBody) {
-        if (this.clienteRepository.atualizaCliente(Number(id), clienteBody) === undefined) {
+        if (this.clienteRepository.indexCliente(Number(id)) === -1)
             throw new Error("Cliente com este ID não existe no sistema.");
-        }
-        if (this.clienteRepository.cpfRepetido(clienteBody.cpf) != -1) {
+        if (this.clienteRepository.cpfRepetido(clienteBody.cpf) != -1)
             throw new Error("Não pode atualizar o CPF de um cliente que já tenha outro cadastrado. Use CPF diferentes.");
-        }
         return this.clienteRepository.atualizaCliente(Number(id), clienteBody);
     }
     deletaCliente(id) {
