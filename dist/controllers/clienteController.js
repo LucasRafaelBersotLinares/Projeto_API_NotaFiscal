@@ -7,7 +7,9 @@ exports.atualizaCliente = atualizaCliente;
 exports.deletaCliente = deletaCliente;
 exports.listaNotasCliente = listaNotasCliente;
 const clienteService_1 = require("../services/clienteService");
+const erroStatusRepository_1 = require("../repositories/erroStatusRepository");
 const clienteService = new clienteService_1.ClienteService();
+const erroStatus = erroStatusRepository_1.ErroStatusRepository.getInstance();
 function insereCliente(req, res) {
     try {
         const newCliente = clienteService.insereCliente(req.body);
@@ -17,7 +19,7 @@ function insereCliente(req, res) {
         });
     }
     catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(erroStatus.mostraErro()).json({ message: error.message });
     }
 }
 function listaClientes(req, res) {
@@ -29,7 +31,7 @@ function listaClientes(req, res) {
         });
     }
     catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(erroStatus.mostraErro()).json({ message: error.message });
     }
 }
 function listaClienteID(req, res) {
@@ -41,7 +43,7 @@ function listaClienteID(req, res) {
         });
     }
     catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(erroStatus.mostraErro()).json({ message: error.message });
     }
 }
 function atualizaCliente(req, res) {
@@ -53,7 +55,7 @@ function atualizaCliente(req, res) {
         });
     }
     catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(erroStatus.mostraErro()).json({ message: error.message });
     }
 }
 function deletaCliente(req, res) {
@@ -65,7 +67,7 @@ function deletaCliente(req, res) {
         });
     }
     catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(erroStatus.mostraErro()).json({ message: error.message });
     }
 }
 function listaNotasCliente(req, res) {
@@ -77,7 +79,7 @@ function listaNotasCliente(req, res) {
         });
     }
     catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(erroStatus.mostraErro()).json({ message: error.message });
     }
 }
 //# sourceMappingURL=clienteController.js.map

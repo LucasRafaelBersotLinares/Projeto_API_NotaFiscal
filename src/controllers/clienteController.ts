@@ -1,7 +1,9 @@
 import { Request, Response } from "express"
 import { ClienteService } from "../services/clienteService"
+import { ErroStatusRepository } from "../repositories/erroStatusRepository"
 
 const clienteService = new ClienteService()
+const erroStatus = ErroStatusRepository.getInstance()
 
 export function insereCliente(req: Request, res: Response){
     try {
@@ -13,7 +15,7 @@ export function insereCliente(req: Request, res: Response){
         }
         )
     } catch( error: any){
-        res.status(400).json({message: error.message})
+        res.status(erroStatus.mostraErro()).json({message: error.message})
     }
 }
 
@@ -27,7 +29,7 @@ export function listaClientes(req: Request, res: Response){
         }
         )
     } catch(error : any){
-        res.status(400).json({message: error.message})
+        res.status(erroStatus.mostraErro()).json({message: error.message})
     }
 }
 
@@ -41,7 +43,7 @@ export function listaClienteID(req: Request, res: Response){
         }
         )
     } catch(error: any){
-        res.status(400).json({message: error.message})
+        res.status(erroStatus.mostraErro()).json({message: error.message})
     }
 }
 
@@ -55,7 +57,7 @@ export function atualizaCliente(req: Request, res: Response){
         }
         )
     } catch(error: any){
-        res.status(400).json({message: error.message})
+        res.status(erroStatus.mostraErro()).json({message: error.message})
     }
 }
 
@@ -69,7 +71,7 @@ export function deletaCliente(req: Request, res: Response){
         }
         )
     } catch(error: any){
-        res.status(400).json({message: error.message})
+        res.status(erroStatus.mostraErro()).json({message: error.message})
     }
 }
 
@@ -83,6 +85,6 @@ export function listaNotasCliente(req: Request, res: Response){
         }
         )
     } catch(error: any){
-        res.status(400).json({message: error.message})
+        res.status(erroStatus.mostraErro()).json({message: error.message})
     }
 }
