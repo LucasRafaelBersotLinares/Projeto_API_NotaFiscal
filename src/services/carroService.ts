@@ -13,18 +13,18 @@ export class CarroService {
         const anoAtual: Date = new Date()
 
         if(!carroBody.marca || !carroBody.modelo || !carroBody.ano || !carroBody.placa || !carroBody.preco || !carroBody.cor){
-            throw new Error("Dados obrigatórios faltantes!!! [Marca, Modelo, Ano, Placa, Preco, Cor]")
+            throw new Error("Dados obrigatórios faltantes!!! [Marca, Modelo, Ano, Placa, Preco, Cor].")
         }
         if(this.carroRepository.placaRepetida(carroBody.placa) === -1){
             if(carroBody.ano >= 1950 && carroBody.ano <= (anoAtual.getFullYear()+1)){
                 if(carroBody.preco > 0){
                     return this.carroRepository.insereCarro(carroBody)
                 }
-                throw new Error("O preco do carro deve ser maior que zero")
+                throw new Error("O preço do carro deve ser maior que zero.")
             }
-            throw new Error("O ano do carro deve ser mais que 1950 ou um ano valido antes do proximo ano atual (Ex: 2026 + 1 = 2027)")
+            throw new Error("O ano do carro deve ser maior que 1950 ou um ano válido antes do próximo ano atual. (Ex: 2027 = (anoAtual: 2026) + (próximoAno: 1)= 2027)")
         }
-        throw new Error("Sistema ja possui um carro cadastrado nesta placa")
+        throw new Error("Sistema já possuí um carro cadastrado com está placa.")
     }
 
     listaCarros(): Carro[] {
@@ -36,7 +36,7 @@ export class CarroService {
 
     listaCarroID(id: any): Carro | undefined {
         if(this.carroRepository.listaCarroID(Number(id)) === undefined){
-            throw new Error("Carro com este ID não existe no sistema.")
+            throw new Error("Carro com este ID, não existe no sistema.")
         }
         return this.carroRepository.listaCarroID(Number(id))
     } 
@@ -44,9 +44,9 @@ export class CarroService {
     atualizaCarro(id: any, carroBody: any): Carro | undefined {
         const anoAtual: Date = new Date()
         if(this.carroRepository.indexCarro(Number(id)) === -1)
-            throw new Error("Carro com este ID não existe no sistema.")
+            throw new Error("Carro com este ID, não existe no sistema.")
         if(this.carroRepository.placaRepetida(carroBody.placa) != -1)
-            throw new Error("Não pode colocar uma placa de uma carro já registrado no sistema. Coloque uma outra placa!")
+            throw new Error("Não pode colocar uma placa de uma carro já registrado no sistema. Coloque outra placa.")
         if(!(carroBody.ano >= 1950 && carroBody.ano <= (anoAtual.getFullYear()+1))) 
             throw new Error("O ano do carro deve ser maior que 1950 ou um ano válido antes do próximo ano atual. (Ex: 2027 = (anoAtual: 2026) + (próximoAno: 1)= 2027)")
         if(!(carroBody.preco > 0))
@@ -56,7 +56,7 @@ export class CarroService {
 
     deletaCarro(id: any): Carro[] | undefined {
         if(this.carroRepository.listaCarroID(Number(id)) === undefined){
-            throw new Error("Carro com este ID não está cadastrado no sistema.")
+            throw new Error("Carro com este ID, não está cadastrado no sistema.")
         }
         if(this.notaRepository.verificaNotaIDtabela(Number(id),"carro") != -1){
             throw new Error("Carro não pode ser excluído por conta que tem nota emitida.")

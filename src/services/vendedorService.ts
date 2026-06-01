@@ -15,9 +15,9 @@ export class VendedorService {
             if(vendedorBody.comissao_percentual >= 0 && vendedorBody.comissao_percentual <= 30){
                 return this.vendedorRepository.insereVendedor(vendedorBody)
             }
-            throw new Error("A comissão percentual tem que ser um valor entre 0 a 30")
+            throw new Error("A comissão percentual tem que ser um valor entre zero a trinta.")
         }
-        throw new Error("Sistema ja possui um vendedor cadastrado nesta matricula")
+        throw new Error("O sistema já possuí um vendedor cadastrado com está matricula.")
     }
 
     listaVendedores(): Vendedor[] {
@@ -29,24 +29,24 @@ export class VendedorService {
 
     listaVendedorID(id: any): Vendedor| undefined {
         if(this.vendedorRepository.listaVendedorID(Number(id)) === undefined){
-            throw new Error("Vendedor com este ID não existe no sistema.")
+            throw new Error("Vendedor cadastrado com este ID, não existe no sistema.")
         }
         return this.vendedorRepository.listaVendedorID(Number(id))
     }
 
     atualizaVendedor(id: any, vendedorBody: any): Vendedor | undefined {
         if(this.vendedorRepository.indexVendedor(Number(id)) === -1)
-            throw new Error("Vendedor com este ID não existe no sistema.")
+            throw new Error("Vendedor cadastrado com este ID, não existe no sistema.")
         if(this.vendedorRepository.matriculaRepetida(vendedorBody.matricula) != -1)
             throw new Error("Não pode ter um vendedor com uma matrícula já cadastrada. Atualize com outra matrícula.")
         if(!(vendedorBody.comissao_percentual >= 0 && vendedorBody.comissao_percentual <= 30))
-            throw new Error("A comissão percentual tem que ser um valor entre 0 a 30")
+            throw new Error("A comissão percentual tem que ser um valor entre 0 a 30.")
         return this.vendedorRepository.atualizaVendedor(Number(id),vendedorBody)
     }
 
     deletaVendedor(id: any): Vendedor[] | undefined {
         if(this.vendedorRepository.listaVendedorID(Number(id)) === undefined){
-            throw new Error("Vendedor com este ID não está cadastrado no sistema.")
+            throw new Error("Vendedor cadastrado com este ID, não existe no sistema.")
         }
         if(this.notaRepository.verificaNotaIDtabela(Number(id),"vendedor") != -1){
             throw new Error("Vendedor não pode ser excluído por conta que tem nota emitida.")

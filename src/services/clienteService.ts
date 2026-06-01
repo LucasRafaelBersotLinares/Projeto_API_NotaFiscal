@@ -8,12 +8,12 @@ export class ClienteService {
 
     insereCliente(clienteBody: any): Cliente{
         if(!clienteBody.nome || !clienteBody.cpf || !clienteBody.telefone){
-            throw new Error("Dados obrigatórios faltantes!!! [Nome, CPF, Telefone]")
+            throw new Error("Dados obrigatórios faltantes!!! [Nome, CPF, Telefone].")
         }
         if(this.clienteRepository.cpfRepetido(clienteBody.cpf) === -1){
             return this.clienteRepository.insereCliente(clienteBody)
         }
-        throw new Error("Sistema ja possui um cliente cadastrado neste CPF")
+        throw new Error("Sistema já possuí um cliente cadastrado neste CPF.")
     }
 
     listaClientes(): Cliente[] {
@@ -25,22 +25,22 @@ export class ClienteService {
 
     listaClienteID(id: any): Cliente | undefined {
         if(this.clienteRepository.listaClienteID(Number(id)) === undefined){
-            throw new Error("Cliente com este ID não existe no sistema.")
+            throw new Error("Cliente com este ID, não existe no sistema.")
         }
         return this.clienteRepository.listaClienteID(Number(id))
     }   
 
     atualizaCliente(id: any, clienteBody: any): Cliente | undefined {
         if(this.clienteRepository.indexCliente(Number(id)) === -1)
-            throw new Error("Cliente com este ID não existe no sistema.")
+            throw new Error("Cliente com este ID, não existe no sistema.")
         if(this.clienteRepository.cpfRepetido(clienteBody.cpf) != -1)
-            throw new Error("Não pode atualizar o CPF de um cliente que já tenha outro cadastrado. Use CPF diferentes.")
+            throw new Error("Não pode atualizar o CPF de um cliente que já tenha outro cadastrado. Use CPF diferente.")
         return this.clienteRepository.atualizaCliente(Number(id),clienteBody)
     }
 
     deletaCliente(id: any): Cliente[] | undefined {
         if(this.clienteRepository.listaClienteID(Number(id)) === undefined){
-            throw new Error("Cliente com este ID não está cadastrado no sistema.")
+            throw new Error("Cliente com este ID, não está cadastrado no sistema.")
         }
         if(this.notaRepository.verificaNotaIDtabela(Number(id),"cliente") != -1){
             throw new Error("Cliente não pode ser excluído por conta que tem nota emitida.")
