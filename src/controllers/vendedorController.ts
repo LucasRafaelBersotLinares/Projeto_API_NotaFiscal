@@ -1,7 +1,9 @@
 import { Request, Response } from "express"
 import { VendedorService } from "../services/vendedorService"
+import { ErroStatusRepository } from "../repositories/erroStatusRepository"
 
 const vendedorService = new VendedorService()
+const erroStatus = ErroStatusRepository.getInstance()
 
 export function insereVendedor(req: Request, res: Response){
     try {
@@ -13,7 +15,7 @@ export function insereVendedor(req: Request, res: Response){
         }
         )
     } catch( error: any){
-        res.status(400).json({message: error.message})
+        res.status(erroStatus.mostraErro()).json({message: error.message})
     }
 }
 
@@ -27,7 +29,7 @@ export function listaVendedores(req: Request, res: Response){
         }
         )
     } catch(error : any){
-        res.status(400).json({message: error.message})
+        res.status(erroStatus.mostraErro()).json({message: error.message})
     }
 }
 
@@ -41,7 +43,7 @@ export function listaVendedorID(req: Request, res: Response){
         }
         )
     } catch(error: any){
-        res.status(400).json({message: error.message})
+        res.status(erroStatus.mostraErro()).json({message: error.message})
     }
 }
 
@@ -55,7 +57,7 @@ export function atualizaVendedor(req: Request, res: Response){
         }
         )
     } catch(error: any){
-        res.status(400).json({message: error.message})
+        res.status(erroStatus.mostraErro()).json({message: error.message})
     }
 }
 
@@ -69,7 +71,7 @@ export function deletaVendedor(req: Request, res: Response){
         }
         )
     } catch(error: any){
-        res.status(400).json({message: error.message})
+        res.status(erroStatus.mostraErro()).json({message: error.message})
     }
 }
 
@@ -83,6 +85,6 @@ export function listaNotasVendedor(req: Request, res: Response){
         }
         )
     } catch(error: any){
-        res.status(400).json({message: error.message})
+        res.status(erroStatus.mostraErro()).json({message: error.message})
     }
 }
