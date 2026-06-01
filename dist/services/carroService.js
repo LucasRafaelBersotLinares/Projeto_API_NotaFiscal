@@ -37,9 +37,15 @@ class CarroService {
         return this.carroRepository.listaCarroID(Number(id));
     }
     atualizaCarro(id, carroBody) {
-        if (this.carroRepository.atualizaCarro(Number(id), carroBody) === undefined) {
+        const anoAtual = new Date();
+        if (this.carroRepository.atualizaCarro(Number(id), carroBody) === undefined)
             throw new Error("Carro com este ID não existe no sistema.");
-        }
+        if (this.carroRepository.placaRepetida(carroBody.placa) != -1)
+            throw new Error("Não pode colocar uma placa de uma carro já registrado no sistema. Coloque uma outra placa!");
+        if (!(carroBody.ano >= 1950 && carroBody.ano <= (anoAtual.getFullYear() + 1)))
+            throw new Error("O ano do carro deve ser maior que 1950 ou um ano válido antes do próximo ano atual. (Ex: 2027 = (anoAtual: 2026) + (próximoAno: 1)= 2027)");
+        if (!(carroBody.preco > 0))
+            throw new Error("O preço do carro deve ser maior que zero.");
         return this.carroRepository.atualizaCarro(Number(id), carroBody);
     }
     deletaCarro(id) {

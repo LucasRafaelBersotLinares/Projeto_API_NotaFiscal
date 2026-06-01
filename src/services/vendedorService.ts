@@ -38,6 +38,12 @@ export class VendedorService {
         if(this.vendedorRepository.atualizaVendedor(Number(id),vendedorBody) === undefined){
             throw new Error("Vendedor com este ID não existe no sistema.")
         }
+        if(this.vendedorRepository.matriculaRepetida(vendedorBody.matricula) === -1){
+            throw new Error("Não pode ter um vendedor com uma matrícula já cadastrada. Atualize com outra matrícula.")
+        }
+        if(!(vendedorBody.comissao_percentual >= 0 && vendedorBody.comissao_percentual <= 30)){
+            throw new Error("A comissão percentual tem que ser um valor entre 0 a 30")
+        }
         return this.vendedorRepository.atualizaVendedor(Number(id),vendedorBody)
     }
 

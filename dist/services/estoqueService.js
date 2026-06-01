@@ -45,9 +45,18 @@ class EstoqueService {
         return this.estoqueRepository.listaEstoqueIDCarro(Number(id));
     }
     atualizaEstoque(id, estoqueBody) {
-        if (this.estoqueRepository.atualizaEstoque(Number(id), estoqueBody) === undefined) {
-            throw new Error("Cliente com este ID não existe no sistema.");
-        }
+        const dataAtual = new Date().toISOString();
+        const dataEntrada = new Date(estoqueBody.data_entrada).toISOString();
+        if (this.estoqueRepository.atualizaEstoque(Number(id), estoqueBody) === undefined)
+            throw new Error("Estoque com este ID não existe no sistema.");
+        if (this.carroRepository.listaCarroID(estoqueBody.id_carro) === undefined)
+            throw new Error("ID_carro não consta no sistema, cadastre o veículo antes de criar um estoque.");
+        if (dataEntrada > dataAtual)
+            throw new Error("A data de entrada não pode ser uma data futura, coloque a data real que o carro entrou.");
+        if (estoqueBody.quantidade >= 0)
+            throw new Error("Quantidade que possuí de carro no estoque, deve ser maior ou igual a 0.");
+        if (this.estoqueRepository.idCarroDuplicado(estoqueBody.id_carro) === -1)
+            throw new Error("Este ID_carro já foi usado em um estoque anterior, apague o estoque anterior ou atualize o estoque anterior se for mudança de quantidade ou localização.");
         return this.estoqueRepository.atualizaEstoque(Number(id), estoqueBody);
     }
     deletaEstoque(id) {

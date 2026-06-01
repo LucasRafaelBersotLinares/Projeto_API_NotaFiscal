@@ -31,6 +31,9 @@ class ClienteService {
         if (this.clienteRepository.atualizaCliente(Number(id), clienteBody) === undefined) {
             throw new Error("Cliente com este ID não existe no sistema.");
         }
+        if (this.clienteRepository.cpfRepetido(clienteBody.cpf) != -1) {
+            throw new Error("Não pode atualizar o CPF de um cliente que já tenha outro cadastrado. Use CPF diferentes.");
+        }
         return this.clienteRepository.atualizaCliente(Number(id), clienteBody);
     }
     deletaCliente(id) {
