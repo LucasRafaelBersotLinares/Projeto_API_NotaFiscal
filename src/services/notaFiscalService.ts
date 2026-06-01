@@ -63,11 +63,11 @@ export class NotaFiscalService {
         return this.notaRepository.listaNotas() 
     }
 
-    listaNotaIDporTabela(id: any): NotaFiscal | undefined {
-        if(this.notaRepository.listaNotaIDporTabela(Number(id), "nota") === undefined){
+    listaNotaID(id: any): NotaFiscal | undefined {
+        if(this.notaRepository.listaNotaID(Number(id)) === undefined){
             throw new Error("Não existe nota emitida com este ID.")
         }
-        return this.notaRepository.listaNotaIDporTabela(Number(id), "nota")
+        return this.notaRepository.listaNotaID(Number(id))
     }
 
 }

@@ -37,7 +37,7 @@ export class ClienteService {
     }
 
     deletaCliente(id: any): Cliente[] | undefined {
-        if(this.clienteRepository.listaClienteID === undefined){
+        if(this.clienteRepository.listaClienteID(Number(id)) === undefined){
             throw new Error("Cliente com este ID não está cadastrado no sistema.")
         }
         if(this.notaRepository.verificaNotaIDtabela(id,"cliente") != -1){
@@ -45,4 +45,5 @@ export class ClienteService {
         }
         return this.clienteRepository.deletaCliente(id)
     }
+
 }

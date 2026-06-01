@@ -19,6 +19,7 @@ app.post("/clientes", clienteController_1.insereCliente);
 app.get("/clientes", clienteController_1.listaClientes);
 app.get("/clientes/:id", clienteController_1.listaClienteID);
 app.put("/clientes/:id", clienteController_1.atualizaCliente);
+app.delete("/clientes/:id", clienteController_1.deletaCliente);
 app.post("/vendedores", vendedorController_1.insereVendedor);
 app.get("/vendedores", vendedorController_1.listaVendedores);
 app.get("/vendedores/:id", vendedorController_1.listaVendedorID);

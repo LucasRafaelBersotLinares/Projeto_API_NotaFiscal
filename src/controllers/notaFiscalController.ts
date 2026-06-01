@@ -30,9 +30,9 @@ export function listaNotas(req: Request, res: Response){
     }
 }
 
-export function listaNotaIDporTabela(req: Request, res: Response){
+export function listaNotaID(req: Request, res: Response){
     try{
-        const notaID: any = notaService.listaNotaIDporTabela(req.params.id)
+        const notaID: any = notaService.listaNotaID(req.params.id)
         res.status(200).json(
         {
             message: "Nota:",

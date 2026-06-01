@@ -25,20 +25,8 @@ export class NotaFiscalRepository {
         return this.notaList
     }
 
-    listaNotaIDporTabela(id: number, tabela: string): NotaFiscal | undefined{
-        switch(tabela){
-            case "nota":
-                return this.notaList.find(nota => nota.id_nota === id)
-                break
-            case "vendedor":
-                return this.notaList.find(nota => nota.id_vendedor === id)
-                break
-            case "cliente":
-                return this.notaList.find(nota => nota.id_cliente === id)
-                break
-            default:
-             return undefined
-        }
+    listaNotaID(id: number): NotaFiscal | undefined{
+        return this.notaList.find(nota => nota.id_nota === id)
     }
 
     verificaNotaIDtabela(id: any, tabela: string): number{
