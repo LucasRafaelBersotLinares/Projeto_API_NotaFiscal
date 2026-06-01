@@ -32,7 +32,7 @@ export class NotaFiscalRepository {
     verificaNotaIDtabela(id: any, tabela: string): number{
         switch(tabela){
             case "cliente":
-                return this.notaList.findIndex(vendedor => vendedor.id_vendedor === id)
+                return this.notaList.findIndex(vendedor => vendedor.id_cliente === id)
                 break
             case "vendedor":
                 return this.notaList.findIndex(vendedor => vendedor.id_vendedor === id)
