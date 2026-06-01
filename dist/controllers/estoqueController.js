@@ -7,7 +7,9 @@ exports.listaEstoqueIDCarro = listaEstoqueIDCarro;
 exports.atualizaEstoque = atualizaEstoque;
 exports.deletaEstoque = deletaEstoque;
 const estoqueService_1 = require("../services/estoqueService");
+const erroStatusRepository_1 = require("../repositories/erroStatusRepository");
 const estoqueService = new estoqueService_1.EstoqueService();
+const erroStatus = erroStatusRepository_1.ErroStatusRepository.getInstance();
 function insereEstoque(req, res) {
     try {
         const newEstoque = estoqueService.insereEstoque(req.body);
@@ -17,7 +19,7 @@ function insereEstoque(req, res) {
         });
     }
     catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(erroStatus.mostraErro()).json({ message: error.message });
     }
 }
 function listaEstoque(req, res) {
@@ -29,7 +31,7 @@ function listaEstoque(req, res) {
         });
     }
     catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(erroStatus.mostraErro()).json({ message: error.message });
     }
 }
 function listaEstoqueID(req, res) {
@@ -41,7 +43,7 @@ function listaEstoqueID(req, res) {
         });
     }
     catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(erroStatus.mostraErro()).json({ message: error.message });
     }
 }
 function listaEstoqueIDCarro(req, res) {
@@ -53,7 +55,7 @@ function listaEstoqueIDCarro(req, res) {
         });
     }
     catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(erroStatus.mostraErro()).json({ message: error.message });
     }
 }
 function atualizaEstoque(req, res) {
@@ -65,7 +67,7 @@ function atualizaEstoque(req, res) {
         });
     }
     catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(erroStatus.mostraErro()).json({ message: error.message });
     }
 }
 function deletaEstoque(req, res) {
@@ -77,7 +79,7 @@ function deletaEstoque(req, res) {
         });
     }
     catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(erroStatus.mostraErro()).json({ message: error.message });
     }
 }
 //# sourceMappingURL=estoqueController.js.map

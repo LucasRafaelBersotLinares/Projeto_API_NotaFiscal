@@ -10,8 +10,12 @@ export class EstoqueService {
 
     insereEstoque(estoqueBody: any): Estoque {
         const dataAtual: string = new Date().toISOString()
-        const dataEntrada: string = new Date(estoqueBody.data_entrada).toISOString()
+        const dataEntrada: any = new Date(estoqueBody.data_entrada)
 
+        if (isNaN(dataEntrada.getTime())) {
+            this.erroStatus.insereErro(400)
+            throw new Error("Formato de data inválido use [yyyy-mm-dd]")
+        } 
         if(!estoqueBody.id_carro || estoqueBody.quantidade === undefined || !estoqueBody.localizacao_patio || !estoqueBody.data_entrada){
             this.erroStatus.insereErro(400)
             throw new Error("Dados obrigatórios faltantes!!! [ID_carro, Quantidade, Localizacao_patio, Data_entrada].")
@@ -20,7 +24,7 @@ export class EstoqueService {
             this.erroStatus.insereErro(404)
             throw new Error("ID carro não consta no sistema, cadastre o veiculo antes de criar seu estoque.")
         }
-        if(dataEntrada > dataAtual){
+        if(dataEntrada.toISOString() > dataAtual){
             this.erroStatus.insereErro(400)
             throw new Error("A data de entrada não pode ser uma data futura, coloque a data real que o carro entrou.")
         }

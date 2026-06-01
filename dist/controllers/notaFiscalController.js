@@ -4,7 +4,9 @@ exports.emiteNota = emiteNota;
 exports.listaNotas = listaNotas;
 exports.listaNotaID = listaNotaID;
 const notaFiscalService_1 = require("../services/notaFiscalService");
+const erroStatusRepository_1 = require("../repositories/erroStatusRepository");
 const notaService = new notaFiscalService_1.NotaFiscalService();
+const erroStatus = erroStatusRepository_1.ErroStatusRepository.getInstance();
 function emiteNota(req, res) {
     try {
         const newNota = notaService.emiteNota(req.body);
@@ -14,7 +16,7 @@ function emiteNota(req, res) {
         });
     }
     catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(erroStatus.mostraErro()).json({ message: error.message });
     }
 }
 function listaNotas(req, res) {
@@ -26,7 +28,7 @@ function listaNotas(req, res) {
         });
     }
     catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(erroStatus.mostraErro()).json({ message: error.message });
     }
 }
 function listaNotaID(req, res) {
@@ -38,7 +40,7 @@ function listaNotaID(req, res) {
         });
     }
     catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(erroStatus.mostraErro()).json({ message: error.message });
     }
 }
 //# sourceMappingURL=notaFiscalController.js.map

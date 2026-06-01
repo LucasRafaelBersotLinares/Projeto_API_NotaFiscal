@@ -7,7 +7,9 @@ exports.atualizaVendedor = atualizaVendedor;
 exports.deletaVendedor = deletaVendedor;
 exports.listaNotasVendedor = listaNotasVendedor;
 const vendedorService_1 = require("../services/vendedorService");
+const erroStatusRepository_1 = require("../repositories/erroStatusRepository");
 const vendedorService = new vendedorService_1.VendedorService();
+const erroStatus = erroStatusRepository_1.ErroStatusRepository.getInstance();
 function insereVendedor(req, res) {
     try {
         const newVendedor = vendedorService.insereVendedor(req.body);
@@ -17,7 +19,7 @@ function insereVendedor(req, res) {
         });
     }
     catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(erroStatus.mostraErro()).json({ message: error.message });
     }
 }
 function listaVendedores(req, res) {
@@ -29,7 +31,7 @@ function listaVendedores(req, res) {
         });
     }
     catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(erroStatus.mostraErro()).json({ message: error.message });
     }
 }
 function listaVendedorID(req, res) {
@@ -41,7 +43,7 @@ function listaVendedorID(req, res) {
         });
     }
     catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(erroStatus.mostraErro()).json({ message: error.message });
     }
 }
 function atualizaVendedor(req, res) {
@@ -53,7 +55,7 @@ function atualizaVendedor(req, res) {
         });
     }
     catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(erroStatus.mostraErro()).json({ message: error.message });
     }
 }
 function deletaVendedor(req, res) {
@@ -65,7 +67,7 @@ function deletaVendedor(req, res) {
         });
     }
     catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(erroStatus.mostraErro()).json({ message: error.message });
     }
 }
 function listaNotasVendedor(req, res) {
@@ -77,7 +79,7 @@ function listaNotasVendedor(req, res) {
         });
     }
     catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(erroStatus.mostraErro()).json({ message: error.message });
     }
 }
 //# sourceMappingURL=vendedorController.js.map

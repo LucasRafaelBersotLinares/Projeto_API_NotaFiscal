@@ -30,8 +30,12 @@ export class NotaFiscalService {
     
     emiteNota(notaBody: any): NotaFiscal | undefined{
         const dataAtual: string = new Date().toISOString()
-        const dataEntrada: string = new Date(notaBody.data_emissao).toISOString()
+        const dataEntrada: Date = new Date(notaBody.data_emissao)
 
+        if (isNaN(dataEntrada.getTime())) {
+            this.erroStatus.insereErro(400)
+            throw new Error("Formato de data inválido use [yyyy-mm-dd]")
+        }   
         if(!notaBody.numero_nota || !notaBody.data_emissao || !notaBody.valor_total || !notaBody.id_cliente || !notaBody.id_vendedor || !notaBody.id_carro){
             this.erroStatus.insereErro(400)
             throw new Error("Dados obrigatórios faltantes!!! [Numero da nota, Data emissao, Valor total, ID Cliente, ID Vendedor, ID Carro].")
@@ -40,7 +44,7 @@ export class NotaFiscalService {
             this.erroStatus.insereErro(400)
             throw new Error("O campo valor total, deve ser maior que zero.")
         }
-        if(dataEntrada > dataAtual){
+        if(dataEntrada.toISOString() > dataAtual){
             this.erroStatus.insereErro(400)
             throw new Error("A data de emissão não pode ser uma data futura, coloque a data real que a nota foi emitida.")
         }
