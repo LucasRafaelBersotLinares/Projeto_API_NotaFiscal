@@ -10,5 +10,6 @@ export declare class VendedorRepository {
     insereVendedor(vendedor: any): Vendedor;
     indexVendedor(id: any): number;
     atualizaVendedor(id: number, vendedorBody: any): Vendedor | undefined;
+    deletaVendedor(id: number): Vendedor[] | undefined;
 }
 //# sourceMappingURL=vendedorRepository.d.ts.map

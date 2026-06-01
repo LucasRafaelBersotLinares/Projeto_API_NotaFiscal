@@ -46,4 +46,9 @@ export class VendedorRepository {
         this.vendedorList[vendedorIndex]!.comissao_percentual = vendedorBody.comissao_percentual ?? this.vendedorList[vendedorIndex]!.comissao_percentual
         return this.vendedorList[vendedorIndex]
     }
+
+    deletaVendedor(id: number): Vendedor[] | undefined {
+        this.vendedorList = this.vendedorList.filter(vendedor => vendedor.id_vendedor != id)
+        return this.vendedorList
+    }
 }

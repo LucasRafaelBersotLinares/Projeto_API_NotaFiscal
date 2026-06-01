@@ -57,3 +57,17 @@ export function atualizaVendedor(req: Request, res: Response){
         res.status(400).json({message: error.message})
     }
 }
+
+export function deletaVendedor(req: Request, res: Response){
+    try{
+        const vendedorDelete = vendedorService.deletaVendedor(req.params.id)
+        res.status(200).json(
+        {
+            message: "Lista de vendedores restantes:",
+            vendedorDelete
+        }
+        )
+    } catch(error: any){
+        res.status(400).json({message: error.message})
+    }
+}

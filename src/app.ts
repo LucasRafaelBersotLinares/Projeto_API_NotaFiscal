@@ -1,6 +1,6 @@
 import express from "express"
 import { insereCliente, listaClientes, listaClienteID, atualizaCliente, deletaCliente, listaNotasCliente} from "./controllers/clienteController"
-import { insereVendedor, listaVendedores, listaVendedorID, atualizaVendedor } from "./controllers/vendedorController"
+import { insereVendedor, listaVendedores, listaVendedorID, atualizaVendedor, deletaVendedor } from "./controllers/vendedorController"
 import { insereCarro, listaCarros, listaCarroID, atualizaCarro} from "./controllers/carroController"
 import { insereEstoque, listaEstoque, listaEstoqueID, atualizaEstoque, listaEstoqueIDCarro, deletaEstoque } from "./controllers/estoqueController"
 import { emiteNota, listaNotas, listaNotaID} from "./controllers/notaFiscalController"
@@ -24,6 +24,7 @@ app.post("/vendedores",insereVendedor)
 app.get("/vendedores",listaVendedores)
 app.get("/vendedores/:id",listaVendedorID)
 app.put("/vendedores/:id",atualizaVendedor)
+app.delete("/vendedores/:id", deletaVendedor)
 
 app.post("/carros",insereCarro)
 app.get("/carros",listaCarros)

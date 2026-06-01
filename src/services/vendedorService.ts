@@ -1,8 +1,10 @@
 import { Vendedor } from "../models/vendedor"
 import { VendedorRepository } from "../repositories/vendedorRepository"
+import { NotaFiscalRepository } from "../repositories/notaFiscalRepository"
 
 export class VendedorService {
     vendedorRepository: VendedorRepository = VendedorRepository.getInstance()
+    notaRepository: NotaFiscalRepository = NotaFiscalRepository.getInstance()
 
     insereVendedor(vendedorBody: any): Vendedor {
         if(!vendedorBody.nome || !vendedorBody.matricula || !vendedorBody.comissao_percentual){
@@ -36,6 +38,16 @@ export class VendedorService {
             throw new Error("Vendedor com este ID não existe no sistema.")
         }
         return this.vendedorRepository.atualizaVendedor(Number(id),vendedorBody)
+    }
+
+    deletaVendedor(id: any): Vendedor[] | undefined {
+        if(this.vendedorRepository.listaVendedorID(Number(id)) === undefined){
+            throw new Error("Vendedor com este ID não está cadastrado no sistema.")
+        }
+        if(this.notaRepository.verificaNotaIDtabela(Number(id),"vendedor") != -1){
+            throw new Error("Vendedor não pode ser excluído por conta que tem nota emitida.")
+        }
+        return this.vendedorRepository.deletaVendedor(id)
     }
 
 }

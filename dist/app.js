@@ -25,6 +25,7 @@ app.post("/vendedores", vendedorController_1.insereVendedor);
 app.get("/vendedores", vendedorController_1.listaVendedores);
 app.get("/vendedores/:id", vendedorController_1.listaVendedorID);
 app.put("/vendedores/:id", vendedorController_1.atualizaVendedor);
+app.delete("/vendedores/:id", vendedorController_1.deletaVendedor);
 app.post("/carros", carroController_1.insereCarro);
 app.get("/carros", carroController_1.listaCarros);
 app.get("/carros/:id", carroController_1.listaCarroID);
