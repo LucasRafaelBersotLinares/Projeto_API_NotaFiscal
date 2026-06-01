@@ -18,4 +18,4 @@ Projeto criado para estudos de desenvolvimento backend utilizando TypeScript e E
 
 ---
 Postman para testes: [Baixar Collection JSON](https://raw.githubusercontent.com/LucasRafaelBersotLinares/Projeto_API_NotaFiscal/main/Projeto_API_NotaFiscal.postman_collection.json)
-)
+
