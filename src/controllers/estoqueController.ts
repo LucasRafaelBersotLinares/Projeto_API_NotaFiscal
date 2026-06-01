@@ -1,7 +1,9 @@
 import {Request, Response} from "express"
 import { EstoqueService } from "../services/estoqueService"
+import { ErroStatusRepository } from "../repositories/erroStatusRepository"
 
 const estoqueService = new EstoqueService()
+const erroStatus = ErroStatusRepository.getInstance()
 
 export function insereEstoque(req: Request, res: Response){
     try {
@@ -13,7 +15,7 @@ export function insereEstoque(req: Request, res: Response){
         }
         )
     } catch( error: any){
-        res.status(400).json({message: error.message})
+        res.status(erroStatus.mostraErro()).json({message: error.message})
     }
 }
 
@@ -27,7 +29,7 @@ export function listaEstoque(req: Request, res: Response){
         }
         )
     } catch(error : any){
-        res.status(400).json({message: error.message})
+        res.status(erroStatus.mostraErro()).json({message: error.message})
     }
 }
 
@@ -41,7 +43,7 @@ export function listaEstoqueID(req: Request, res: Response){
         }
         )
     } catch(error: any){
-        res.status(400).json({message: error.message})
+        res.status(erroStatus.mostraErro()).json({message: error.message})
     }
 }
 
@@ -55,7 +57,7 @@ export function listaEstoqueIDCarro(req: Request, res: Response){
         }
         )
     } catch(error: any){
-        res.status(400).json({message: error.message})
+        res.status(erroStatus.mostraErro()).json({message: error.message})
     }
 }
 
@@ -70,7 +72,7 @@ export function atualizaEstoque(req: Request, res: Response){
         }
         )
     } catch(error: any){
-        res.status(400).json({message: error.message})
+        res.status(erroStatus.mostraErro()).json({message: error.message})
     }
 }
 
@@ -84,6 +86,6 @@ export function deletaEstoque(req: Request, res: Response){
         }
         )
     } catch(error: any){
-        res.status(400).json({message: error.message})
+        res.status(erroStatus.mostraErro()).json({message: error.message})
     }
 }
