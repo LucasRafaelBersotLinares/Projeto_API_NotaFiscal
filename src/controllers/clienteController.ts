@@ -22,6 +22,7 @@ export function listaClientes(req: Request, res: Response){
         const clientesList = clienteService.listaClientes()
         res.status(200).json(
         {
+            message: "Lista de Clientes Cadastrados:",
             clientesList
         }
         )
@@ -35,7 +36,7 @@ export function listaClienteID(req: Request, res: Response){
         const clienteID: any = clienteService.listaClienteID(req.params.id)
         res.status(200).json(
         {
-            message: "Cliente:",
+            message: "Cliente encontrado:",
             clienteID
         }
         )

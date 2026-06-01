@@ -22,6 +22,7 @@ export function listaVendedores(req: Request, res: Response){
         const vendedorList = vendedorService.listaVendedores()
         res.status(200).json(
         {
+            message: "Lista dos Vendedores Cadastrados:",
             vendedorList
         }
         )
@@ -35,7 +36,7 @@ export function listaVendedorID(req: Request, res: Response){
         const vendedorID: any = vendedorService.listaVendedorID(req.params.id)
         res.status(200).json(
         {
-            message: "Vendedor:",
+            message: "Vendedor encontrado:",
             vendedorID
         }
         )

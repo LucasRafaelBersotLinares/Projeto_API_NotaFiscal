@@ -22,6 +22,7 @@ export function listaNotas(req: Request, res: Response){
         const notasList = notaService.listaNotas()
         res.status(200).json(
         {
+            message: "Lista das Notas Emitidas:",
             notasList
         }
         )
@@ -35,7 +36,7 @@ export function listaNotaID(req: Request, res: Response){
         const notaID: any = notaService.listaNotaID(req.params.id)
         res.status(200).json(
         {
-            message: "Nota:",
+            message: "Nota encontrada:",
             notaID
         }
         )
