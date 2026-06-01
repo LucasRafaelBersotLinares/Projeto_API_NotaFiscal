@@ -32,17 +32,17 @@ export class NotaFiscalRepository {
     verificaNotaIDtabela(id: any, tabela: string): number{
         switch(tabela){
             case "cliente":
-                return this.notaList.findIndex(vendedor => vendedor.id_cliente === id)
+                return this.notaList.findIndex(nota => nota.id_cliente === id)
                 break
             case "vendedor":
-                return this.notaList.findIndex(vendedor => vendedor.id_vendedor === id)
+                return this.notaList.findIndex(nota => nota.id_vendedor === id)
                 break
             default:
                 return -1
         }
     }
 
-    listaNotasporTabela(id: any, tabela: string): NotaFiscal[] | undefined{
+    listaNotasporTabela(id: number, tabela: string): NotaFiscal[] | undefined{
         switch(tabela){
             case "cliente":
                 return this.notaList.filter(nota => nota.id_cliente == id)
