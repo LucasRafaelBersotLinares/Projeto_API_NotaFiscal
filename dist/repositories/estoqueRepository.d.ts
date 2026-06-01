@@ -5,6 +5,7 @@ export declare class EstoqueRepository {
     private constructor();
     static getInstance(): EstoqueRepository;
     insereEstoque(estoque: any): Estoque;
+    indexEstoque(id: number): number;
     idCarroDuplicado(id: number): number;
     listaEstoque(): Estoque[];
     listaEstoqueID(id: number): Estoque | undefined;

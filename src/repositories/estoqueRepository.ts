@@ -18,6 +18,10 @@ export class EstoqueRepository {
         return newEstoque
     }
 
+    indexEstoque(id: number){
+        return this.estoqueList.findIndex(estoque => estoque.id_estoque === id)
+    }
+
     idCarroDuplicado(id: number): number {
         return this.estoqueList.findIndex(estoque => estoque.id_carro === id)
     }
@@ -35,11 +39,8 @@ export class EstoqueRepository {
     }
 
     atualizaEstoque(id: number, estoqueBody: any): Estoque | undefined {
-        let estoqueIndex: number = this.estoqueList.findIndex((estoque => estoque.id_estoque === id))
+        let estoqueIndex: number = this.indexEstoque(Number(id))
 
-        if(estoqueIndex === -1){
-            return undefined
-        }
         this.estoqueList[estoqueIndex]!.quantidade = estoqueBody.quantidade ?? this.estoqueList[estoqueIndex]!.quantidade
         this.estoqueList[estoqueIndex]!.localizacao_patio = estoqueBody.localizacao_patio ?? this.estoqueList[estoqueIndex]!.localizacao_patio
         return this.estoqueList[estoqueIndex]

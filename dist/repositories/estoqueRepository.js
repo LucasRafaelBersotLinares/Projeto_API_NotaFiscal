@@ -17,6 +17,9 @@ class EstoqueRepository {
         this.estoqueList.push(newEstoque);
         return newEstoque;
     }
+    indexEstoque(id) {
+        return this.estoqueList.findIndex(estoque => estoque.id_estoque === id);
+    }
     idCarroDuplicado(id) {
         return this.estoqueList.findIndex(estoque => estoque.id_carro === id);
     }
@@ -30,10 +33,7 @@ class EstoqueRepository {
         return this.estoqueList.find(estoque => estoque.id_carro === id_carro);
     }
     atualizaEstoque(id, estoqueBody) {
-        let estoqueIndex = this.estoqueList.findIndex((estoque => estoque.id_estoque === id));
-        if (estoqueIndex === -1) {
-            return undefined;
-        }
+        let estoqueIndex = this.indexEstoque(Number(id));
         this.estoqueList[estoqueIndex].quantidade = estoqueBody.quantidade ?? this.estoqueList[estoqueIndex].quantidade;
         this.estoqueList[estoqueIndex].localizacao_patio = estoqueBody.localizacao_patio ?? this.estoqueList[estoqueIndex].localizacao_patio;
         return this.estoqueList[estoqueIndex];
