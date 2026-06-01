@@ -23,8 +23,32 @@ class NotaFiscalRepository {
     listaNotas() {
         return this.notaList;
     }
-    listaNotaID(id) {
-        return this.notaList.find(nota => nota.id_nota === id);
+    listaNotaIDporTabela(id, tabela) {
+        switch (tabela) {
+            case "nota":
+                return this.notaList.find(nota => nota.id_nota === id);
+                break;
+            case "vendedor":
+                return this.notaList.find(nota => nota.id_vendedor === id);
+                break;
+            case "cliente":
+                return this.notaList.find(nota => nota.id_cliente === id);
+                break;
+            default:
+                return undefined;
+        }
+    }
+    verificaNotaIDtabela(id, tabela) {
+        switch (tabela) {
+            case "cliente":
+                return this.notaList.findIndex(vendedor => vendedor.id_vendedor === id);
+                break;
+            case "vendedor":
+                return this.notaList.findIndex(vendedor => vendedor.id_vendedor === id);
+                break;
+            default:
+                return -1;
+        }
     }
 }
 exports.NotaFiscalRepository = NotaFiscalRepository;

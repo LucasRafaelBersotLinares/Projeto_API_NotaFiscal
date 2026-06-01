@@ -35,6 +35,6 @@ app.put("/estoque/:id", estoqueController_1.atualizaEstoque);
 app.delete("/estoque/:id", estoqueController_1.deletaEstoque);
 app.post("/notas", notaFiscalController_1.emiteNota);
 app.get("/notas", notaFiscalController_1.listaNotas);
-app.get("/notas/:id", notaFiscalController_1.listaNotaID);
+app.get("/notas/:id", notaFiscalController_1.listaNotaIDporTabela);
 app.listen(PORT, serverOn);
 //# sourceMappingURL=app.js.map

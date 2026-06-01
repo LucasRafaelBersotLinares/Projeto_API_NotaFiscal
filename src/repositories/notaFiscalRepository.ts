@@ -1,5 +1,4 @@
 import { NotaFiscal } from "../models/notaFiscal"
-
 export class NotaFiscalRepository {
     private static instance: NotaFiscalRepository
     private notaList: NotaFiscal[] = []
@@ -26,8 +25,34 @@ export class NotaFiscalRepository {
         return this.notaList
     }
 
-    listaNotaID(id: number): NotaFiscal | undefined{
-        return this.notaList.find(nota => nota.id_nota === id)
+    listaNotaIDporTabela(id: number, tabela: string): NotaFiscal | undefined{
+        switch(tabela){
+            case "nota":
+                return this.notaList.find(nota => nota.id_nota === id)
+                break
+            case "vendedor":
+                return this.notaList.find(nota => nota.id_vendedor === id)
+                break
+            case "cliente":
+                return this.notaList.find(nota => nota.id_cliente === id)
+                break
+            default:
+             return undefined
+        }
     }
+
+    verificaNotaIDtabela(id: any, tabela: string): number{
+        switch(tabela){
+            case "cliente":
+                return this.notaList.findIndex(vendedor => vendedor.id_vendedor === id)
+                break
+            case "vendedor":
+                return this.notaList.findIndex(vendedor => vendedor.id_vendedor === id)
+                break
+            default:
+                return -1
+        }
+    }
+
 
 }

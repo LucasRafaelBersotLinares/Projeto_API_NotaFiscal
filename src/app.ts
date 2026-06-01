@@ -3,7 +3,7 @@ import { insereCliente, listaClientes, listaClienteID, atualizaCliente} from "./
 import { insereVendedor, listaVendedores, listaVendedorID, atualizaVendedor } from "./controllers/vendedorController"
 import { insereCarro, listaCarros, listaCarroID, atualizaCarro} from "./controllers/carroController"
 import { insereEstoque, listaEstoque, listaEstoqueID, atualizaEstoque, listaEstoqueIDCarro, deletaEstoque } from "./controllers/estoqueController"
-import { emiteNota, listaNotas, listaNotaID} from "./controllers/notaFiscalController"
+import { emiteNota, listaNotas, listaNotaIDporTabela} from "./controllers/notaFiscalController"
 
 const app = express()
 const PORT = process.env.PORT ?? 3000
@@ -37,5 +37,5 @@ app.delete("/estoque/:id",deletaEstoque)
 
 app.post("/notas",emiteNota)
 app.get("/notas",listaNotas)
-app.get("/notas/:id",listaNotaID)
+app.get("/notas/:id",listaNotaIDporTabela)
 app.listen(PORT, serverOn)

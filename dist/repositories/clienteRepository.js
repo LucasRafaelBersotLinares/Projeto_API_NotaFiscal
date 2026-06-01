@@ -42,7 +42,8 @@ class ClienteRepository {
         return this.clienteList[clienteIndex];
     }
     deletaCliente(id) {
-        return this.clienteList = this.clienteList.filter(cliente => cliente.id_cliente != id);
+        this.clienteList = this.clienteList.filter(cliente => cliente.id_cliente != id);
+        return this.clienteList;
     }
 }
 exports.ClienteRepository = ClienteRepository;

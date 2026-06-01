@@ -2,8 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ClienteService = void 0;
 const clienteRepository_1 = require("../repositories/clienteRepository");
+const notaFiscalRepository_1 = require("../repositories/notaFiscalRepository");
 class ClienteService {
     clienteRepository = clienteRepository_1.ClienteRepository.getInstance();
+    notaRepository = notaFiscalRepository_1.NotaFiscalRepository.getInstance();
     insereCliente(clienteBody) {
         if (!clienteBody.nome || !clienteBody.cpf || !clienteBody.telefone) {
             throw new Error("Dados obrigatórios faltantes!!! [Nome, CPF, Telefone]");
@@ -30,6 +32,15 @@ class ClienteService {
             throw new Error("Cliente com este ID não existe no sistema.");
         }
         return this.clienteRepository.atualizaCliente(Number(id), clienteBody);
+    }
+    deletaCliente(id) {
+        if (this.clienteRepository.listaClienteID === undefined) {
+            throw new Error("Cliente com este ID não está cadastrado no sistema.");
+        }
+        if (this.notaRepository.verificaNotaIDtabela(id, "cliente") != -1) {
+            throw new Error("Cliente não pode ser excluído por conta que tem nota emitida.");
+        }
+        return this.clienteRepository.deletaCliente(id);
     }
 }
 exports.ClienteService = ClienteService;
