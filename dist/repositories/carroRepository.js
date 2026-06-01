@@ -42,6 +42,10 @@ class CarroRepository {
         this.carroList[carroIndex].cor = carroBody.cor ?? this.carroList[carroIndex].cor;
         return this.carroList[carroIndex];
     }
+    deletaCarro(id) {
+        this.carroList = this.carroList.filter(carro => carro.id_carro != id);
+        return this.carroList;
+    }
 }
 exports.CarroRepository = CarroRepository;
 //# sourceMappingURL=carroRepository.js.map

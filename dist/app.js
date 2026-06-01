@@ -31,6 +31,7 @@ app.post("/carros", carroController_1.insereCarro);
 app.get("/carros", carroController_1.listaCarros);
 app.get("/carros/:id", carroController_1.listaCarroID);
 app.put("/carros/:id", carroController_1.atualizaCarro);
+app.delete("/carros/:id", carroController_1.deletaCarro);
 app.post("/estoque", estoqueController_1.insereEstoque);
 app.get("/estoque", estoqueController_1.listaEstoque);
 app.get("/estoque/:id", estoqueController_1.listaEstoqueID);

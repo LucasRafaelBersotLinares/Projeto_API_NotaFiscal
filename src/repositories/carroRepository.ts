@@ -49,4 +49,8 @@ export class CarroRepository {
         return this.carroList[carroIndex]
     }
 
+    deletaCarro(id: number): Carro[] | undefined {
+        this.carroList = this.carroList.filter(carro => carro.id_carro != id)
+        return this.carroList
+    }
 }

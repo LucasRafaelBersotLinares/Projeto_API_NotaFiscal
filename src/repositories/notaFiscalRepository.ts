@@ -37,6 +37,9 @@ export class NotaFiscalRepository {
             case "vendedor":
                 return this.notaList.findIndex(nota => nota.id_vendedor === id)
                 break
+            case "carro":
+                return this.notaList.findIndex(nota => nota.id_carro === id)
+                break
             default:
                 return -1
         }

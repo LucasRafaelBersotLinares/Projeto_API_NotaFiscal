@@ -10,5 +10,6 @@ export declare class CarroRepository {
     insereCarro(carro: any): Carro;
     indexCarro(id: any): number;
     atualizaCarro(id: number, carroBody: any): Carro | undefined;
+    deletaCarro(id: number): Carro[] | undefined;
 }
 //# sourceMappingURL=carroRepository.d.ts.map

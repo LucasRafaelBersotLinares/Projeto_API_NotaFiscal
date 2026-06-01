@@ -57,3 +57,17 @@ export function atualizaCarro(req: Request, res: Response){
         res.status(400).json({message: error.message})
     }
 }
+
+export function deletaCarro(req: Request, res: Response){
+    try{
+        const carroDelete = carroService.deletaCarro(req.params.id)
+        res.status(200).json(
+        {
+            message: "Lista de carros restantes:",
+            carroDelete
+        }
+        )
+    } catch(error: any){
+        res.status(400).json({message: error.message})
+    }
+}

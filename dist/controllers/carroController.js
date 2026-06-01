@@ -4,6 +4,7 @@ exports.insereCarro = insereCarro;
 exports.listaCarros = listaCarros;
 exports.listaCarroID = listaCarroID;
 exports.atualizaCarro = atualizaCarro;
+exports.deletaCarro = deletaCarro;
 const carroService_1 = require("../services/carroService");
 const carroService = new carroService_1.CarroService();
 function insereCarro(req, res) {
@@ -47,6 +48,18 @@ function atualizaCarro(req, res) {
         res.status(200).json({
             message: "Carro Atualizado: ",
             carroAtualizado
+        });
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+function deletaCarro(req, res) {
+    try {
+        const carroDelete = carroService.deletaCarro(req.params.id);
+        res.status(200).json({
+            message: "Lista de carros restantes:",
+            carroDelete
         });
     }
     catch (error) {

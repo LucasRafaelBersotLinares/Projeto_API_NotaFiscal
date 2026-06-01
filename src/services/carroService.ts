@@ -1,8 +1,13 @@
 import { Carro } from "../models/carro"
 import { CarroRepository } from "../repositories/carroRepository"
+import { NotaFiscalRepository } from "../repositories/notaFiscalRepository"
+import { EstoqueRepository } from "../repositories/estoqueRepository"
 
 export class CarroService {
     carroRepository: CarroRepository = CarroRepository.getInstance()
+    notaRepository: NotaFiscalRepository = NotaFiscalRepository.getInstance()
+    estoqueRepository: EstoqueRepository = EstoqueRepository.getInstance()
+
 
     insereCarro(carroBody: any): Carro{
         const anoAtual: Date = new Date()
@@ -41,5 +46,18 @@ export class CarroService {
             throw new Error("Carro com este ID não existe no sistema.")
         }
         return this.carroRepository.atualizaCarro(Number(id),carroBody)
+    }
+
+    deletaCarro(id: any): Carro[] | undefined {
+        if(this.carroRepository.listaCarroID(Number(id)) === undefined){
+            throw new Error("Carro com este ID não está cadastrado no sistema.")
+        }
+        if(this.notaRepository.verificaNotaIDtabela(Number(id),"carro") != -1){
+            throw new Error("Carro não pode ser excluído por conta que tem nota emitida.")
+        }
+        if(this.estoqueRepository.listaEstoqueIDCarro(Number(id)) != undefined){
+            throw new Error("Carro não pode ser excluído por conta que tem estoque aberto.")
+        }
+        return this.carroRepository.deletaCarro(id)
     }
 }

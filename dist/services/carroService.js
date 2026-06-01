@@ -2,8 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CarroService = void 0;
 const carroRepository_1 = require("../repositories/carroRepository");
+const notaFiscalRepository_1 = require("../repositories/notaFiscalRepository");
+const estoqueRepository_1 = require("../repositories/estoqueRepository");
 class CarroService {
     carroRepository = carroRepository_1.CarroRepository.getInstance();
+    notaRepository = notaFiscalRepository_1.NotaFiscalRepository.getInstance();
+    estoqueRepository = estoqueRepository_1.EstoqueRepository.getInstance();
     insereCarro(carroBody) {
         const anoAtual = new Date();
         if (!carroBody.marca || !carroBody.modelo || !carroBody.ano || !carroBody.placa || !carroBody.preco || !carroBody.cor) {
@@ -37,6 +41,18 @@ class CarroService {
             throw new Error("Carro com este ID não existe no sistema.");
         }
         return this.carroRepository.atualizaCarro(Number(id), carroBody);
+    }
+    deletaCarro(id) {
+        if (this.carroRepository.listaCarroID(Number(id)) === undefined) {
+            throw new Error("Carro com este ID não está cadastrado no sistema.");
+        }
+        if (this.notaRepository.verificaNotaIDtabela(Number(id), "carro") != -1) {
+            throw new Error("Carro não pode ser excluído por conta que tem nota emitida.");
+        }
+        if (this.estoqueRepository.listaEstoqueIDCarro(Number(id)) != undefined) {
+            throw new Error("Carro não pode ser excluído por conta que tem estoque aberto.");
+        }
+        return this.carroRepository.deletaCarro(id);
     }
 }
 exports.CarroService = CarroService;
