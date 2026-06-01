@@ -60,9 +60,15 @@ export class NotaFiscalService {
         if(this.notaRepository.listaNotas() === undefined){
             throw new Error("Nenhuma Nota emitida.")
         }
-        return this.notaRepository.listaNotas()
+        return this.notaRepository.listaNotas() 
     }
 
+    listaNotaID(id: any): NotaFiscal | undefined {
+        if(this.notaRepository.listaNotaID(Number(id)) === undefined){
+            throw new Error("Não existe nota emitida com este ID.")
+        }
+        return this.notaRepository.listaNotaID(Number(id))
+    }
 
 }
 

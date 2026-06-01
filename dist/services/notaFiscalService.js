@@ -58,6 +58,12 @@ class NotaFiscalService {
         }
         return this.notaRepository.listaNotas();
     }
+    listaNotaID(id) {
+        if (this.notaRepository.listaNotaID(Number(id)) === undefined) {
+            throw new Error("Não existe nota emitida com este ID.");
+        }
+        return this.notaRepository.listaNotaID(Number(id));
+    }
 }
 exports.NotaFiscalService = NotaFiscalService;
 //# sourceMappingURL=notaFiscalService.js.map

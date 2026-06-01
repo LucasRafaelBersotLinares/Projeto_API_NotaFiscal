@@ -26,4 +26,8 @@ export class NotaFiscalRepository {
         return this.notaList
     }
 
+    listaNotaID(id: number): NotaFiscal | undefined{
+        return this.notaList.find(nota => nota.id_nota === id)
+    }
+
 }

@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.emiteNota = emiteNota;
 exports.listaNotas = listaNotas;
+exports.listaNotaID = listaNotaID;
 const notaFiscalService_1 = require("../services/notaFiscalService");
 const notaService = new notaFiscalService_1.NotaFiscalService();
 function emiteNota(req, res) {
@@ -21,6 +22,18 @@ function listaNotas(req, res) {
         const notasList = notaService.listaNotas();
         res.status(200).json({
             notasList
+        });
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+function listaNotaID(req, res) {
+    try {
+        const notaID = notaService.listaNotaID(req.params.id);
+        res.status(200).json({
+            message: "Nota:",
+            notaID
         });
     }
     catch (error) {

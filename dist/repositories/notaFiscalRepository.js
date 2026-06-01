@@ -23,6 +23,9 @@ class NotaFiscalRepository {
     listaNotas() {
         return this.notaList;
     }
+    listaNotaID(id) {
+        return this.notaList.find(nota => nota.id_nota === id);
+    }
 }
 exports.NotaFiscalRepository = NotaFiscalRepository;
 //# sourceMappingURL=notaFiscalRepository.js.map

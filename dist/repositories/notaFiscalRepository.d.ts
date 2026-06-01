@@ -7,5 +7,6 @@ export declare class NotaFiscalRepository {
     emiteNota(nota: any): NotaFiscal;
     notaDuplicada(numero: any): number;
     listaNotas(): NotaFiscal[];
+    listaNotaID(id: number): NotaFiscal | undefined;
 }
 //# sourceMappingURL=notaFiscalRepository.d.ts.map
