@@ -24,6 +24,7 @@ function listaEstoque(req, res) {
     try {
         const estoqueList = estoqueService.listaEstoque();
         res.status(200).json({
+            message: "Lista dos Estoques Lançados:",
             estoqueList
         });
     }
@@ -35,7 +36,7 @@ function listaEstoqueID(req, res) {
     try {
         const estoqueID = estoqueService.listaEstoqueID(req.params.id);
         res.status(200).json({
-            message: "Estoque:",
+            message: "Estoque encontrado:",
             estoqueID
         });
     }
@@ -47,7 +48,7 @@ function listaEstoqueIDCarro(req, res) {
     try {
         const estoqueIDCarro = estoqueService.listaEstoqueIDCarro(req.params.id);
         res.status(200).json({
-            message: "Estoque:",
+            message: "Estoque encontrado:",
             estoqueIDCarro
         });
     }

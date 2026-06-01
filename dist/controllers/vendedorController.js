@@ -24,6 +24,7 @@ function listaVendedores(req, res) {
     try {
         const vendedorList = vendedorService.listaVendedores();
         res.status(200).json({
+            message: "Lista dos Vendedores Cadastrados:",
             vendedorList
         });
     }
@@ -35,7 +36,7 @@ function listaVendedorID(req, res) {
     try {
         const vendedorID = vendedorService.listaVendedorID(req.params.id);
         res.status(200).json({
-            message: "Vendedor:",
+            message: "Vendedor encontrado:",
             vendedorID
         });
     }

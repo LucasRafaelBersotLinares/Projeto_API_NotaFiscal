@@ -24,6 +24,7 @@ function listaClientes(req, res) {
     try {
         const clientesList = clienteService.listaClientes();
         res.status(200).json({
+            message: "Lista de Clientes Cadastrados:",
             clientesList
         });
     }
@@ -35,7 +36,7 @@ function listaClienteID(req, res) {
     try {
         const clienteID = clienteService.listaClienteID(req.params.id);
         res.status(200).json({
-            message: "Cliente:",
+            message: "Cliente encontrado:",
             clienteID
         });
     }

@@ -21,6 +21,7 @@ function listaNotas(req, res) {
     try {
         const notasList = notaService.listaNotas();
         res.status(200).json({
+            message: "Lista das Notas Emitidas:",
             notasList
         });
     }
@@ -32,7 +33,7 @@ function listaNotaID(req, res) {
     try {
         const notaID = notaService.listaNotaID(req.params.id);
         res.status(200).json({
-            message: "Nota:",
+            message: "Nota encontrada:",
             notaID
         });
     }

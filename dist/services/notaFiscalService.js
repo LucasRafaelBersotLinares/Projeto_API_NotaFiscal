@@ -28,16 +28,16 @@ class NotaFiscalService {
         const dataAtual = new Date().toISOString();
         const dataEntrada = new Date(notaBody.data_emissao).toISOString();
         if (!notaBody.numero_nota || !notaBody.data_emissao || !notaBody.valor_total || !notaBody.id_cliente || !notaBody.id_vendedor || !notaBody.id_carro) {
-            throw new Error("Dados obrigatórios faltantes!!! [Numero da nota, Data emissao, Valor total, ID Cliente, ID Vendedor, ID Carro");
+            throw new Error("Dados obrigatórios faltantes!!! [Numero da nota, Data emissao, Valor total, ID Cliente, ID Vendedor, ID Carro].");
         }
         if (!(notaBody.valor_total > 0)) {
-            throw new Error("Valor total deve ser maior que zero.");
+            throw new Error("O campo valor total, deve ser maior que zero.");
         }
         if (dataEntrada > dataAtual) {
-            throw new Error("A data de emissao nao pode ser uma data futura, coloque a data real que a nota foi emitida.");
+            throw new Error("A data de emissão não pode ser uma data futura, coloque a data real que a nota foi emitida.");
         }
         if (this.verificarExistencia("id_carro", notaBody.id_carro) === -1 || this.verificarExistencia("id_vendedor", notaBody.id_vendedor) === -1 || this.verificarExistencia("id_cliente", notaBody.id_cliente) === -1) {
-            throw new Error("O ID Carro, ID Vendedor e ID Cliente devem já estar previamente cadastrados no sistema.");
+            throw new Error("O ID Carro, ID Vendedor e ID Cliente já deve estar previamente cadastrado no sistema.");
         }
         const estoqueCarro = this.estoqueRepository.listaEstoqueIDCarro(notaBody.id_carro);
         if (estoqueCarro === undefined) {
