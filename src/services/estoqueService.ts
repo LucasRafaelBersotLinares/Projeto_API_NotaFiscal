@@ -57,8 +57,8 @@ export class EstoqueService {
     }
 
     deletaEstoque(id: any): Estoque[] | undefined{
-        if(this.estoqueRepository.deletaEstoque(Number(id)) === undefined){
-            throw new Error("Cliente com este ID não existe no sistema.")
+        if(this.estoqueRepository.listaEstoqueID(Number(id)) === undefined){
+            throw new Error("Estoque com este ID não existe no sistema.")
         }
         return this.estoqueRepository.deletaEstoque(Number(id))
     }

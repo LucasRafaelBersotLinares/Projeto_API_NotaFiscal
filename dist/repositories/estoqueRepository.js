@@ -39,10 +39,6 @@ class EstoqueRepository {
         return this.estoqueList[estoqueIndex];
     }
     deletaEstoque(id) {
-        let estoqueIndex = this.estoqueList.findIndex((estoque => estoque.id_estoque === id));
-        if (estoqueIndex === -1) {
-            return undefined;
-        }
         this.estoqueList = this.estoqueList.filter(estoque => estoque.id_estoque != id);
         return this.estoqueList;
     }
