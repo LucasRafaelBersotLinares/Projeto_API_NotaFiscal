@@ -43,4 +43,5 @@ app.delete("/estoque/:id",deletaEstoque)
 app.post("/notas",emiteNota)
 app.get("/notas",listaNotas)
 app.get("/notas/:id",listaNotaID)
+
 app.listen(PORT, serverOn)
