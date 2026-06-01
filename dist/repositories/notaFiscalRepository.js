@@ -20,6 +20,9 @@ class NotaFiscalRepository {
     notaDuplicada(numero) {
         return this.notaList.findIndex(nota => nota.numero_nota === numero);
     }
+    listaNotas() {
+        return this.notaList;
+    }
 }
 exports.NotaFiscalRepository = NotaFiscalRepository;
 //# sourceMappingURL=notaFiscalRepository.js.map

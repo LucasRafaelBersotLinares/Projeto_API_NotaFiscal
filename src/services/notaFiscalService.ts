@@ -54,12 +54,15 @@ export class NotaFiscalService {
             throw new Error("Esse núemro de nota está vinculada a uma existente. ")
         }
         throw new Error("A quantidade do carro que está no estoque é igual a 0, não pode vender esse carro.")
-
-
-
-
-
-
     }
 
+    listaNotas(): NotaFiscal[] {
+        if(this.notaRepository.listaNotas() === undefined){
+            throw new Error("Nenhuma Nota emitida.")
+        }
+        return this.notaRepository.listaNotas()
+    }
+
+
 }
+

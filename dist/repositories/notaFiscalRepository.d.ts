@@ -6,5 +6,6 @@ export declare class NotaFiscalRepository {
     static getInstance(): NotaFiscalRepository;
     emiteNota(nota: any): NotaFiscal;
     notaDuplicada(numero: any): number;
+    listaNotas(): NotaFiscal[];
 }
 //# sourceMappingURL=notaFiscalRepository.d.ts.map

@@ -48,9 +48,15 @@ class NotaFiscalService {
             if (this.notaRepository.notaDuplicada(notaBody.numero_nota) === -1) {
                 return this.notaRepository.emiteNota(notaBody);
             }
-            throw new Error("Esse núemro de nota está vinculada a uma existente.");
+            throw new Error("Esse núemro de nota está vinculada a uma existente. ");
         }
         throw new Error("A quantidade do carro que está no estoque é igual a 0, não pode vender esse carro.");
+    }
+    listaNotas() {
+        if (this.notaRepository.listaNotas() === undefined) {
+            throw new Error("Nenhuma Nota emitida.");
+        }
+        return this.notaRepository.listaNotas();
     }
 }
 exports.NotaFiscalService = NotaFiscalService;

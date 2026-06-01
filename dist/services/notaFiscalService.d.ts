@@ -12,5 +12,6 @@ export declare class NotaFiscalService {
     estoqueRepository: EstoqueRepository;
     verificarExistencia(tabela: string, valor: any): number;
     emiteNota(notaBody: any): NotaFiscal | undefined;
+    listaNotas(): NotaFiscal[];
 }
 //# sourceMappingURL=notaFiscalService.d.ts.map

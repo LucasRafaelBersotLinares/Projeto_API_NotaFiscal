@@ -22,4 +22,8 @@ export class NotaFiscalRepository {
         return this.notaList.findIndex(nota => nota.numero_nota === numero)
     }
 
+    listaNotas(): NotaFiscal[] {
+        return this.notaList
+    }
+
 }

@@ -15,6 +15,17 @@ export function emiteNota(req: Request, res: Response){
     } catch( error: any){
         res.status(400).json({message: error.message})
     }
+}
 
-
+export function listaNotas(req: Request, res: Response){
+    try{
+        const notasList = notaService.listaNotas()
+        res.status(200).json(
+        {
+            notasList
+        }
+        )
+    } catch(error : any){
+        res.status(400).json({message: error.message})
+    }
 }
