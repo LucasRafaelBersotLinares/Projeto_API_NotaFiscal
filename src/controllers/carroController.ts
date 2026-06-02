@@ -47,6 +47,20 @@ export function listaCarroID(req: Request, res: Response){
     }
 }
 
+export function listaCarroDisponiveis(req: Request, res: Response){
+    try{
+        const carrosDisponiveis: any = carroService.listaCarroDisponivel()
+        res.status(200).json(
+        {
+            message: "Carros Disponiveis encontrados:",
+            carrosDisponiveis
+        }
+        )
+    } catch(error: any){
+        res.status(erroStatus.mostraErro()).json({message: error.message})
+    }
+}
+
 export function atualizaCarro(req: Request, res: Response){
     try{
         const carroAtualizado = carroService.atualizaCarro(req.params.id,req.body)

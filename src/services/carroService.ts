@@ -47,7 +47,17 @@ export class CarroService {
             throw new Error("Carro com este ID, não existe no sistema.")
         }
         return this.carroRepository.listaCarroID(Number(id))
-    } 
+    }
+
+    listaCarroDisponivel(): Carro[] | undefined {
+        const carroList = this.carroRepository.listaCarros()
+        const carroDisponiveis = carroList.filter(carro => this.estoqueRepository.listaCarroDisponivel(Number(carro.id_carro))?.quantidade != 0)
+        if(carroList.length === 0 || carroDisponiveis.length === 0){
+            this.erroStatus.insereErro(404)
+            throw new Error("Nenhum veiculo cadastrado")
+        }
+        return carroDisponiveis
+    }
 
     atualizaCarro(id: any, carroBody: any): Carro | undefined {
         const anoAtual: Date = new Date()

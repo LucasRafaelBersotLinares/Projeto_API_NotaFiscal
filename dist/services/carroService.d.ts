@@ -11,6 +11,7 @@ export declare class CarroService {
     insereCarro(carroBody: any): Carro;
     listaCarros(): Carro[];
     listaCarroID(id: any): Carro | undefined;
+    listaCarroDisponivel(): Carro[] | undefined;
     atualizaCarro(id: any, carroBody: any): Carro | undefined;
     deletaCarro(id: any): Carro[] | undefined;
 }

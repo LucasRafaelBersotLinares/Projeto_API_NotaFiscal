@@ -10,6 +10,7 @@ export declare class EstoqueRepository {
     listaEstoque(): Estoque[];
     listaEstoqueID(id: number): Estoque | undefined;
     listaEstoqueIDCarro(id_carro: number): Estoque | undefined;
+    listaCarroDisponivel(id_carro: number): Estoque | undefined;
     atualizaEstoque(id: number, estoqueBody: any): Estoque | undefined;
     deletaEstoque(id: number): Estoque[] | undefined;
     diminuirEstoque(id: number): void;

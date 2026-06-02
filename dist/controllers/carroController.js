@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.insereCarro = insereCarro;
 exports.listaCarros = listaCarros;
 exports.listaCarroID = listaCarroID;
+exports.listaCarroDisponiveis = listaCarroDisponiveis;
 exports.atualizaCarro = atualizaCarro;
 exports.deletaCarro = deletaCarro;
 const carroService_1 = require("../services/carroService");
@@ -39,6 +40,18 @@ function listaCarroID(req, res) {
         res.status(200).json({
             message: "Carro encontrado:",
             carroID
+        });
+    }
+    catch (error) {
+        res.status(erroStatus.mostraErro()).json({ message: error.message });
+    }
+}
+function listaCarroDisponiveis(req, res) {
+    try {
+        const carrosDisponiveis = carroService.listaCarroDisponivel();
+        res.status(200).json({
+            message: "Carros Disponiveis encontrados:",
+            carrosDisponiveis
         });
     }
     catch (error) {

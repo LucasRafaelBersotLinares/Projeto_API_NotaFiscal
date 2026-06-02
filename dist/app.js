@@ -29,6 +29,7 @@ app.put("/vendedores/:id", vendedorController_1.atualizaVendedor);
 app.delete("/vendedores/:id", vendedorController_1.deletaVendedor);
 app.post("/carros", carroController_1.insereCarro);
 app.get("/carros", carroController_1.listaCarros);
+app.get("/carros/disponiveis", carroController_1.listaCarroDisponiveis);
 app.get("/carros/:id", carroController_1.listaCarroID);
 app.put("/carros/:id", carroController_1.atualizaCarro);
 app.delete("/carros/:id", carroController_1.deletaCarro);

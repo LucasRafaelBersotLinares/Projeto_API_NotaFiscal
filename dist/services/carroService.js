@@ -44,6 +44,13 @@ class CarroService {
         }
         return this.carroRepository.listaCarroID(Number(id));
     }
+    listaCarroDisponivel() {
+        const carroList = this.carroRepository.listaCarros();
+        const carroDisponiveis = carroList.filter(carro => this.estoqueRepository.listaCarroDisponivel(Number(carro.id_carro))?.quantidade != 0);
+        console.log(carroDisponiveis);
+        console.log(carroList);
+        return carroDisponiveis;
+    }
     atualizaCarro(id, carroBody) {
         const anoAtual = new Date();
         if (this.carroRepository.indexCarro(Number(id)) === -1) {

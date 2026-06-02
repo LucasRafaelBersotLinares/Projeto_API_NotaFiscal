@@ -32,6 +32,9 @@ class EstoqueRepository {
     listaEstoqueIDCarro(id_carro) {
         return this.estoqueList.find(estoque => estoque.id_carro === id_carro);
     }
+    listaCarroDisponivel(id_carro) {
+        return this.estoqueList.find(estoque => estoque.id_carro === id_carro);
+    }
     atualizaEstoque(id, estoqueBody) {
         let estoqueIndex = this.indexEstoque(Number(id));
         this.estoqueList[estoqueIndex].quantidade = estoqueBody.quantidade ?? this.estoqueList[estoqueIndex].quantidade;
