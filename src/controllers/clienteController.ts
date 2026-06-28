@@ -10,8 +10,7 @@ export function insereCliente(req: Request, res: Response){
         const newCliente = clienteService.insereCliente(req.body)
         res.status(201).json(
         {
-            message: "Cliente cadastrado com sucesso!!!",
-            cliente: newCliente
+            newCliente
         }
         )
     } catch( error: any){
@@ -24,7 +23,6 @@ export function listaClientes(req: Request, res: Response){
         const clientesList = clienteService.listaClientes()
         res.status(200).json(
         {
-            message: "Lista de Clientes Cadastrados:",
             clientesList
         }
         )
@@ -38,7 +36,6 @@ export function listaClienteID(req: Request, res: Response){
         const clienteID: any = clienteService.listaClienteID(req.params.id)
         res.status(200).json(
         {
-            message: "Cliente encontrado:",
             clienteID
         }
         )
@@ -52,7 +49,6 @@ export function atualizaCliente(req: Request, res: Response){
         const clienteAtualizado = clienteService.atualizaCliente(req.params.id,req.body)
         res.status(200).json(
         {
-            message: "Cliente Atualizado: ",
             clienteAtualizado
         }
         )
@@ -66,7 +62,6 @@ export function deletaCliente(req: Request, res: Response){
         const clienteDelete = clienteService.deletaCliente(req.params.id)
         res.status(200).json(
         {
-            message: "Lista de clientes restantes:",
             clienteDelete
         }
         )
@@ -80,7 +75,6 @@ export function listaNotasCliente(req: Request, res: Response){
         const notasID = clienteService.listaNotasCliente(req.params.id)
         res.status(200).json(
         {
-            message: "Notas do Cliente:",
             notasID
         }
         )

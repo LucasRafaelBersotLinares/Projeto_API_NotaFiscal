@@ -10,8 +10,7 @@ export function insereVendedor(req: Request, res: Response){
         const newVendedor = vendedorService.insereVendedor(req.body)
         res.status(201).json(
         {
-            message: "Vendedor cadastrado com sucesso!!!",
-            vendedor: newVendedor
+            newVendedor
         }
         )
     } catch( error: any){
@@ -24,7 +23,6 @@ export function listaVendedores(req: Request, res: Response){
         const vendedorList = vendedorService.listaVendedores()
         res.status(200).json(
         {
-            message: "Lista dos Vendedores Cadastrados:",
             vendedorList
         }
         )
@@ -38,7 +36,6 @@ export function listaVendedorID(req: Request, res: Response){
         const vendedorID: any = vendedorService.listaVendedorID(req.params.id)
         res.status(200).json(
         {
-            message: "Vendedor encontrado:",
             vendedorID
         }
         )
@@ -52,7 +49,6 @@ export function atualizaVendedor(req: Request, res: Response){
         const vendedorAtualizado = vendedorService.atualizaVendedor(req.params.id,req.body)
         res.status(200).json(
         {
-            message: "Vendedor Atualizado: ",
             vendedorAtualizado
         }
         )
@@ -66,7 +62,6 @@ export function deletaVendedor(req: Request, res: Response){
         const vendedorDelete = vendedorService.deletaVendedor(req.params.id)
         res.status(200).json(
         {
-            message: "Lista de vendedores restantes:",
             vendedorDelete
         }
         )
@@ -80,7 +75,6 @@ export function listaNotasVendedor(req: Request, res: Response){
         const notasID = vendedorService.listaNotasVendedor(req.params.id)
         res.status(200).json(
         {
-            message: "Notas do Vendedor:",
             notasID
         }
         )

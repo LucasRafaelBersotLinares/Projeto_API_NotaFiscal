@@ -10,8 +10,7 @@ export function insereEstoque(req: Request, res: Response){
         const newEstoque = estoqueService.insereEstoque(req.body)
         res.status(201).json(
         {
-            message: "Estoque cadastrado com sucesso!!!",
-            estoque: newEstoque
+            newEstoque
         }
         )
     } catch( error: any){
@@ -24,7 +23,6 @@ export function listaEstoque(req: Request, res: Response){
         const estoqueList = estoqueService.listaEstoque()
         res.status(200).json(
         {
-            message: "Lista dos Estoques Lançados:",
             estoqueList
         }
         )
@@ -38,7 +36,6 @@ export function listaEstoqueID(req: Request, res: Response){
         const estoqueID: any = estoqueService.listaEstoqueID(req.params.id)
         res.status(200).json(
         {
-            message: "Estoque encontrado:",
             estoqueID
         }
         )
@@ -52,7 +49,6 @@ export function listaEstoqueIDCarro(req: Request, res: Response){
         const estoqueIDCarro: any = estoqueService.listaEstoqueIDCarro(req.params.id)
         res.status(200).json(
         {
-            message: "Estoque encontrado:",
             estoqueIDCarro
         }
         )
@@ -67,7 +63,6 @@ export function atualizaEstoque(req: Request, res: Response){
         const estoqueAtualizado = estoqueService.atualizaEstoque(req.params.id,req.body)
         res.status(200).json(
         {
-            message: "Estoque Atualizado: ",
             estoqueAtualizado
         }
         )
@@ -81,7 +76,6 @@ export function deletaEstoque(req: Request, res: Response){
         const estoqueDelete = estoqueService.deletaEstoque(req.params.id)
         res.status(200).json(
         {
-            message: "Lista de Estoque Restantes: ",
             estoqueDelete
         }
         )

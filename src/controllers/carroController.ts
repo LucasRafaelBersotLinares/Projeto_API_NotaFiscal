@@ -10,8 +10,7 @@ export function insereCarro(req: Request, res: Response){
         const newCarro = carroService.insereCarro(req.body)
         res.status(201).json(
         {
-            message: "Carro cadastrado com sucesso!!!",
-            carro: newCarro
+            newCarro
         }
         )
     } catch( error: any){
@@ -24,7 +23,6 @@ export function listaCarros(req: Request, res: Response){
         const carroList = carroService.listaCarros()
         res.status(200).json(
         {
-            message: "Lista dos Carros Cadastrados:",
             carroList
         }
         )
@@ -38,7 +36,6 @@ export function listaCarroID(req: Request, res: Response){
         const carroID: any = carroService.listaCarroID(req.params.id)
         res.status(200).json(
         {
-            message: "Carro encontrado:",
             carroID
         }
         )
@@ -52,7 +49,6 @@ export function listaCarroDisponiveis(req: Request, res: Response){
         const carrosDisponiveis: any = carroService.listaCarroDisponivel()
         res.status(200).json(
         {
-            message: "Carros Disponiveis encontrados:",
             carrosDisponiveis
         }
         )
@@ -66,7 +62,6 @@ export function atualizaCarro(req: Request, res: Response){
         const carroAtualizado = carroService.atualizaCarro(req.params.id,req.body)
         res.status(200).json(
         {
-            message: "Carro Atualizado: ",
             carroAtualizado
         }
         )
@@ -80,7 +75,6 @@ export function deletaCarro(req: Request, res: Response){
         const carroDelete = carroService.deletaCarro(req.params.id)
         res.status(200).json(
         {
-            message: "Lista de carros restantes:",
             carroDelete
         }
         )
