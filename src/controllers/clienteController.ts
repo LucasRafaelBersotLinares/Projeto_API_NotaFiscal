@@ -43,14 +43,14 @@ export class ClienteController {
         }
     }
 
-    // deletaCliente(req: Request, res: Response){
-    //     try{
-    //         const clienteDelete = this.clienteService.deletaCliente(req.params.id)
-    //         res.status(200).json(clienteDelete)
-    //     } catch(error: any){
-    //         res.status(this.erroStatus.mostraErro()).json({message: error.message})
-    //     }
-    // }
+    async deleteCliente(req: Request, res: Response){
+        try{
+            const clienteDelete = await this.clienteService.deletaCliente(req.params.id)
+            res.status(200).json(clienteDelete)
+        } catch(error: any){
+            res.status(this.erroStatus.mostraErro()).json({message: error.message})
+        }
+    }
 
     // listaNotasCliente(req: Request, res: Response){
     //     try{

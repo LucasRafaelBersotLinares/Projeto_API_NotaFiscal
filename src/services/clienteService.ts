@@ -50,17 +50,17 @@ export class ClienteService {
         return this.clienteRepository.atualizaCliente(Number(id),clienteBody)
     }
 
-//     deletaCliente(id: any): Cliente[] | undefined {
-//         if(this.clienteRepository.listaClienteID(Number(id)) === undefined){
-//             this.erroStatus.insereErro(404)
-//             throw new Error("Cliente com este ID, não está cadastrado no sistema.")
-//         }
-//         if(this.notaRepository.verificaNotaIDtabela(Number(id),"cliente") != -1){
-//             this.erroStatus.insereErro(422)
-//             throw new Error("Cliente não pode ser excluído por conta que tem nota emitida.")
-//         }
-//         return this.clienteRepository.deletaCliente(id)
-//     }
+    async deletaCliente(id: any): Promise<Cliente | undefined>{
+        if(await this.clienteRepository.listaClienteID(Number(id)) === undefined){
+            this.erroStatus.insereErro(404)
+            throw new Error("Cliente com este ID, não está cadastrado no sistema.")
+        }
+        // if(this.notaRepository.verificaNotaIDtabela(Number(id),"cliente") != -1){
+        //     this.erroStatus.insereErro(422)
+        //     throw new Error("Cliente não pode ser excluído por conta que tem nota emitida.")
+        // }
+        return this.clienteRepository.deleteCliente(id)
+    }
 
 //     listaNotasCliente(id: any): NotaFiscal[] | undefined {
 //         if(this.notaRepository.listaNotasporTabela(id,"cliente")!.length === 0){

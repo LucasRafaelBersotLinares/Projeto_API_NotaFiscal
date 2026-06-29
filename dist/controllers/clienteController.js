@@ -42,6 +42,15 @@ class ClienteController {
             res.status(this.erroStatus.mostraErro()).json({ message: error.message });
         }
     }
+    async deleteCliente(req, res) {
+        try {
+            const clienteDelete = await this.clienteService.deletaCliente(req.params.id);
+            res.status(200).json(clienteDelete);
+        }
+        catch (error) {
+            res.status(this.erroStatus.mostraErro()).json({ message: error.message });
+        }
+    }
 }
 exports.ClienteController = ClienteController;
 //# sourceMappingURL=clienteController.js.map

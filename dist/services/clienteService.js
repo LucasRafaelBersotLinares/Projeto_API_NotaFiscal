@@ -44,6 +44,17 @@ class ClienteService {
         // }
         return this.clienteRepository.atualizaCliente(Number(id), clienteBody);
     }
+    async deletaCliente(id) {
+        if (await this.clienteRepository.listaClienteID(Number(id)) === undefined) {
+            this.erroStatus.insereErro(404);
+            throw new Error("Cliente com este ID, não está cadastrado no sistema.");
+        }
+        // if(this.notaRepository.verificaNotaIDtabela(Number(id),"cliente") != -1){
+        //     this.erroStatus.insereErro(422)
+        //     throw new Error("Cliente não pode ser excluído por conta que tem nota emitida.")
+        // }
+        return this.clienteRepository.deleteCliente(id);
+    }
 }
 exports.ClienteService = ClienteService;
 //# sourceMappingURL=clienteService.js.map

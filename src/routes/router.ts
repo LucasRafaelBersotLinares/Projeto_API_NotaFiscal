@@ -19,7 +19,7 @@ router.get("/clientes",(req: Request, res: Response) => {clienteController.lista
 router.get("/clientes/:id",(req: Request, res: Response) => {clienteController.listaClienteID(req,res)})
 // router.get("/clientes/notas/:id",listaNotasCliente)
 router.put("/clientes/:id",(req: Request, res: Response) => {clienteController.atualizaCliente(req,res)})
-// router.delete("/clientes/:id", deletaCliente)
+router.delete("/clientes/:id", (req: Request, res: Response) => {clienteController.deleteCliente(req,res)})
 
 // router.post("/vendedores",insereVendedor)
 // router.get("/vendedores",listaVendedores)

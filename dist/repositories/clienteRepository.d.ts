@@ -8,5 +8,6 @@ export declare class ClienteRepository {
     listaClientes(): Promise<Cliente[]>;
     listaClienteID(id: any): Promise<Cliente | undefined>;
     atualizaCliente(id: any, clienteBody: any): Promise<Cliente>;
+    deleteCliente(id: any): Promise<Cliente | undefined>;
 }
 //# sourceMappingURL=clienteRepository.d.ts.map

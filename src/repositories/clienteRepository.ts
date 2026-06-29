@@ -77,4 +77,9 @@ export class ClienteRepository {
         return await executarComandoSQL("SELECT * FROM Clientes WHERE id_cliente = ?", [id])
     }
 
+    async deleteCliente(id: any): Promise<Cliente | undefined> {
+        const cliente = await this.listaClienteID(id)
+        await executarComandoSQL("DELETE FROM Clientes WHERE id_cliente = ?", [id])
+        return cliente
+    }
 }

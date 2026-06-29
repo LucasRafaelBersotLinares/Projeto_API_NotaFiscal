@@ -10,5 +10,6 @@ export declare class ClienteService {
     listaClientes(): Promise<Cliente[]>;
     listaClienteID(id: any): Promise<Cliente | undefined>;
     atualizaCliente(id: any, clienteBody: any): Promise<Cliente | undefined>;
+    deletaCliente(id: any): Promise<Cliente | undefined>;
 }
 //# sourceMappingURL=clienteService.d.ts.map

@@ -56,6 +56,11 @@ class ClienteRepository {
             WHERE id_cliente = ?;`, [clienteBody.nome, clienteBody.telefone, clienteBody.cpf, clienteBody.email, clienteBody.cidade, id]);
         return await (0, mysql_1.executarComandoSQL)("SELECT * FROM Clientes WHERE id_cliente = ?", [id]);
     }
+    async deleteCliente(id) {
+        const cliente = await this.listaClienteID(id);
+        await (0, mysql_1.executarComandoSQL)("DELETE FROM Clientes WHERE id_cliente = ?", [id]);
+        return cliente;
+    }
 }
 exports.ClienteRepository = ClienteRepository;
 //# sourceMappingURL=clienteRepository.js.map
