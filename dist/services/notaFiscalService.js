@@ -33,6 +33,22 @@ class NotaFiscalService {
             this.erroStatus.insereErro(400);
             throw new Error("A data de emissão não pode ser uma data futura, coloque a data real que a nota foi emitida.");
         }
+        if (await this.clienteRepository.listaClienteID(notaBody.id_cliente) === undefined) {
+            this.erroStatus.insereErro(404);
+            throw new Error("Cliente não encontrado.");
+        }
+        if (await this.vendedorRepository.listaVendedorID(notaBody.id_vendedor) === undefined) {
+            this.erroStatus.insereErro(404);
+            throw new Error("Vendedor não encontrado.");
+        }
+        if (await this.carroRepository.listaCarroID(notaBody.id_carro) === undefined) {
+            this.erroStatus.insereErro(404);
+            throw new Error("Carro não encontrado.");
+        }
+        if (await this.notaRepository.notaDuplicada(notaBody.numero_nota) != undefined) {
+            this.erroStatus.insereErro(409);
+            throw new Error("Esse número de nota está vinculada a uma existente. ");
+        }
         const estoqueCarro = await this.estoqueRepository.listaEstoqueCarroID(notaBody.id_carro);
         if (estoqueCarro === undefined) {
             this.erroStatus.insereErro(404);
@@ -41,11 +57,7 @@ class NotaFiscalService {
         if (estoqueCarro.quantidade > 0) {
             estoqueCarro.quantidade -= 1;
             await this.estoqueRepository.diminuirEstoque(estoqueCarro.id_estoque, estoqueCarro);
-            if (this.notaRepository.notaDuplicada(notaBody.numero_nota) === undefined) {
-                return this.notaRepository.emiteNota(notaBody);
-            }
-            this.erroStatus.insereErro(409);
-            throw new Error("Esse número de nota está vinculada a uma existente. ");
+            return this.notaRepository.emiteNota(notaBody);
         }
         this.erroStatus.insereErro(422);
         throw new Error("A quantidade do carro que está no estoque é igual a 0, não pode vender esse carro.");
