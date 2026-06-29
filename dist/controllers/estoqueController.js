@@ -33,14 +33,15 @@ class EstoqueController {
             res.status(this.erroStatus.mostraErro()).json({ message: error.message });
         }
     }
-    // async listaEstoqueCarroID(req: Request, res: Response){
-    //     try{
-    //         const estoqueIDCarro: any = await this.estoqueService.listaEstoqueCarroID(req.params.id)
-    //         res.status(200).json(estoqueIDCarro)
-    //     } catch(error: any){
-    //         res.status(this.erroStatus.mostraErro()).json({message: error.message})
-    //     }
-    // }
+    async listaEstoqueCarroID(req, res) {
+        try {
+            const estoqueIDCarro = await this.estoqueService.listaEstoqueCarroID(req.params.id);
+            res.status(200).json(estoqueIDCarro);
+        }
+        catch (error) {
+            res.status(this.erroStatus.mostraErro()).json({ message: error.message });
+        }
+    }
     async atualizaEstoque(req, res) {
         try {
             const estoqueAtualizado = await this.estoqueService.atualizaEstoque(req.params.id, req.body);

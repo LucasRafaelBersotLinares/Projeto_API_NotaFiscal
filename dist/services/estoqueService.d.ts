@@ -9,6 +9,7 @@ export declare class EstoqueService {
     insereEstoque(estoqueBody: any): Promise<Estoque>;
     listaEstoque(): Promise<Estoque[]>;
     listaEstoqueID(id: any): Promise<Estoque | undefined>;
+    listaEstoqueCarroID(id: any): Promise<Estoque | undefined>;
     atualizaEstoque(id: any, estoqueBody: any): Promise<Estoque | undefined>;
     deletaEstoque(id: any): Promise<Estoque | undefined>;
 }

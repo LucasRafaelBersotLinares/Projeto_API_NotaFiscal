@@ -22,6 +22,14 @@ class VendedorRepository {
             );
         `;
     }
+    async matriculaRepetida(matricula) {
+        const linhas = await (0, mysql_1.executarComandoSQL)("SELECT * FROM Vendedores WHERE matricula = ?", [matricula]);
+        if (linhas.length === 0) {
+            return undefined;
+        }
+        const linha = linhas[0];
+        return new vendedor_1.Vendedor(linha.id_vendedor, linha.nome, linha.matricula, linha.comissao_percentual);
+    }
     async insereVendedor(vendedor) {
         const resultado = await (0, mysql_1.executarComandoSQL)("INSERT INTO Vendedores (nome, matricula, comissao_percentual) VALUES (?, ?, ?)", [vendedor.nome, vendedor.matricula, vendedor.comissao_percentual]);
         const idGerado = resultado.insertId;

@@ -7,6 +7,7 @@ export declare class EstoqueController {
     insereEstoque(req: Request, res: Response): Promise<void>;
     listaEstoque(req: Request, res: Response): Promise<void>;
     listaEstoqueID(req: Request, res: Response): Promise<void>;
+    listaEstoqueCarroID(req: Request, res: Response): Promise<void>;
     atualizaEstoque(req: Request, res: Response): Promise<void>;
     deleteEstoque(req: Request, res: Response): Promise<void>;
 }

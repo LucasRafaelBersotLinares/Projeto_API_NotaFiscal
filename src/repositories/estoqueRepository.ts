@@ -56,10 +56,20 @@ export class EstoqueRepository {
 
     async listaEstoqueID(id: any): Promise<Estoque | undefined>{
         const linhas = await executarComandoSQL("SELECT * FROM Estoques WHERE id_estoque = ?", [id])
-        const estoque: Estoque = linhas.map((linha: any) => {
-            return new Estoque(linha.id_estoque, linha.id_carro, linha.quantidade, linha.localizacao_patio, linha.data_entrada)
-        })
-        return estoque
+
+        if (linhas.length === 0) {
+            return undefined;
+        }
+
+        const linha = linhas[0];
+
+        return new Estoque(
+            linha.id_estoque,
+            linha.id_carro,
+            linha.quantidade,
+            linha.localizacao_patio,
+            linha.data_entrada
+        );
     }
 
     async atualizaEstoque(id: any, estoqueBody: any): Promise<Estoque> {
@@ -76,10 +86,20 @@ export class EstoqueRepository {
 
     async carroDuplicado(id: any): Promise<Estoque | undefined>{
         const linhas = await executarComandoSQL("SELECT * FROM Estoques WHERE id_carro = ?", [id])
-        const estoque: Estoque = linhas.map((linha: any) => {
-            return new Estoque(linha.id_estoque, linha.id_carro, linha.quantidade, linha.localizacao_patio, linha.data_entrada)
-        })
-        return estoque
+
+        if (linhas.length === 0) {
+            return undefined;
+        }
+
+        const linha = linhas[0];
+
+        return new Estoque(
+            linha.id_estoque,
+            linha.id_carro,
+            linha.quantidade,
+            linha.localizacao_patio,
+            linha.data_entrada
+        );
     }
 
     async deleteEstoque(id: any): Promise<Estoque | undefined> {
@@ -89,13 +109,23 @@ export class EstoqueRepository {
     }
 
 
-    // async listaEstoqueCarroID(id: any): Promise<Estoque | undefined>{
-    //     const linhas = await executarComandoSQL("SELECT * FROM Estoques WHERE id_carro = ?", [id])
-    //     const estoque: Estoque = linhas.map((linha: any) => {
-    //         return new Estoque(linha.id_estoque, linha.id_carro, linha.quantidade, linha.localizacao_patio, linha.data_entrada)
-    //     })
-    //     return estoque
-    // }
+    async listaEstoqueCarroID(id: any): Promise<Estoque | undefined>{
+        const linhas = await executarComandoSQL("SELECT * FROM Estoques WHERE id_carro = ?", [id])
+        
+        if (linhas.length === 0) {
+            return undefined;
+        }
+
+        const linha = linhas[0];
+
+        return new Estoque(
+            linha.id_estoque,
+            linha.id_carro,
+            linha.quantidade,
+            linha.localizacao_patio,
+            linha.data_entrada
+        );
+    }
 
 
     // diminuirEstoque(id: number){

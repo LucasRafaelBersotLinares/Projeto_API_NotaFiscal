@@ -22,6 +22,26 @@ export class VendedorRepository {
             );
         `;
     }
+    
+    async matriculaRepetida(matricula: string): Promise<Vendedor | undefined> {
+        const linhas = await executarComandoSQL(
+            "SELECT * FROM Vendedores WHERE matricula = ?",
+            [matricula]
+        );
+
+        if (linhas.length === 0) {
+            return undefined;
+        }
+
+        const linha = linhas[0];
+
+        return new Vendedor(
+            linha.id_vendedor,
+            linha.nome,
+            linha.matricula,
+            linha.comissao_percentual,
+        );
+    } 
 
     async insereVendedor(vendedor: Vendedor): Promise<Vendedor> {
         const resultado = await executarComandoSQL(

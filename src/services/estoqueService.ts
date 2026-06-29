@@ -55,13 +55,13 @@ export class EstoqueService {
         return this.estoqueRepository.listaEstoqueID(Number(id))
     }  
     
-    // async listaEstoqueCarroID(id: any): Promise<Estoque | undefined>{
-    //     if(await this.estoqueRepository.listaEstoqueCarroID(Number(id)) === undefined){
-    //         this.erroStatus.insereErro(404)
-    //         throw new Error("Estoque com este ID de carro, não existe no sistema.")
-    //     }
-    //     return await this.estoqueRepository.listaEstoqueCarroID(Number(id))
-    // }
+    async listaEstoqueCarroID(id: any): Promise<Estoque | undefined>{
+        if(await this.estoqueRepository.listaEstoqueCarroID(Number(id)) === undefined){
+            this.erroStatus.insereErro(404)
+            throw new Error("Estoque com este ID de carro, não existe no sistema.")
+        }
+        return await this.estoqueRepository.listaEstoqueCarroID(Number(id))
+    }
 
     async atualizaEstoque(id: any, estoqueBody: any): Promise<Estoque | undefined>{   
         if(await this.estoqueRepository.listaEstoqueID(Number(id)) === undefined){

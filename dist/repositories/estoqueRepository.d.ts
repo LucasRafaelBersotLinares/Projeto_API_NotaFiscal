@@ -10,5 +10,6 @@ export declare class EstoqueRepository {
     atualizaEstoque(id: any, estoqueBody: any): Promise<Estoque>;
     carroDuplicado(id: any): Promise<Estoque | undefined>;
     deleteEstoque(id: any): Promise<Estoque | undefined>;
+    listaEstoqueCarroID(id: any): Promise<Estoque | undefined>;
 }
 //# sourceMappingURL=estoqueRepository.d.ts.map

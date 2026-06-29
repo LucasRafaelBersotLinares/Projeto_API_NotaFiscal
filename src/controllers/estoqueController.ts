@@ -33,14 +33,14 @@ export class EstoqueController {
         }
     }
 
-    // async listaEstoqueCarroID(req: Request, res: Response){
-    //     try{
-    //         const estoqueIDCarro: any = await this.estoqueService.listaEstoqueCarroID(req.params.id)
-    //         res.status(200).json(estoqueIDCarro)
-    //     } catch(error: any){
-    //         res.status(this.erroStatus.mostraErro()).json({message: error.message})
-    //     }
-    // }
+    async listaEstoqueCarroID(req: Request, res: Response){
+        try{
+            const estoqueIDCarro: any = await this.estoqueService.listaEstoqueCarroID(req.params.id)
+            res.status(200).json(estoqueIDCarro)
+        } catch(error: any){
+            res.status(this.erroStatus.mostraErro()).json({message: error.message})
+        }
+    }
 
     async atualizaEstoque(req: Request, res: Response){
         try{

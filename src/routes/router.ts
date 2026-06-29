@@ -37,7 +37,7 @@ router.delete("/carros/:id", (req: Request, res: Response) => {carroController.d
 
 router.post("/estoque",(req: Request, res: Response) => {estoqueController.insereEstoque(req,res)})
 router.get("/estoque",(req: Request, res: Response) => {estoqueController.listaEstoque(req,res)})
-// router.get("/estoque/carro/:id",(req: Request, res: Response) => {estoqueController.listaEstoqueCarroID(req,res)})
+router.get("/estoque/carro/:id",(req: Request, res: Response) => {estoqueController.listaEstoqueCarroID(req,res)})
 router.get("/estoque/:id",(req: Request, res: Response) => {estoqueController.listaEstoqueID(req,res)})
 router.put("/estoque/:id",(req: Request, res: Response) => {estoqueController.atualizaEstoque(req,res)})
 router.delete("/estoque/:id",(req: Request, res: Response) => {estoqueController.deleteEstoque(req,res)})

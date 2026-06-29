@@ -4,6 +4,7 @@ export declare class VendedorRepository {
     private constructor();
     static getInstance(): VendedorRepository;
     static getCreateTableQuery(): string;
+    matriculaRepetida(matricula: string): Promise<Vendedor | undefined>;
     insereVendedor(vendedor: Vendedor): Promise<Vendedor>;
     listaVendedores(): Promise<Vendedor[]>;
     listaVendedorID(id: any): Promise<Vendedor | undefined>;

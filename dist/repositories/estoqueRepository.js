@@ -40,10 +40,11 @@ class EstoqueRepository {
     }
     async listaEstoqueID(id) {
         const linhas = await (0, mysql_1.executarComandoSQL)("SELECT * FROM Estoques WHERE id_estoque = ?", [id]);
-        const estoque = linhas.map((linha) => {
-            return new estoque_1.Estoque(linha.id_estoque, linha.id_carro, linha.quantidade, linha.localizacao_patio, linha.data_entrada);
-        });
-        return estoque;
+        if (linhas.length === 0) {
+            return undefined;
+        }
+        const linha = linhas[0];
+        return new estoque_1.Estoque(linha.id_estoque, linha.id_carro, linha.quantidade, linha.localizacao_patio, linha.data_entrada);
     }
     async atualizaEstoque(id, estoqueBody) {
         await (0, mysql_1.executarComandoSQL)(`UPDATE Estoques
@@ -55,15 +56,24 @@ class EstoqueRepository {
     }
     async carroDuplicado(id) {
         const linhas = await (0, mysql_1.executarComandoSQL)("SELECT * FROM Estoques WHERE id_carro = ?", [id]);
-        const estoque = linhas.map((linha) => {
-            return new estoque_1.Estoque(linha.id_estoque, linha.id_carro, linha.quantidade, linha.localizacao_patio, linha.data_entrada);
-        });
-        return estoque;
+        if (linhas.length === 0) {
+            return undefined;
+        }
+        const linha = linhas[0];
+        return new estoque_1.Estoque(linha.id_estoque, linha.id_carro, linha.quantidade, linha.localizacao_patio, linha.data_entrada);
     }
     async deleteEstoque(id) {
         const estoque = await this.listaEstoqueID(id);
         await (0, mysql_1.executarComandoSQL)("DELETE FROM Estoques WHERE id_estoque = ?", [id]);
         return estoque;
+    }
+    async listaEstoqueCarroID(id) {
+        const linhas = await (0, mysql_1.executarComandoSQL)("SELECT * FROM Estoques WHERE id_carro = ?", [id]);
+        if (linhas.length === 0) {
+            return undefined;
+        }
+        const linha = linhas[0];
+        return new estoque_1.Estoque(linha.id_estoque, linha.id_carro, linha.quantidade, linha.localizacao_patio, linha.data_entrada);
     }
 }
 exports.EstoqueRepository = EstoqueRepository;
