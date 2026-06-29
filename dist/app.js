@@ -4,43 +4,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const clienteController_1 = require("./controllers/clienteController");
-const vendedorController_1 = require("./controllers/vendedorController");
-const carroController_1 = require("./controllers/carroController");
-const estoqueController_1 = require("./controllers/estoqueController");
-const notaFiscalController_1 = require("./controllers/notaFiscalController");
+const router_1 = __importDefault(require("./routes/router"));
+const mysql_1 = require("./database/mysql");
 const app = (0, express_1.default)();
 const PORT = process.env.PORT ?? 3000;
 app.use(express_1.default.json());
-function serverOn() {
-    console.log(`API está sendo executada no endereço: http:localhost:${PORT}`);
+app.use("/api", router_1.default);
+async function startServer() {
+    await (0, mysql_1.inicializarBanco)();
+    app.listen(PORT, () => {
+        console.log(`Servidor rodando em http://localhost:${PORT}`);
+    });
 }
-app.post("/clientes", clienteController_1.insereCliente);
-app.get("/clientes", clienteController_1.listaClientes);
-app.get("/clientes/:id", clienteController_1.listaClienteID);
-app.get("/clientes/notas/:id", clienteController_1.listaNotasCliente);
-app.put("/clientes/:id", clienteController_1.atualizaCliente);
-app.delete("/clientes/:id", clienteController_1.deletaCliente);
-app.post("/vendedores", vendedorController_1.insereVendedor);
-app.get("/vendedores", vendedorController_1.listaVendedores);
-app.get("/vendedores/:id", vendedorController_1.listaVendedorID);
-app.get("/vendedores/notas/:id", vendedorController_1.listaNotasVendedor);
-app.put("/vendedores/:id", vendedorController_1.atualizaVendedor);
-app.delete("/vendedores/:id", vendedorController_1.deletaVendedor);
-app.post("/carros", carroController_1.insereCarro);
-app.get("/carros", carroController_1.listaCarros);
-app.get("/carros/disponiveis", carroController_1.listaCarroDisponiveis);
-app.get("/carros/:id", carroController_1.listaCarroID);
-app.put("/carros/:id", carroController_1.atualizaCarro);
-app.delete("/carros/:id", carroController_1.deletaCarro);
-app.post("/estoque", estoqueController_1.insereEstoque);
-app.get("/estoque", estoqueController_1.listaEstoque);
-app.get("/estoque/:id", estoqueController_1.listaEstoqueID);
-app.get("/estoque/carro/:id", estoqueController_1.listaEstoqueIDCarro);
-app.put("/estoque/:id", estoqueController_1.atualizaEstoque);
-app.delete("/estoque/:id", estoqueController_1.deletaEstoque);
-app.post("/notas", notaFiscalController_1.emiteNota);
-app.get("/notas", notaFiscalController_1.listaNotas);
-app.get("/notas/:id", notaFiscalController_1.listaNotaID);
-app.listen(PORT, serverOn);
+startServer();
 //# sourceMappingURL=app.js.map

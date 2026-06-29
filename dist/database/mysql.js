@@ -4,7 +4,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.executarComandoSQL = executarComandoSQL;
+exports.inicializarBanco = inicializarBanco;
 const mysql2_1 = __importDefault(require("mysql2"));
+const clienteRepository_1 = require("../repositories/clienteRepository");
 const dbConfig = {
     host: 'localhost',
     port: 3306,
@@ -30,5 +32,23 @@ function executarComandoSQL(query, valores) {
             resolve(resultado);
         });
     });
+}
+async function inicializarBanco() {
+    console.log("Sincronizando schemas do banco de dados...");
+    const schemas = [
+        clienteRepository_1.ClienteRepository.getCreateTableQuery(),
+    ];
+    try {
+        await executarComandoSQL(`USE ${dbConfig.database}`, []);
+        console.log(`Conectado ao schema: ${dbConfig.database}`);
+        for (const query of schemas) {
+            await executarComandoSQL(query, []);
+        }
+        console.log("Todos os repositórios foram inicializados com sucesso.");
+    }
+    catch (err) {
+        console.error("Erro crítico na sincronização dos repositórios:", err);
+        process.exit(1);
+    }
 }
 //# sourceMappingURL=mysql.js.map

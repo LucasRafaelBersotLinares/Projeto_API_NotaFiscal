@@ -1,11 +1,10 @@
 export declare class Cliente {
-    id_cliente: number;
+    id_cliente: number | null;
     nome: string;
     cpf: string;
     telefone: string;
     email: string;
     cidade: string;
-    constructor(nome: string, cpf: string, telefone: string, email: string, cidade: string);
-    geraId(): number;
+    constructor(id_cliente: number | null, nome: string, cpf: string, telefone: string, email: string, cidade: string);
 }
 //# sourceMappingURL=cliente.d.ts.map

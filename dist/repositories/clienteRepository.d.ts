@@ -1,15 +1,9 @@
 import { Cliente } from "../models/cliente";
 export declare class ClienteRepository {
     private static instance;
-    private clienteList;
     private constructor();
     static getInstance(): ClienteRepository;
-    listaClientes(): Cliente[];
-    listaClienteID(id: number): Cliente | undefined;
-    cpfRepetido(cpf: string): number;
-    insereCliente(cliente: any): Cliente;
-    indexCliente(id: any): number;
-    atualizaCliente(id: number, clienteBody: any): Cliente | undefined;
-    deletaCliente(id: number): Cliente[] | undefined;
+    static getCreateTableQuery(): string;
+    insereCliente(cliente: Cliente): Promise<Cliente>;
 }
 //# sourceMappingURL=clienteRepository.d.ts.map

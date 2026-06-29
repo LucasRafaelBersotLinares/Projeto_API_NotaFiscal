@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ClienteRepository = void 0;
+const mysql_1 = require("../database/mysql");
 const cliente_1 = require("../models/cliente");
 class ClienteRepository {
     static instance;
-    clienteList = [];
     constructor() { }
     static getInstance() {
         if (!this.instance) {
@@ -12,35 +12,24 @@ class ClienteRepository {
         }
         return this.instance;
     }
-    listaClientes() {
-        return this.clienteList;
+    static getCreateTableQuery() {
+        return `
+            CREATE TABLE IF NOT EXISTS Clientes (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            nome VARCHAR(255) NOT NULL,
+            cpf VARCHAR(255) NOT NULL,
+            telefone VARCHAR(255) NOT NULL,
+            email VARCHAR(255),
+            cidade VARCHAR(255)
+            );
+        `;
     }
-    listaClienteID(id) {
-        return this.clienteList.find(cliente => cliente.id_cliente === id);
-    }
-    cpfRepetido(cpf) {
-        return this.clienteList.findIndex(cliente => cliente.cpf === cpf);
-    }
-    insereCliente(cliente) {
-        const newCliente = new cliente_1.Cliente(cliente.nome, cliente.cpf, cliente.telefone, cliente.email, cliente.cidade);
-        this.clienteList.push(newCliente);
+    async insereCliente(cliente) {
+        const resultado = await (0, mysql_1.executarComandoSQL)("INSERT INTO Clientes (nome, cpf, telefone, email, cidade) VALUES (?, ?, ?, ?, ?)", [cliente.nome, cliente.cpf, cliente.telefone, cliente.email, cliente.cidade]);
+        const idGerado = resultado.insertId;
+        const newCliente = new cliente_1.Cliente(idGerado, cliente.nome, cliente.cpf, cliente.telefone, cliente.email, cliente.cidade);
+        console.log("Cliente inserido com sucesso:", newCliente);
         return newCliente;
-    }
-    indexCliente(id) {
-        return this.clienteList.findIndex((cliente => cliente.id_cliente === id));
-    }
-    atualizaCliente(id, clienteBody) {
-        let clienteIndex = this.indexCliente(id);
-        this.clienteList[clienteIndex].nome = clienteBody.nome ?? this.clienteList[clienteIndex].nome;
-        this.clienteList[clienteIndex].cpf = clienteBody.cpf ?? this.clienteList[clienteIndex].cpf;
-        this.clienteList[clienteIndex].email = clienteBody.email ?? this.clienteList[clienteIndex].email;
-        this.clienteList[clienteIndex].cidade = clienteBody.cidade ?? this.clienteList[clienteIndex].cidade;
-        this.clienteList[clienteIndex].telefone = clienteBody.telefone ?? this.clienteList[clienteIndex].telefone;
-        return this.clienteList[clienteIndex];
-    }
-    deletaCliente(id) {
-        this.clienteList = this.clienteList.filter(cliente => cliente.id_cliente != id);
-        return this.clienteList;
     }
 }
 exports.ClienteRepository = ClienteRepository;

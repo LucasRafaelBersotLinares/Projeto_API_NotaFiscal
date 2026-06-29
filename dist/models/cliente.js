@@ -8,16 +8,13 @@ class Cliente {
     telefone;
     email;
     cidade;
-    constructor(nome, cpf, telefone, email, cidade) {
-        this.id_cliente = this.geraId();
+    constructor(id_cliente, nome, cpf, telefone, email, cidade) {
+        this.id_cliente = id_cliente;
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
         this.email = email;
         this.cidade = cidade;
-    }
-    geraId() {
-        return Date.now();
     }
 }
 exports.Cliente = Cliente;

@@ -22,7 +22,7 @@ export class NotaFiscalService {
             case "id_vendedor":
                 return this.vendedorRepository.indexVendedor(valor)
             case "id_cliente":
-                return this.clienteRepository.indexCliente(valor)
+                return 1 //this.clienteRepository.indexCliente(valor)
             default:
                 return -1
         }
