@@ -10,10 +10,7 @@ const erroStatus = erroStatusRepository_1.ErroStatusRepository.getInstance();
 function emiteNota(req, res) {
     try {
         const newNota = notaService.emiteNota(req.body);
-        res.status(201).json({
-            message: "Nota emitida com sucesso!!!",
-            cliente: newNota
-        });
+        res.status(201).json(newNota);
     }
     catch (error) {
         res.status(erroStatus.mostraErro()).json({ message: error.message });
@@ -22,10 +19,7 @@ function emiteNota(req, res) {
 function listaNotas(req, res) {
     try {
         const notasList = notaService.listaNotas();
-        res.status(200).json({
-            message: "Lista das Notas Emitidas:",
-            notasList
-        });
+        res.status(200).json(notasList);
     }
     catch (error) {
         res.status(erroStatus.mostraErro()).json({ message: error.message });
@@ -34,10 +28,7 @@ function listaNotas(req, res) {
 function listaNotaID(req, res) {
     try {
         const notaID = notaService.listaNotaID(req.params.id);
-        res.status(200).json({
-            message: "Nota encontrada:",
-            notaID
-        });
+        res.status(200).json(notaID);
     }
     catch (error) {
         res.status(erroStatus.mostraErro()).json({ message: error.message });

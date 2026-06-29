@@ -8,11 +8,7 @@ const erroStatus = ErroStatusRepository.getInstance()
 export function insereEstoque(req: Request, res: Response){
     try {
         const newEstoque = estoqueService.insereEstoque(req.body)
-        res.status(201).json(
-        {
-            newEstoque
-        }
-        )
+        res.status(201).json(newEstoque)
     } catch( error: any){
         res.status(erroStatus.mostraErro()).json({message: error.message})
     }
@@ -21,11 +17,7 @@ export function insereEstoque(req: Request, res: Response){
 export function listaEstoque(req: Request, res: Response){
     try{
         const estoqueList = estoqueService.listaEstoque()
-        res.status(200).json(
-        {
-            estoqueList
-        }
-        )
+        res.status(200).json(estoqueList)
     } catch(error : any){
         res.status(erroStatus.mostraErro()).json({message: error.message})
     }
@@ -34,11 +26,7 @@ export function listaEstoque(req: Request, res: Response){
 export function listaEstoqueID(req: Request, res: Response){
     try{
         const estoqueID: any = estoqueService.listaEstoqueID(req.params.id)
-        res.status(200).json(
-        {
-            estoqueID
-        }
-        )
+        res.status(200).json(estoqueID)
     } catch(error: any){
         res.status(erroStatus.mostraErro()).json({message: error.message})
     }
@@ -47,11 +35,7 @@ export function listaEstoqueID(req: Request, res: Response){
 export function listaEstoqueIDCarro(req: Request, res: Response){
     try{
         const estoqueIDCarro: any = estoqueService.listaEstoqueIDCarro(req.params.id)
-        res.status(200).json(
-        {
-            estoqueIDCarro
-        }
-        )
+        res.status(200).json(estoqueIDCarro)
     } catch(error: any){
         res.status(erroStatus.mostraErro()).json({message: error.message})
     }
@@ -61,11 +45,7 @@ export function listaEstoqueIDCarro(req: Request, res: Response){
 export function atualizaEstoque(req: Request, res: Response){
     try{
         const estoqueAtualizado = estoqueService.atualizaEstoque(req.params.id,req.body)
-        res.status(200).json(
-        {
-            estoqueAtualizado
-        }
-        )
+        res.status(200).json(estoqueAtualizado)
     } catch(error: any){
         res.status(erroStatus.mostraErro()).json({message: error.message})
     }
@@ -74,11 +54,7 @@ export function atualizaEstoque(req: Request, res: Response){
 export function deletaEstoque(req: Request, res: Response){
     try{
         const estoqueDelete = estoqueService.deletaEstoque(req.params.id)
-        res.status(200).json(
-        {
-            estoqueDelete
-        }
-        )
+        res.status(200).json(estoqueDelete)
     } catch(error: any){
         res.status(erroStatus.mostraErro()).json({message: error.message})
     }

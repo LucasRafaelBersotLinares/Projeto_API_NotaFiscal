@@ -47,8 +47,10 @@ class CarroService {
     listaCarroDisponivel() {
         const carroList = this.carroRepository.listaCarros();
         const carroDisponiveis = carroList.filter(carro => this.estoqueRepository.listaCarroDisponivel(Number(carro.id_carro))?.quantidade != 0);
-        console.log(carroDisponiveis);
-        console.log(carroList);
+        if (carroList.length === 0 || carroDisponiveis.length === 0) {
+            this.erroStatus.insereErro(404);
+            throw new Error("Nenhum veiculo cadastrado");
+        }
         return carroDisponiveis;
     }
     atualizaCarro(id, carroBody) {

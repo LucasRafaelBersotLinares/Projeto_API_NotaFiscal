@@ -13,10 +13,7 @@ const erroStatus = erroStatusRepository_1.ErroStatusRepository.getInstance();
 function insereCliente(req, res) {
     try {
         const newCliente = clienteService.insereCliente(req.body);
-        res.status(201).json({
-            message: "Cliente cadastrado com sucesso!!!",
-            cliente: newCliente
-        });
+        res.status(201).json(newCliente);
     }
     catch (error) {
         res.status(erroStatus.mostraErro()).json({ message: error.message });
@@ -25,10 +22,7 @@ function insereCliente(req, res) {
 function listaClientes(req, res) {
     try {
         const clientesList = clienteService.listaClientes();
-        res.status(200).json({
-            message: "Lista de Clientes Cadastrados:",
-            clientesList
-        });
+        res.status(200).json(clientesList);
     }
     catch (error) {
         res.status(erroStatus.mostraErro()).json({ message: error.message });
@@ -37,10 +31,7 @@ function listaClientes(req, res) {
 function listaClienteID(req, res) {
     try {
         const clienteID = clienteService.listaClienteID(req.params.id);
-        res.status(200).json({
-            message: "Cliente encontrado:",
-            clienteID
-        });
+        res.status(200).json(clienteID);
     }
     catch (error) {
         res.status(erroStatus.mostraErro()).json({ message: error.message });
@@ -49,10 +40,7 @@ function listaClienteID(req, res) {
 function atualizaCliente(req, res) {
     try {
         const clienteAtualizado = clienteService.atualizaCliente(req.params.id, req.body);
-        res.status(200).json({
-            message: "Cliente Atualizado: ",
-            clienteAtualizado
-        });
+        res.status(200).json(clienteAtualizado);
     }
     catch (error) {
         res.status(erroStatus.mostraErro()).json({ message: error.message });
@@ -61,10 +49,7 @@ function atualizaCliente(req, res) {
 function deletaCliente(req, res) {
     try {
         const clienteDelete = clienteService.deletaCliente(req.params.id);
-        res.status(200).json({
-            message: "Lista de clientes restantes:",
-            clienteDelete
-        });
+        res.status(200).json(clienteDelete);
     }
     catch (error) {
         res.status(erroStatus.mostraErro()).json({ message: error.message });
@@ -73,10 +58,7 @@ function deletaCliente(req, res) {
 function listaNotasCliente(req, res) {
     try {
         const notasID = clienteService.listaNotasCliente(req.params.id);
-        res.status(200).json({
-            message: "Notas do Cliente:",
-            notasID
-        });
+        res.status(200).json(notasID);
     }
     catch (error) {
         res.status(erroStatus.mostraErro()).json({ message: error.message });

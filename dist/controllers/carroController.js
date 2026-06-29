@@ -13,10 +13,7 @@ const erroStatus = erroStatusRepository_1.ErroStatusRepository.getInstance();
 function insereCarro(req, res) {
     try {
         const newCarro = carroService.insereCarro(req.body);
-        res.status(201).json({
-            message: "Carro cadastrado com sucesso!!!",
-            carro: newCarro
-        });
+        res.status(201).json(newCarro);
     }
     catch (error) {
         res.status(erroStatus.mostraErro()).json({ message: error.message });
@@ -25,10 +22,7 @@ function insereCarro(req, res) {
 function listaCarros(req, res) {
     try {
         const carroList = carroService.listaCarros();
-        res.status(200).json({
-            message: "Lista dos Carros Cadastrados:",
-            carroList
-        });
+        res.status(200).json(carroList);
     }
     catch (error) {
         res.status(erroStatus.mostraErro()).json({ message: error.message });
@@ -37,10 +31,7 @@ function listaCarros(req, res) {
 function listaCarroID(req, res) {
     try {
         const carroID = carroService.listaCarroID(req.params.id);
-        res.status(200).json({
-            message: "Carro encontrado:",
-            carroID
-        });
+        res.status(200).json(carroID);
     }
     catch (error) {
         res.status(erroStatus.mostraErro()).json({ message: error.message });
@@ -49,10 +40,7 @@ function listaCarroID(req, res) {
 function listaCarroDisponiveis(req, res) {
     try {
         const carrosDisponiveis = carroService.listaCarroDisponivel();
-        res.status(200).json({
-            message: "Carros Disponiveis encontrados:",
-            carrosDisponiveis
-        });
+        res.status(200).json(carrosDisponiveis);
     }
     catch (error) {
         res.status(erroStatus.mostraErro()).json({ message: error.message });
@@ -61,10 +49,7 @@ function listaCarroDisponiveis(req, res) {
 function atualizaCarro(req, res) {
     try {
         const carroAtualizado = carroService.atualizaCarro(req.params.id, req.body);
-        res.status(200).json({
-            message: "Carro Atualizado: ",
-            carroAtualizado
-        });
+        res.status(200).json(carroAtualizado);
     }
     catch (error) {
         res.status(erroStatus.mostraErro()).json({ message: error.message });
@@ -73,10 +58,7 @@ function atualizaCarro(req, res) {
 function deletaCarro(req, res) {
     try {
         const carroDelete = carroService.deletaCarro(req.params.id);
-        res.status(200).json({
-            message: "Lista de carros restantes:",
-            carroDelete
-        });
+        res.status(200).json(carroDelete);
     }
     catch (error) {
         res.status(erroStatus.mostraErro()).json({ message: error.message });
