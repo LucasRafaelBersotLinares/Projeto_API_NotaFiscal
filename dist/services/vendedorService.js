@@ -41,10 +41,6 @@ class VendedorService {
             this.erroStatus.insereErro(404);
             throw new Error("Vendedor com este ID, não existe no sistema.");
         }
-        // if(indexMatricula !== -1 && indexMatricula !== indexId){
-        //     this.erroStatus.insereErro(409)
-        //     throw new Error("Não pode ter um vendedor com uma matrícula já cadastrada. Atualize com outra matrícula.")
-        // }
         if (!(vendedorBody.comissao_percentual >= 0 && vendedorBody.comissao_percentual <= 30)) {
             this.erroStatus.insereErro(400);
             throw new Error("A comissão percentual tem que ser um valor entre 0 a 30.");

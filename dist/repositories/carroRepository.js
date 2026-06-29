@@ -41,10 +41,19 @@ class CarroRepository {
     }
     async listaCarroID(id) {
         const linhas = await (0, mysql_1.executarComandoSQL)("SELECT * FROM Carros WHERE id_carro = ?", [id]);
-        const carro = linhas.map((linha) => {
-            return new carro_1.Carro(linha.id_carro, linha.marca, linha.modelo, linha.ano, linha.placa, linha.preco, linha.cor);
-        });
-        return carro;
+        if (linhas.length === 0) {
+            return undefined;
+        }
+        const linha = linhas[0];
+        return new carro_1.Carro(linha.id_carro, linha.marca, linha.modelo, linha.ano, linha.placa, linha.preco, linha.cor);
+    }
+    async placaRepetida(placa) {
+        const linhas = await (0, mysql_1.executarComandoSQL)("SELECT * FROM Carros WHERE placa = ?", [placa]);
+        if (linhas.length === 0) {
+            return undefined;
+        }
+        const linha = linhas[0];
+        return new carro_1.Carro(linha.id_carro, linha.marca, linha.modelo, linha.ano, linha.placa, linha.preco, linha.cor);
     }
     async atualizaCarro(id, carroBody) {
         await (0, mysql_1.executarComandoSQL)(`UPDATE Carros

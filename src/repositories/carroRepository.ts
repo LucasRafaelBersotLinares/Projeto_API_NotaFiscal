@@ -58,12 +58,46 @@ export class CarroRepository {
 
     async listaCarroID(id: any): Promise<Carro | undefined>{
         const linhas = await executarComandoSQL("SELECT * FROM Carros WHERE id_carro = ?", [id])
-        const carro: Carro = linhas.map((linha: any) => {
-            return new Carro(linha.id_carro, linha.marca, linha.modelo, linha.ano, linha.placa, linha.preco, linha.cor)
-        })
-        return carro
+
+        if (linhas.length === 0) {
+            return undefined;
+        }
+
+        const linha = linhas[0];
+
+        return new Carro(
+            linha.id_carro,
+            linha.marca,
+            linha.modelo,
+            linha.ano,
+            linha.placa,
+            linha.preco,
+            linha.cor
+        );
     }
 
+    async placaRepetida(placa: string): Promise<Carro | undefined> {
+        const linhas = await executarComandoSQL(
+            "SELECT * FROM Carros WHERE placa = ?",
+            [placa]
+        );
+
+        if (linhas.length === 0) {
+            return undefined;
+        }
+
+        const linha = linhas[0];
+
+        return new Carro(
+            linha.id_carro,
+            linha.marca,
+            linha.modelo,
+            linha.ano,
+            linha.placa,
+            linha.preco,
+            linha.cor
+        );
+    } 
 
     async atualizaCarro(id: any, carroBody: any): Promise<Carro> {
         await executarComandoSQL(
