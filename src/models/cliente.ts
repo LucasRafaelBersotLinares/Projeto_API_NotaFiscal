@@ -1,5 +1,5 @@
 export class Cliente {
-    id_cliente: number
+    id_cliente: number | null
     nome: string
     cpf: string
     telefone: string
