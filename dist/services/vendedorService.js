@@ -23,6 +23,76 @@ class VendedorService {
         // throw new Error("O sistema já possuí um vendedor cadastrado com está matricula.")
         return this.vendedorRepository.insereVendedor(vendedorBody);
     }
+    // listaVendedores(): Vendedor[] {
+    //     if(this.vendedorRepository.listaVendedores() === undefined){
+    //         this.erroStatus.insereErro(404)
+    //         throw new Error("Nenhum Vendedor cadastrado.")
+    //     }
+    //     return this.vendedorRepository.listaVendedores()
+    // }
+    async listaVendedores() {
+        if (await this.vendedorRepository.listaVendedores() === undefined) {
+            this.erroStatus.insereErro(404);
+            throw new Error("Nenhum Vendedor cadastrado.");
+        }
+        return this.vendedorRepository.listaVendedores();
+    }
+    // listaVendedorID(id: any): Vendedor| undefined {
+    //     if(this.vendedorRepository.listaVendedorID(Number(id)) === undefined){
+    //         this.erroStatus.insereErro(404)
+    //         throw new Error("Vendedor cadastrado com este ID, não existe no sistema.")
+    //     }
+    //     return this.vendedorRepository.listaVendedorID(Number(id))
+    // }
+    async listaVendedorID(id) {
+        if (await this.vendedorRepository.listaVendedorID(Number(id)) === undefined) {
+            this.erroStatus.insereErro(404);
+            throw new Error("Vendedor com este ID, não existe no sistema.");
+        }
+        return this.vendedorRepository.listaVendedorID(Number(id));
+    }
+    // atualizaVendedor(id: any, vendedorBody: any): Vendedor | undefined {
+    //     if(this.vendedorRepository.indexVendedor(Number(id)) === -1){
+    //         this.erroStatus.insereErro(404)
+    //         throw new Error("Vendedor cadastrado com este ID, não existe no sistema.")
+    //     }
+    //     const indexId = this.vendedorRepository.indexVendedor(Number(id));
+    //     const indexMatricula = this.vendedorRepository.matriculaRepetida(vendedorBody.matricula);
+    //     if(indexMatricula !== -1 && indexMatricula !== indexId){
+    //         this.erroStatus.insereErro(409)
+    //         throw new Error("Não pode ter um vendedor com uma matrícula já cadastrada. Atualize com outra matrícula.")
+    //     }
+    //     if(!(vendedorBody.comissao_percentual >= 0 && vendedorBody.comissao_percentual <= 30)){
+    //         this.erroStatus.insereErro(400)
+    //         throw new Error("A comissão percentual tem que ser um valor entre 0 a 30.")
+    //     }
+    //     return this.vendedorRepository.atualizaVendedor(Number(id),vendedorBody)
+    // }
+    async atualizaVendedor(id, vendedorBody) {
+        if (await this.vendedorRepository.listaVendedorID(Number(id)) === undefined) {
+            this.erroStatus.insereErro(404);
+            throw new Error("Vendedor com este ID, não existe no sistema.");
+        }
+        return this.vendedorRepository.atualizaVendedor(Number(id), vendedorBody);
+    }
+    // deletaVendedor(id: any): Vendedor[] | undefined {
+    //     if(this.vendedorRepository.listaVendedorID(Number(id)) === undefined){
+    //         this.erroStatus.insereErro(404)
+    //         throw new Error("Vendedor cadastrado com este ID, não existe no sistema.")
+    //     }
+    //     if(this.notaRepository.verificaNotaIDtabela(Number(id),"vendedor") != -1){
+    //         this.erroStatus.insereErro(422)
+    //         throw new Error("Vendedor não pode ser excluído por conta que tem nota emitida.")
+    //     }
+    //     return this.vendedorRepository.deletaVendedor(id)
+    // }
+    async deleteVendedor(id) {
+        if (await this.vendedorRepository.listaVendedorID(Number(id)) === undefined) {
+            this.erroStatus.insereErro(404);
+            throw new Error("Vendedor com este ID, não está cadastrado no sistema.");
+        }
+        return this.vendedorRepository.deleteVendedor(id);
+    }
 }
 exports.VendedorService = VendedorService;
 //# sourceMappingURL=vendedorService.js.map

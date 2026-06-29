@@ -29,6 +29,40 @@ class VendedorRepository {
         console.log("Cliente inserido com sucesso:", newCliente);
         return newCliente;
     }
+    // matriculaRepetida(matricula: string): number{
+    //     return this.vendedorList.findIndex(vendedor => vendedor.matricula === matricula)
+    // }
+    // indexVendedor(id: any){
+    //     return this.vendedorList.findIndex((vendedor => vendedor.id_vendedor === id))
+    // }
+    async listaVendedores() {
+        const linhas = await (0, mysql_1.executarComandoSQL)("SELECT * FROM Vendedores", []);
+        const vendedores = linhas.map((linha) => {
+            return new vendedor_1.Vendedor(linha.id_vendedor, linha.nome, linha.matricula, linha.comissao_percentual);
+        });
+        return vendedores;
+    }
+    async listaVendedorID(id) {
+        const linhas = await (0, mysql_1.executarComandoSQL)("SELECT * FROM Vendedores WHERE id_vendedor = ?", [id]);
+        const vendedor = linhas.map((linha) => {
+            return new vendedor_1.Vendedor(linha.id_vendedor, linha.nome, linha.matricula, linha.comissao_percentual);
+        });
+        return vendedor;
+    }
+    async atualizaVendedor(id, vendedorBody) {
+        await (0, mysql_1.executarComandoSQL)(`UPDATE Vendedores
+            SET 
+                nome = ?,
+                matricula = ?,
+                comissao_percentual = ?
+            WHERE id_vendedor = ?;`, [vendedorBody.nome, vendedorBody.matricula, vendedorBody.comissao_percentual, id]);
+        return await (0, mysql_1.executarComandoSQL)("SELECT * FROM Vendedores WHERE id_vendedor = ?", [id]);
+    }
+    async deleteVendedor(id) {
+        const vendedor = await this.listaVendedorID(id);
+        await (0, mysql_1.executarComandoSQL)("DELETE FROM Vendedores WHERE id_vendedor = ?", [id]);
+        return vendedor;
+    }
 }
 exports.VendedorRepository = VendedorRepository;
 //# sourceMappingURL=vendedorRepository.js.map

@@ -15,6 +15,42 @@ class VendedorController {
             res.status(this.erroStatus.mostraErro()).json({ message: error.message });
         }
     }
+    async listaVendedores(req, res) {
+        try {
+            const vendedorList = await this.vendedorService.listaVendedores();
+            res.status(200).json(vendedorList);
+        }
+        catch (error) {
+            res.status(this.erroStatus.mostraErro()).json({ message: error.message });
+        }
+    }
+    async listaVendedorID(req, res) {
+        try {
+            const vendedorID = await this.vendedorService.listaVendedorID(req.params.id);
+            res.status(200).json(vendedorID);
+        }
+        catch (error) {
+            res.status(this.erroStatus.mostraErro()).json({ message: error.message });
+        }
+    }
+    async atualizaVendedor(req, res) {
+        try {
+            const vendedorAtualizado = await this.vendedorService.atualizaVendedor(req.params.id, req.body);
+            res.status(200).json(vendedorAtualizado);
+        }
+        catch (error) {
+            res.status(this.erroStatus.mostraErro()).json({ message: error.message });
+        }
+    }
+    async deleteVendedor(req, res) {
+        try {
+            const vendedorDelete = await this.vendedorService.deleteVendedor(req.params.id);
+            res.status(200).json(vendedorDelete);
+        }
+        catch (error) {
+            res.status(this.erroStatus.mostraErro()).json({ message: error.message });
+        }
+    }
 }
 exports.VendedorController = VendedorController;
 //# sourceMappingURL=vendedorController.js.map

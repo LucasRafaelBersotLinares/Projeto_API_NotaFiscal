@@ -50,4 +50,38 @@ export class VendedorRepository {
     //     return this.vendedorList.findIndex((vendedor => vendedor.id_vendedor === id))
     // }
 
+    async listaVendedores(): Promise<Vendedor[]> {
+        const linhas = await executarComandoSQL("SELECT * FROM Vendedores", []);
+        const vendedores: Vendedor[] = linhas.map((linha: any) => {
+            return new Vendedor(linha.id_vendedor, linha.nome, linha.matricula, linha.comissao_percentual)
+        })
+        return vendedores
+    }
+
+    async listaVendedorID(id: any): Promise<Vendedor | undefined>{
+        const linhas = await executarComandoSQL("SELECT * FROM Vendedores WHERE id_vendedor = ?", [id])
+        const vendedor: Vendedor = linhas.map((linha: any) => {
+            return new Vendedor(linha.id_vendedor, linha.nome, linha.matricula, linha.comissao_percentual)
+        })
+        return vendedor
+    }
+
+    async atualizaVendedor(id: any, vendedorBody: any): Promise<Vendedor> {
+        await executarComandoSQL(
+            `UPDATE Vendedores
+            SET 
+                nome = ?,
+                matricula = ?,
+                comissao_percentual = ?
+            WHERE id_vendedor = ?;`,
+            [vendedorBody.nome, vendedorBody.matricula, vendedorBody.comissao_percentual, id]
+        );
+        return await executarComandoSQL("SELECT * FROM Vendedores WHERE id_vendedor = ?", [id])
+    }
+
+    async deleteVendedor(id: any): Promise<Vendedor | undefined> {
+        const vendedor = await this.listaVendedorID(id)
+        await executarComandoSQL("DELETE FROM Vendedores WHERE id_vendedor = ?", [id])
+        return vendedor
+    }
 }

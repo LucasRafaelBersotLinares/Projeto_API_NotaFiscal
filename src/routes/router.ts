@@ -22,11 +22,11 @@ router.put("/clientes/:id",(req: Request, res: Response) => {clienteController.a
 router.delete("/clientes/:id", (req: Request, res: Response) => {clienteController.deleteCliente(req,res)})
 
 router.post("/vendedores",(req: Request, res: Response) => {vendedorController.insereVendedor(req,res)})
-// router.get("/vendedores",listaVendedores)
-// router.get("/vendedores/:id",listaVendedorID)
+router.get("/vendedores",(req: Request, res: Response) => {vendedorController.listaVendedores(req,res)})
+router.get("/vendedores/:id",(req: Request, res: Response) => {vendedorController.listaVendedorID(req,res)})
 // router.get("/vendedores/notas/:id",listaNotasVendedor)
-// router.put("/vendedores/:id",atualizaVendedor)
-// router.delete("/vendedores/:id", deletaVendedor)
+router.put("/vendedores/:id",(req: Request, res: Response) => {vendedorController.atualizaVendedor(req,res)})
+router.delete("/vendedores/:id",(req: Request, res: Response) => {vendedorController.deleteVendedor(req,res)})
 
 // router.post("/carros",insereCarro)
 // router.get("/carros",listaCarros)

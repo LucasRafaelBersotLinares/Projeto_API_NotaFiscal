@@ -19,11 +19,11 @@ router.get("/clientes/:id", (req, res) => { clienteController.listaClienteID(req
 router.put("/clientes/:id", (req, res) => { clienteController.atualizaCliente(req, res); });
 router.delete("/clientes/:id", (req, res) => { clienteController.deleteCliente(req, res); });
 router.post("/vendedores", (req, res) => { vendedorController.insereVendedor(req, res); });
-// router.get("/vendedores",listaVendedores)
-// router.get("/vendedores/:id",listaVendedorID)
+router.get("/vendedores", (req, res) => { vendedorController.listaVendedores(req, res); });
+router.get("/vendedores/:id", (req, res) => { vendedorController.listaVendedorID(req, res); });
 // router.get("/vendedores/notas/:id",listaNotasVendedor)
-// router.put("/vendedores/:id",atualizaVendedor)
-// router.delete("/vendedores/:id", deletaVendedor)
+router.put("/vendedores/:id", (req, res) => { vendedorController.atualizaVendedor(req, res); });
+router.delete("/vendedores/:id", (req, res) => { vendedorController.deleteVendedor(req, res); });
 // router.post("/carros",insereCarro)
 // router.get("/carros",listaCarros)
 // router.get("/carros/disponiveis",listaCarroDisponiveis)

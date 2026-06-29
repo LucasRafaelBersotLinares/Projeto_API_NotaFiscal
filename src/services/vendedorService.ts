@@ -34,6 +34,14 @@ export class VendedorService {
     //     return this.vendedorRepository.listaVendedores()
     // }
 
+    async listaVendedores(): Promise<Vendedor[]> {
+        if(await this.vendedorRepository.listaVendedores() === undefined){
+            this.erroStatus.insereErro(404)
+            throw new Error("Nenhum Vendedor cadastrado.")
+        }
+        return this.vendedorRepository.listaVendedores()
+    }
+
     // listaVendedorID(id: any): Vendedor| undefined {
     //     if(this.vendedorRepository.listaVendedorID(Number(id)) === undefined){
     //         this.erroStatus.insereErro(404)
@@ -41,6 +49,15 @@ export class VendedorService {
     //     }
     //     return this.vendedorRepository.listaVendedorID(Number(id))
     // }
+
+
+    async listaVendedorID(id: any): Promise<Vendedor | undefined>{
+        if(await this.vendedorRepository.listaVendedorID(Number(id)) === undefined){
+            this.erroStatus.insereErro(404)
+            throw new Error("Vendedor com este ID, não existe no sistema.")
+        }
+        return this.vendedorRepository.listaVendedorID(Number(id))
+    } 
 
     // atualizaVendedor(id: any, vendedorBody: any): Vendedor | undefined {
     //     if(this.vendedorRepository.indexVendedor(Number(id)) === -1){
@@ -62,6 +79,15 @@ export class VendedorService {
     //     return this.vendedorRepository.atualizaVendedor(Number(id),vendedorBody)
     // }
 
+    async atualizaVendedor(id: any, vendedorBody: any): Promise<Vendedor | undefined>{
+        if(await this.vendedorRepository.listaVendedorID(Number(id)) === undefined){
+            this.erroStatus.insereErro(404)
+            throw new Error("Vendedor com este ID, não existe no sistema.")
+        }
+
+        return this.vendedorRepository.atualizaVendedor(Number(id),vendedorBody)
+    }
+
     // deletaVendedor(id: any): Vendedor[] | undefined {
     //     if(this.vendedorRepository.listaVendedorID(Number(id)) === undefined){
     //         this.erroStatus.insereErro(404)
@@ -73,6 +99,15 @@ export class VendedorService {
     //     }
     //     return this.vendedorRepository.deletaVendedor(id)
     // }
+
+    async deleteVendedor(id: any): Promise<Vendedor | undefined>{
+        if(await this.vendedorRepository.listaVendedorID(Number(id)) === undefined){
+            this.erroStatus.insereErro(404)
+            throw new Error("Vendedor com este ID, não está cadastrado no sistema.")
+        }
+
+        return this.vendedorRepository.deleteVendedor(id)
+    }
 
     // listaNotasVendedor(id: any): NotaFiscal[] | undefined {
     //     if(this.notaRepository.listaNotasporTabela(id,"vendedor")!.length === 0){
