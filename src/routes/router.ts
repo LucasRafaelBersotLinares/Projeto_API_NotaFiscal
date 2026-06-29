@@ -2,14 +2,14 @@ import express, { Request, Response, Router } from "express"
 import { ClienteController } from "../controllers/clienteController"
 import { CarroController } from "../controllers/carroController"
 import { EstoqueController } from "../controllers/estoqueController"
-// import { NotaFiscalController } from "../controllers/notaFiscalController"
+import { NotaController } from "../controllers/notaFiscalController"
 import { VendedorController } from "../controllers/vendedorController"
 
 const router = Router();
 const clienteController = new ClienteController();
 const carroController = new CarroController();
 const estoqueController = new EstoqueController();
-// const notaFiscalController = new NotaFiscalController();
+const notaFiscalController = new NotaController();
 const vendedorController = new VendedorController();
 
 
@@ -42,8 +42,8 @@ router.get("/estoque/:id",(req: Request, res: Response) => {estoqueController.li
 router.put("/estoque/:id",(req: Request, res: Response) => {estoqueController.atualizaEstoque(req,res)})
 router.delete("/estoque/:id",(req: Request, res: Response) => {estoqueController.deleteEstoque(req,res)})
 
-// router.post("/notas",emiteNota)
-// router.get("/notas",listaNotas)
-// router.get("/notas/:id",listaNotaID)
+router.post("/notas",(req: Request, res: Response) => {notaFiscalController.emiteNota(req,res)})
+router.get("/notas",(req: Request, res: Response) => {notaFiscalController.listaNotas(req,res)})
+router.get("/notas/:id",(req: Request, res: Response) => {notaFiscalController.listaNotaID(req,res)})
 
 export default router 

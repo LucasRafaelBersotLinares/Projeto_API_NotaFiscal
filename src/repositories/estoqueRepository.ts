@@ -25,6 +25,10 @@ export class EstoqueRepository {
         `;
     }
 
+    async diminuirEstoque(id: any, estoqueCarro: any) {
+        await this.atualizaEstoque(id, estoqueCarro)
+        return
+    }
 
     async insereEstoque(estoque: Estoque): Promise<Estoque> {
         const resultado = await executarComandoSQL(

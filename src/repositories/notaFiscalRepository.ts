@@ -1,59 +1,108 @@
-// import { NotaFiscal } from "../models/notaFiscal"
-// export class NotaFiscalRepository {
-//     private static instance: NotaFiscalRepository
-//     private notaList: NotaFiscal[] = []
-//     private constructor() {}
+import { executarComandoSQL } from "../database/mysql"
+import { NotaFiscal } from "../models/notaFiscal"
+export class NotaFiscalRepository {
+    private static instance: NotaFiscalRepository
+    private constructor() {}
 
-//     public static getInstance(): NotaFiscalRepository {
-//         if(!this.instance){
-//             this.instance = new NotaFiscalRepository()
-//         }
-//         return this.instance
-//     }
+    public static getInstance(): NotaFiscalRepository {
+        if(!this.instance){
+            this.instance = new NotaFiscalRepository()
+        }
+        return this.instance
+    }
 
-//     emiteNota(nota: any): NotaFiscal {
-//         const newNota = new NotaFiscal(nota.numero_nota,nota.data_emissao,nota.valor_total,nota.id_cliente,nota.id_vendedor,nota.id_carro)
-//         this.notaList.push(newNota)
-//         return newNota
-//     }
+    static getCreateTableQuery(): string {
+        return `
+            CREATE TABLE IF NOT EXISTS Notas (
+            id_nota INT AUTO_INCREMENT PRIMARY KEY,
+            numero_nota VARCHAR(255) NOT NULL,
+            data_emissao DATE NOT NULL,
+            valor_total INT NOT NULL,
+            id_cliente INT NOT NULL,
+            id_vendedor INT NOT NULL,
+            id_carro INT NOT NULL,
 
-//     notaDuplicada(numero: any): number {
-//         return this.notaList.findIndex(nota => nota.numero_nota === numero)
-//     }
+            FOREIGN KEY (id_cliente) REFERENCES Clientes(id_cliente),
+            FOREIGN KEY (id_vendedor) REFERENCES Vendedores(id_vendedor),
+            FOREIGN KEY (id_carro) REFERENCES Carros(id_carro)
+            );
+        `;
+    }
 
-//     listaNotas(): NotaFiscal[] {
-//         return this.notaList
-//     }
+    async emiteNota(nota: any): Promise<NotaFiscal> {
+        const resultado = await executarComandoSQL(
+            "INSERT INTO Notas (numero_nota, data_emissao, valor_total, id_cliente, id_vendedor, id_carro) VALUES (?, ?, ?, ?, ?, ?)",
+            [nota.numero_nota, nota.data_emissao, nota.valor_total, nota.id_cliente, nota.id_vendedor, nota.id_carro]
+        );
 
-//     listaNotaID(id: number): NotaFiscal | undefined{
-//         return this.notaList.find(nota => nota.id_nota === id)
-//     }
+        const idGerado = resultado.insertId;
 
-//     verificaNotaIDtabela(id: any, tabela: string): number{
-//         switch(tabela){
-//             case "cliente":
-//                 return this.notaList.findIndex(nota => nota.id_cliente === id)
-//                 break
-//             case "vendedor":
-//                 return this.notaList.findIndex(nota => nota.id_vendedor === id)
-//                 break
-//             case "carro":
-//                 return this.notaList.findIndex(nota => nota.id_carro === id)
-//                 break
-//             default:
-//                 return -1
-//         }
-//     }
+        const newNota = new NotaFiscal(
+            idGerado,
+            nota.numero_nota,
+            nota.data_emissao,
+            nota.valor_total,
+            nota.id_cliente,
+            nota.id_vendedor,
+            nota.id_carro
+        );
 
-//     listaNotasporTabela(id: number, tabela: string): NotaFiscal[] | undefined{
-//         switch(tabela){
-//             case "cliente":
-//                 return this.notaList.filter(nota => nota.id_cliente == id)
-//             case "vendedor":
-//                 return this.notaList.filter(nota => nota.id_vendedor == id)
-//             default:
-//                 return undefined
-//         }
-//     }
+        console.log("Nota emitida com sucesso:", newNota);
+        return newNota;
+    }
 
-// }
+    async listaNotas(): Promise<NotaFiscal[]> {
+        const linhas = await executarComandoSQL("SELECT * FROM Notas", []);
+        const notas: NotaFiscal[] = linhas.map((linha: any) => {
+            return new NotaFiscal(linha.id_nota, linha.numero_nota, linha.data_emissao, linha.valor_total, linha.id_cliente, linha.id_vendedor, linha.id_carro)
+        })
+        return notas
+    }
+
+    async notaDuplicada(nota: string): Promise<NotaFiscal | undefined> {
+        const linhas = await executarComandoSQL(
+            "SELECT * FROM Notas WHERE numero_nota = ?",
+            [nota]
+        );
+
+        if (linhas.length === 0) {
+            return undefined;
+        }
+
+        const linha = linhas[0];
+
+        return new NotaFiscal(
+            linha.id_nota,
+            linha.numero_nota,
+            linha.data_emissao,
+            linha.valor_total,
+            linha.id_cliente,
+            linha.id_vendedor,
+            linha.id_carro
+        );
+    }   
+
+    async listaNotaID(id: number): Promise<NotaFiscal | undefined> {
+        const linhas = await executarComandoSQL(
+            "SELECT * FROM Notas WHERE id_nota = ?",
+            [id]
+        );
+
+        if (linhas.length === 0) {
+            return undefined;
+        }
+
+        const linha = linhas[0];
+
+        return new NotaFiscal(
+            linha.id_nota,
+            linha.numero_nota,
+            linha.data_emissao,
+            linha.valor_total,
+            linha.id_cliente,
+            linha.id_vendedor,
+            linha.id_carro
+        );
+    }
+
+}

@@ -3,6 +3,7 @@ import { ClienteRepository } from "../repositories/clienteRepository"
 import { VendedorRepository } from "../repositories/vendedorRepository"
 import { CarroRepository } from "../repositories/carroRepository"
 import { EstoqueRepository } from "../repositories/estoqueRepository"
+import { NotaFiscalRepository } from "../repositories/notaFiscalRepository"
 
 const dbConfig = {
     host: 'localhost',
@@ -41,7 +42,8 @@ export async function inicializarBanco(): Promise<void> {
         ClienteRepository.getCreateTableQuery(),
         VendedorRepository.getCreateTableQuery(),
         CarroRepository.getCreateTableQuery(),
-        EstoqueRepository.getCreateTableQuery()
+        EstoqueRepository.getCreateTableQuery(),
+        NotaFiscalRepository.getCreateTableQuery()
     ];
 
     try {

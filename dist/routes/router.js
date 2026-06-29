@@ -4,13 +4,13 @@ const express_1 = require("express");
 const clienteController_1 = require("../controllers/clienteController");
 const carroController_1 = require("../controllers/carroController");
 const estoqueController_1 = require("../controllers/estoqueController");
-// import { NotaFiscalController } from "../controllers/notaFiscalController"
+const notaFiscalController_1 = require("../controllers/notaFiscalController");
 const vendedorController_1 = require("../controllers/vendedorController");
 const router = (0, express_1.Router)();
 const clienteController = new clienteController_1.ClienteController();
 const carroController = new carroController_1.CarroController();
 const estoqueController = new estoqueController_1.EstoqueController();
-// const notaFiscalController = new NotaFiscalController();
+const notaFiscalController = new notaFiscalController_1.NotaController();
 const vendedorController = new vendedorController_1.VendedorController();
 router.post("/clientes", (req, res) => { clienteController.insereCliente(req, res); });
 router.get("/clientes", (req, res) => { clienteController.listaClientes(req, res); });
@@ -36,8 +36,8 @@ router.get("/estoque/carro/:id", (req, res) => { estoqueController.listaEstoqueC
 router.get("/estoque/:id", (req, res) => { estoqueController.listaEstoqueID(req, res); });
 router.put("/estoque/:id", (req, res) => { estoqueController.atualizaEstoque(req, res); });
 router.delete("/estoque/:id", (req, res) => { estoqueController.deleteEstoque(req, res); });
-// router.post("/notas",emiteNota)
-// router.get("/notas",listaNotas)
-// router.get("/notas/:id",listaNotaID)
+router.post("/notas", (req, res) => { notaFiscalController.emiteNota(req, res); });
+router.get("/notas", (req, res) => { notaFiscalController.listaNotas(req, res); });
+router.get("/notas/:id", (req, res) => { notaFiscalController.listaNotaID(req, res); });
 exports.default = router;
 //# sourceMappingURL=router.js.map

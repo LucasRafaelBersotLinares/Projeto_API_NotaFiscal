@@ -10,6 +10,7 @@ const clienteRepository_1 = require("../repositories/clienteRepository");
 const vendedorRepository_1 = require("../repositories/vendedorRepository");
 const carroRepository_1 = require("../repositories/carroRepository");
 const estoqueRepository_1 = require("../repositories/estoqueRepository");
+const notaFiscalRepository_1 = require("../repositories/notaFiscalRepository");
 const dbConfig = {
     host: 'localhost',
     port: 3306,
@@ -42,7 +43,8 @@ async function inicializarBanco() {
         clienteRepository_1.ClienteRepository.getCreateTableQuery(),
         vendedorRepository_1.VendedorRepository.getCreateTableQuery(),
         carroRepository_1.CarroRepository.getCreateTableQuery(),
-        estoqueRepository_1.EstoqueRepository.getCreateTableQuery()
+        estoqueRepository_1.EstoqueRepository.getCreateTableQuery(),
+        notaFiscalRepository_1.NotaFiscalRepository.getCreateTableQuery()
     ];
     try {
         await executarComandoSQL(`USE ${dbConfig.database}`, []);

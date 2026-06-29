@@ -24,6 +24,10 @@ class EstoqueRepository {
             );
         `;
     }
+    async diminuirEstoque(id, estoqueCarro) {
+        await this.atualizaEstoque(id, estoqueCarro);
+        return;
+    }
     async insereEstoque(estoque) {
         const resultado = await (0, mysql_1.executarComandoSQL)("INSERT INTO Estoques (id_carro, quantidade, localizacao_patio, data_entrada) VALUES (?, ?, ?, ?)", [estoque.id_carro, estoque.quantidade, estoque.localizacao_patio, estoque.data_entrada]);
         const idGerado = resultado.insertId;
