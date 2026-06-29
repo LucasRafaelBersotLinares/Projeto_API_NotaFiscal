@@ -5,5 +5,8 @@ export declare class ClienteRepository {
     static getInstance(): ClienteRepository;
     static getCreateTableQuery(): string;
     insereCliente(cliente: Cliente): Promise<Cliente>;
+    listaClientes(): Promise<Cliente[]>;
+    listaClienteID(id: any): Promise<Cliente | undefined>;
+    atualizaCliente(id: any, clienteBody: any): Promise<Cliente>;
 }
 //# sourceMappingURL=clienteRepository.d.ts.map

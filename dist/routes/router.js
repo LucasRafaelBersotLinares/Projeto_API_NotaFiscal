@@ -13,10 +13,10 @@ const clienteController = new clienteController_1.ClienteController();
 // const notaFiscalController = new NotaFiscalController();
 // const vendedorController = new VendedorController();
 router.post("/clientes", (req, res) => { clienteController.insereCliente(req, res); });
-// router.get("/clientes",listaClientes)
-// router.get("/clientes/:id",listaClienteID)
+router.get("/clientes", (req, res) => { clienteController.listaClientes(req, res); });
+router.get("/clientes/:id", (req, res) => { clienteController.listaClienteID(req, res); });
 // router.get("/clientes/notas/:id",listaNotasCliente)
-// router.put("/clientes/:id",atualizaCliente)
+router.put("/clientes/:id", (req, res) => { clienteController.atualizaCliente(req, res); });
 // router.delete("/clientes/:id", deletaCliente)
 // router.post("/vendedores",insereVendedor)
 // router.get("/vendedores",listaVendedores)

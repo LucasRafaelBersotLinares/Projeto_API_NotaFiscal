@@ -26,29 +26,29 @@ export class ClienteService {
         return this.clienteRepository.listaClientes()
     }
 
-//     listaClienteID(id: any): Cliente | undefined {
-//         if(this.clienteRepository.listaClienteID(Number(id)) === undefined){
-//             this.erroStatus.insereErro(404)
-//             throw new Error("Cliente com este ID, não existe no sistema.")
-//         }
-//         return this.clienteRepository.listaClienteID(Number(id))
-//     }   
+    async listaClienteID(id: any): Promise<Cliente | undefined>{
+        if(await this.clienteRepository.listaClienteID(Number(id)) === undefined){
+            this.erroStatus.insereErro(404)
+            throw new Error("Cliente com este ID, não existe no sistema.")
+        }
+        return this.clienteRepository.listaClienteID(Number(id))
+    }   
 
-//     atualizaCliente(id: any, clienteBody: any): Cliente | undefined {
-//         if(this.clienteRepository.indexCliente(Number(id)) === -1){
-//             this.erroStatus.insereErro(404)
-//             throw new Error("Cliente com este ID, não existe no sistema.")
-//         }
+    async atualizaCliente(id: any, clienteBody: any): Promise<Cliente | undefined>{
+        if(await this.clienteRepository.listaClienteID(Number(id)) === undefined){
+            this.erroStatus.insereErro(404)
+            throw new Error("Cliente com este ID, não existe no sistema.")
+        }
 
-//         const indexId = this.clienteRepository.indexCliente(Number(id));
-//         const indexCPF = this.clienteRepository.cpfRepetido(clienteBody.cpf);
-//         if(indexCPF !== -1 && indexCPF !== indexId){
-//             this.erroStatus.insereErro(409)
-//             throw new Error("Não pode ter um vendedor com uma matrícula já cadastrada. Atualize com outra matrícula.")
-//         }
+        // const indexId = this.clienteRepository.indexCliente(Number(id));
+        // const indexCPF = this.clienteRepository.cpfRepetido(clienteBody.cpf);
+        // if(indexCPF !== -1 && indexCPF !== indexId){
+        //     this.erroStatus.insereErro(409)
+        //     throw new Error("Não pode ter um vendedor com uma matrícula já cadastrada. Atualize com outra matrícula.")
+        // }
 
-//         return this.clienteRepository.atualizaCliente(Number(id),clienteBody)
-//     }
+        return this.clienteRepository.atualizaCliente(Number(id),clienteBody)
+    }
 
 //     deletaCliente(id: any): Cliente[] | undefined {
 //         if(this.clienteRepository.listaClienteID(Number(id)) === undefined){

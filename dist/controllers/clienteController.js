@@ -15,6 +15,33 @@ class ClienteController {
             res.status(this.erroStatus.mostraErro()).json({ message: error.message });
         }
     }
+    async listaClientes(req, res) {
+        try {
+            const clientesList = await this.clienteService.listaClientes();
+            res.status(200).json(clientesList);
+        }
+        catch (error) {
+            res.status(this.erroStatus.mostraErro()).json({ message: error.message });
+        }
+    }
+    async listaClienteID(req, res) {
+        try {
+            const clienteID = await this.clienteService.listaClienteID(req.params.id);
+            res.status(200).json(clienteID);
+        }
+        catch (error) {
+            res.status(this.erroStatus.mostraErro()).json({ message: error.message });
+        }
+    }
+    async atualizaCliente(req, res) {
+        try {
+            const clienteAtualizado = await this.clienteService.atualizaCliente(req.params.id, req.body);
+            res.status(200).json(clienteAtualizado);
+        }
+        catch (error) {
+            res.status(this.erroStatus.mostraErro()).json({ message: error.message });
+        }
+    }
 }
 exports.ClienteController = ClienteController;
 //# sourceMappingURL=clienteController.js.map

@@ -17,6 +17,33 @@ class ClienteService {
         const novoCliente = new cliente_1.Cliente(null, clienteBody.nome, clienteBody.cpf, clienteBody.telefone, clienteBody.email, clienteBody.cidade);
         return this.clienteRepository.insereCliente(novoCliente);
     }
+    async listaClientes() {
+        if (await this.clienteRepository.listaClientes() === undefined) {
+            this.erroStatus.insereErro(404);
+            throw new Error("Nenhum Cliente cadastrado.");
+        }
+        return this.clienteRepository.listaClientes();
+    }
+    async listaClienteID(id) {
+        if (await this.clienteRepository.listaClienteID(Number(id)) === undefined) {
+            this.erroStatus.insereErro(404);
+            throw new Error("Cliente com este ID, não existe no sistema.");
+        }
+        return this.clienteRepository.listaClienteID(Number(id));
+    }
+    async atualizaCliente(id, clienteBody) {
+        if (await this.clienteRepository.listaClienteID(Number(id)) === undefined) {
+            this.erroStatus.insereErro(404);
+            throw new Error("Cliente com este ID, não existe no sistema.");
+        }
+        // const indexId = this.clienteRepository.indexCliente(Number(id));
+        // const indexCPF = this.clienteRepository.cpfRepetido(clienteBody.cpf);
+        // if(indexCPF !== -1 && indexCPF !== indexId){
+        //     this.erroStatus.insereErro(409)
+        //     throw new Error("Não pode ter um vendedor com uma matrícula já cadastrada. Atualize com outra matrícula.")
+        // }
+        return this.clienteRepository.atualizaCliente(Number(id), clienteBody);
+    }
 }
 exports.ClienteService = ClienteService;
 //# sourceMappingURL=clienteService.js.map

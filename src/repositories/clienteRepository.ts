@@ -15,7 +15,7 @@ export class ClienteRepository {
     static getCreateTableQuery(): string {
         return `
             CREATE TABLE IF NOT EXISTS Clientes (
-            id INT AUTO_INCREMENT PRIMARY KEY,
+            id_cliente INT AUTO_INCREMENT PRIMARY KEY,
             nome VARCHAR(255) NOT NULL,
             cpf VARCHAR(255) NOT NULL,
             telefone VARCHAR(255) NOT NULL,
@@ -47,13 +47,34 @@ export class ClienteRepository {
     }
 
     async listaClientes(): Promise<Cliente[]> {
-        const linhas = await executarComandoSQL("SELECT * FROM CLientes", []);
+        const linhas = await executarComandoSQL("SELECT * FROM Clientes", []);
         const clientes: Cliente[] = linhas.map((linha: any) => {
             return new Cliente(linha.id_cliente, linha.nome, linha.cpf, linha.telefone, linha.email, linha.cidade)
         })
         return clientes
     }
 
-    
+    async listaClienteID(id: any): Promise<Cliente | undefined>{
+        const linhas = await executarComandoSQL("SELECT * FROM Clientes WHERE id_cliente = ?", [id])
+        const cliente: Cliente = linhas.map((linha: any) => {
+            return new Cliente(linha.id_cliente, linha.nome, linha.cpf, linha.telefone, linha.email, linha.cidade)
+        })
+        return cliente
+    }
+
+    async atualizaCliente(id: any, clienteBody: any): Promise<Cliente> {
+        await executarComandoSQL(
+            `UPDATE Clientes
+            SET 
+                nome = ?,
+                telefone = ?,
+                cpf = ?,
+                email = ?,
+                cidade = ?
+            WHERE id_cliente = ?;`,
+            [clienteBody.nome, clienteBody.telefone, clienteBody.cpf, clienteBody.email, clienteBody.cidade,id]
+        );
+        return await executarComandoSQL("SELECT * FROM Clientes WHERE id_cliente = ?", [id])
+    }
 
 }

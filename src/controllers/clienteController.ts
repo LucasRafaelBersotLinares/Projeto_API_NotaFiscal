@@ -16,32 +16,32 @@ export class ClienteController {
         }
     }
 
-    listaClientes(req: Request, res: Response){
+    async listaClientes(req: Request, res: Response){
         try{
-            const clientesList = this.clienteService.listaClientes()
+            const clientesList = await this.clienteService.listaClientes()
             res.status(200).json(clientesList)
         } catch(error : any){
             res.status(this.erroStatus.mostraErro()).json({message: error.message})
         }
     }
 
-    // listaClienteID(req: Request, res: Response){
-    //     try{
-    //         const clienteID: any = this.clienteService.listaClienteID(req.params.id)
-    //         res.status(200).json(clienteID)
-    //     } catch(error: any){
-    //         res.status(this.erroStatus.mostraErro()).json({message: error.message})
-    //     }
-    // }
+    async listaClienteID(req: Request, res: Response){
+        try{
+            const clienteID: any = await this.clienteService.listaClienteID(req.params.id)
+            res.status(200).json(clienteID)
+        } catch(error: any){
+            res.status(this.erroStatus.mostraErro()).json({message: error.message})
+        }
+    }
 
-    // atualizaCliente(req: Request, res: Response){
-    //     try{
-    //         const clienteAtualizado = this.clienteService.atualizaCliente(req.params.id,req.body)
-    //         res.status(200).json(clienteAtualizado)
-    //     } catch(error: any){
-    //         res.status(this.erroStatus.mostraErro()).json({message: error.message})
-    //     }
-    // }
+    async atualizaCliente(req: Request, res: Response){
+        try{
+            const clienteAtualizado = await this.clienteService.atualizaCliente(req.params.id,req.body)
+            res.status(200).json(clienteAtualizado)
+        } catch(error: any){
+            res.status(this.erroStatus.mostraErro()).json({message: error.message})
+        }
+    }
 
     // deletaCliente(req: Request, res: Response){
     //     try{

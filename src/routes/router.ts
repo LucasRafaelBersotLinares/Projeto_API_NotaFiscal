@@ -16,9 +16,9 @@ const clienteController = new ClienteController();
 
 router.post("/clientes",(req: Request, res: Response) => {clienteController.insereCliente(req,res)})
 router.get("/clientes",(req: Request, res: Response) => {clienteController.listaClientes(req,res)})
-// router.get("/clientes/:id",listaClienteID)
+router.get("/clientes/:id",(req: Request, res: Response) => {clienteController.listaClienteID(req,res)})
 // router.get("/clientes/notas/:id",listaNotasCliente)
-// router.put("/clientes/:id",atualizaCliente)
+router.put("/clientes/:id",(req: Request, res: Response) => {clienteController.atualizaCliente(req,res)})
 // router.delete("/clientes/:id", deletaCliente)
 
 // router.post("/vendedores",insereVendedor)

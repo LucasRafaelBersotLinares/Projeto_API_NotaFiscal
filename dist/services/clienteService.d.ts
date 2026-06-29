@@ -7,5 +7,8 @@ export declare class ClienteService {
     notaRepository: NotaFiscalRepository;
     erroStatus: ErroStatusRepository;
     insereCliente(clienteBody: any): Promise<Cliente>;
+    listaClientes(): Promise<Cliente[]>;
+    listaClienteID(id: any): Promise<Cliente | undefined>;
+    atualizaCliente(id: any, clienteBody: any): Promise<Cliente | undefined>;
 }
 //# sourceMappingURL=clienteService.d.ts.map
