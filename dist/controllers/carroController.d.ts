@@ -7,6 +7,7 @@ export declare class CarroController {
     insereCarro(req: Request, res: Response): Promise<void>;
     listaCarros(req: Request, res: Response): Promise<void>;
     listaCarroID(req: Request, res: Response): Promise<void>;
+    listaCarroDisponivel(req: Request, res: Response): Promise<void>;
     atualizaCarro(req: Request, res: Response): Promise<void>;
     deleteCarro(req: Request, res: Response): Promise<void>;
 }

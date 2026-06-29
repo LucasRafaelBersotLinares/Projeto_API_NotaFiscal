@@ -25,6 +25,14 @@ export class EstoqueRepository {
         `;
     }
 
+    async carrosDisponiveis(): Promise<Estoque[] | undefined>{
+        const linhas = await executarComandoSQL("SELECT * FROM Estoques WHERE quantidade > 0", []);
+        const estoques: Estoque[] = linhas.map((linha: any) => {
+            return new Estoque(linha.id_estoque,linha.id_carro, linha.quantidade, linha.localizacao_patio, linha.data_entrada)
+        })
+        return estoques
+    }
+
     async diminuirEstoque(id: any, estoqueCarro: any) {
         await this.atualizaEstoque(id, estoqueCarro)
         return

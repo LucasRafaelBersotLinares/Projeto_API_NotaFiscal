@@ -4,6 +4,7 @@ export declare class EstoqueRepository {
     private constructor();
     static getInstance(): EstoqueRepository;
     static getCreateTableQuery(): string;
+    carrosDisponiveis(): Promise<Estoque[] | undefined>;
     diminuirEstoque(id: any, estoqueCarro: any): Promise<void>;
     insereEstoque(estoque: Estoque): Promise<Estoque>;
     listaEstoques(): Promise<Estoque[]>;

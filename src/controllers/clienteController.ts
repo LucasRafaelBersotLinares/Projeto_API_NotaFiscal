@@ -52,12 +52,12 @@ export class ClienteController {
         }
     }
 
-    // listaNotasCliente(req: Request, res: Response){
-    //     try{
-    //         const notasID = this.clienteService.listaNotasCliente(req.params.id)
-    //         res.status(200).json(notasID)
-    //     } catch(error: any){
-    //         res.status(this.erroStatus.mostraErro()).json({message: error.message})
-    //     }
-    // }
+    async listaNotasCliente(req: Request, res: Response){
+        try{
+            const notasID = await this.clienteService.listaNotasCliente(req.params.id)
+            res.status(200).json(notasID)
+        } catch(error: any){
+            res.status(this.erroStatus.mostraErro()).json({message: error.message})
+        }
+    }
 }

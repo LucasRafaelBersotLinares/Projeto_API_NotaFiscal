@@ -51,12 +51,12 @@ export class VendedorController {
         }
     }
 
-    // listaNotasVendedor(req: Request, res: Response){
-    //     try{
-    //         const notasID = this.vendedorService.listaNotasVendedor(req.params.id)
-    //         res.status(200).json(notasID)
-    //     } catch(error: any){
-    //         res.status(this.erroStatus.mostraErro()).json({message: error.message})
-    //     }
-    // }
+    async listaNotasVendedor(req: Request, res: Response){
+        try{
+            const notasID = await this.vendedorService.listaNotasVendedor(req.params.id)
+            res.status(200).json(notasID)
+        } catch(error: any){
+            res.status(this.erroStatus.mostraErro()).json({message: error.message})
+        }
+    }
 }

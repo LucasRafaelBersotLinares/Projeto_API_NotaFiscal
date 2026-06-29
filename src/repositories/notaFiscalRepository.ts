@@ -105,4 +105,67 @@ export class NotaFiscalRepository {
         );
     }
 
+    async verificaCliente(id: any): Promise<number | undefined>{
+        const linhas = await executarComandoSQL(
+            "SELECT * FROM Notas WHERE id_cliente = ?",
+            [id]
+        );
+
+        if (linhas.length === 0) {
+            return undefined;
+        }else {
+            return 1
+        }
+    }
+
+    async verificaVendedor(id: any): Promise<number | undefined>{
+        const linhas = await executarComandoSQL(
+            "SELECT * FROM Notas WHERE id_vendedor = ?",
+            [id]
+        );
+
+        if (linhas.length === 0) {
+            return undefined;
+        }else {
+            return 1
+        }
+    }
+
+    async verificaCarro(id: any): Promise<number | undefined>{
+        const linhas = await executarComandoSQL(
+            "SELECT * FROM Notas WHERE id_carro = ?",
+            [id]
+        );
+
+        if (linhas.length === 0) {
+            return undefined;
+        }else {
+            return 1
+        }
+    }
+
+    async listaNotasCliente(id: any): Promise<NotaFiscal[] | undefined>{
+        const linhas = await executarComandoSQL("SELECT * FROM Notas WHERE id_cliente = ?", [id]);
+        const notas: NotaFiscal[] = linhas.map((linha: any) => {
+            return new NotaFiscal(linha.id_nota, linha.numero_nota, linha.data_emissao, linha.valor_total, linha.id_cliente, linha.id_vendedor, linha.id_carro)
+        })
+        return notas
+    }
+
+    async listaNotasVendedor(id: any): Promise<NotaFiscal[] | undefined>{
+        const linhas = await executarComandoSQL("SELECT * FROM Notas WHERE id_vendedor = ?", [id]);
+        const notas: NotaFiscal[] = linhas.map((linha: any) => {
+            return new NotaFiscal(linha.id_nota, linha.numero_nota, linha.data_emissao, linha.valor_total, linha.id_cliente, linha.id_vendedor, linha.id_carro)
+        })
+        return notas
+    }
+
+    async listaNotasCarro(id: any): Promise<NotaFiscal[] | undefined>{
+        const linhas = await executarComandoSQL("SELECT * FROM Notas WHERE id_carro = ?", [id]);
+        const notas: NotaFiscal[] = linhas.map((linha: any) => {
+            return new NotaFiscal(linha.id_nota, linha.numero_nota, linha.data_emissao, linha.valor_total, linha.id_cliente, linha.id_vendedor, linha.id_carro)
+        })
+        return notas
+    }
+
 }

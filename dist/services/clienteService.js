@@ -3,10 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ClienteService = void 0;
 const cliente_1 = require("../models/cliente");
 const clienteRepository_1 = require("../repositories/clienteRepository");
+const notaFiscalRepository_1 = require("../repositories/notaFiscalRepository");
 const erroStatusRepository_1 = require("../repositories/erroStatusRepository");
 class ClienteService {
     clienteRepository = clienteRepository_1.ClienteRepository.getInstance();
-    // notaRepository: NotaFiscalRepository = NotaFiscalRepository.getInstance()
+    notaRepository = notaFiscalRepository_1.NotaFiscalRepository.getInstance();
     erroStatus = erroStatusRepository_1.ErroStatusRepository.getInstance();
     async insereCliente(clienteBody) {
         if (!clienteBody.nome || !clienteBody.cpf || !clienteBody.telefone) {
@@ -41,12 +42,6 @@ class ClienteService {
             this.erroStatus.insereErro(404);
             throw new Error("Cliente com este ID, não existe no sistema.");
         }
-        // const indexId = this.clienteRepository.indexCliente(Number(id));
-        // const indexCPF = this.clienteRepository.cpfRepetido(clienteBody.cpf);
-        // if(indexCPF !== -1 && indexCPF !== indexId){
-        //     this.erroStatus.insereErro(409)
-        //     throw new Error("Não pode ter um vendedor com uma matrícula já cadastrada. Atualize com outra matrícula.")
-        // }
         return this.clienteRepository.atualizaCliente(Number(id), clienteBody);
     }
     async deletaCliente(id) {
@@ -54,11 +49,18 @@ class ClienteService {
             this.erroStatus.insereErro(404);
             throw new Error("Cliente com este ID, não está cadastrado no sistema.");
         }
-        // if(this.notaRepository.verificaNotaIDtabela(Number(id),"cliente") != -1){
-        //     this.erroStatus.insereErro(422)
-        //     throw new Error("Cliente não pode ser excluído por conta que tem nota emitida.")
-        // }
+        if (await this.notaRepository.verificaCliente(Number(id)) != undefined) {
+            this.erroStatus.insereErro(422);
+            throw new Error("Cliente não pode ser excluído por conta que tem nota emitida.");
+        }
         return this.clienteRepository.deleteCliente(id);
+    }
+    async listaNotasCliente(id) {
+        if (await this.notaRepository.listaNotasCliente(id) === undefined) {
+            this.erroStatus.insereErro(404);
+            throw new Error("Cliente não possuí notas emitidas no sistema.");
+        }
+        return this.notaRepository.listaNotasCliente(id);
     }
 }
 exports.ClienteService = ClienteService;

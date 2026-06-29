@@ -9,5 +9,6 @@ export declare class VendedorController {
     listaVendedorID(req: Request, res: Response): Promise<void>;
     atualizaVendedor(req: Request, res: Response): Promise<void>;
     deleteVendedor(req: Request, res: Response): Promise<void>;
+    listaNotasVendedor(req: Request, res: Response): Promise<void>;
 }
 //# sourceMappingURL=vendedorController.d.ts.map

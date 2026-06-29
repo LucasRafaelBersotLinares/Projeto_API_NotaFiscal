@@ -59,6 +59,54 @@ class NotaFiscalRepository {
         const linha = linhas[0];
         return new notaFiscal_1.NotaFiscal(linha.id_nota, linha.numero_nota, linha.data_emissao, linha.valor_total, linha.id_cliente, linha.id_vendedor, linha.id_carro);
     }
+    async verificaCliente(id) {
+        const linhas = await (0, mysql_1.executarComandoSQL)("SELECT * FROM Notas WHERE id_cliente = ?", [id]);
+        if (linhas.length === 0) {
+            return undefined;
+        }
+        else {
+            return 1;
+        }
+    }
+    async verificaVendedor(id) {
+        const linhas = await (0, mysql_1.executarComandoSQL)("SELECT * FROM Notas WHERE id_vendedor = ?", [id]);
+        if (linhas.length === 0) {
+            return undefined;
+        }
+        else {
+            return 1;
+        }
+    }
+    async verificaCarro(id) {
+        const linhas = await (0, mysql_1.executarComandoSQL)("SELECT * FROM Notas WHERE id_carro = ?", [id]);
+        if (linhas.length === 0) {
+            return undefined;
+        }
+        else {
+            return 1;
+        }
+    }
+    async listaNotasCliente(id) {
+        const linhas = await (0, mysql_1.executarComandoSQL)("SELECT * FROM Notas WHERE id_cliente = ?", [id]);
+        const notas = linhas.map((linha) => {
+            return new notaFiscal_1.NotaFiscal(linha.id_nota, linha.numero_nota, linha.data_emissao, linha.valor_total, linha.id_cliente, linha.id_vendedor, linha.id_carro);
+        });
+        return notas;
+    }
+    async listaNotasVendedor(id) {
+        const linhas = await (0, mysql_1.executarComandoSQL)("SELECT * FROM Notas WHERE id_vendedor = ?", [id]);
+        const notas = linhas.map((linha) => {
+            return new notaFiscal_1.NotaFiscal(linha.id_nota, linha.numero_nota, linha.data_emissao, linha.valor_total, linha.id_cliente, linha.id_vendedor, linha.id_carro);
+        });
+        return notas;
+    }
+    async listaNotasCarro(id) {
+        const linhas = await (0, mysql_1.executarComandoSQL)("SELECT * FROM Notas WHERE id_carro = ?", [id]);
+        const notas = linhas.map((linha) => {
+            return new notaFiscal_1.NotaFiscal(linha.id_nota, linha.numero_nota, linha.data_emissao, linha.valor_total, linha.id_cliente, linha.id_vendedor, linha.id_carro);
+        });
+        return notas;
+    }
 }
 exports.NotaFiscalRepository = NotaFiscalRepository;
 //# sourceMappingURL=notaFiscalRepository.js.map

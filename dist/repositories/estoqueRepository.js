@@ -24,6 +24,13 @@ class EstoqueRepository {
             );
         `;
     }
+    async carrosDisponiveis() {
+        const linhas = await (0, mysql_1.executarComandoSQL)("SELECT * FROM Estoques WHERE quantidade > 0", []);
+        const estoques = linhas.map((linha) => {
+            return new estoque_1.Estoque(linha.id_estoque, linha.id_carro, linha.quantidade, linha.localizacao_patio, linha.data_entrada);
+        });
+        return estoques;
+    }
     async diminuirEstoque(id, estoqueCarro) {
         await this.atualizaEstoque(id, estoqueCarro);
         return;

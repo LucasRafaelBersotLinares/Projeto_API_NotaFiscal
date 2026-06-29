@@ -51,6 +51,15 @@ class ClienteController {
             res.status(this.erroStatus.mostraErro()).json({ message: error.message });
         }
     }
+    async listaNotasCliente(req, res) {
+        try {
+            const notasID = await this.clienteService.listaNotasCliente(req.params.id);
+            res.status(200).json(notasID);
+        }
+        catch (error) {
+            res.status(this.erroStatus.mostraErro()).json({ message: error.message });
+        }
+    }
 }
 exports.ClienteController = ClienteController;
 //# sourceMappingURL=clienteController.js.map

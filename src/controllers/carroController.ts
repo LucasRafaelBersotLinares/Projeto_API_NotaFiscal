@@ -34,14 +34,14 @@ export class CarroController {
         }
     }
 
-    // listaCarroDisponiveis(req: Request, res: Response){
-    //     try{
-    //         const carrosDisponiveis: any = carroService.listaCarroDisponivel()
-    //         res.status(200).json(carrosDisponiveis)
-    //     } catch(error: any){
-    //         res.status(erroStatus.mostraErro()).json({message: error.message})
-    //     }
-    // }
+    async listaCarroDisponivel(req: Request, res: Response){
+        try{
+            const carrosDisponiveis: any = await this.carroService.listaCarroDisponivel()
+            res.status(200).json(carrosDisponiveis)
+        } catch(error: any){
+            res.status(this.erroStatus.mostraErro()).json({message: error.message})
+        }
+    }
 
     async atualizaCarro(req: Request, res: Response){
         try{

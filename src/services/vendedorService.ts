@@ -1,12 +1,12 @@
 import { Vendedor } from "../models/vendedor"
 import { VendedorRepository } from "../repositories/vendedorRepository"
-// import { NotaFiscalRepository } from "../repositories/notaFiscalRepository"
+import { NotaFiscalRepository } from "../repositories/notaFiscalRepository"
 import { NotaFiscal } from "../models/notaFiscal"
 import { ErroStatusRepository } from "../repositories/erroStatusRepository"
 
 export class VendedorService {
     vendedorRepository: VendedorRepository = VendedorRepository.getInstance()
-    // notaRepository: NotaFiscalRepository = NotaFiscalRepository.getInstance()
+    notaRepository: NotaFiscalRepository = NotaFiscalRepository.getInstance()
     erroStatus: ErroStatusRepository = ErroStatusRepository.getInstance()
 
     async insereVendedor(vendedorBody: any): Promise<Vendedor> {
@@ -73,15 +73,20 @@ export class VendedorService {
             throw new Error("Vendedor com este ID, não está cadastrado no sistema.")
         }
 
+        if(await this.notaRepository.verificaVendedor(Number(id)) != undefined){
+            this.erroStatus.insereErro(422)
+            throw new Error("Vendedor não pode ser excluído por conta que tem nota emitida.")
+        }
+
         return this.vendedorRepository.deleteVendedor(id)
     }
 
-    // listaNotasVendedor(id: any): NotaFiscal[] | undefined {
-    //     if(this.notaRepository.listaNotasporTabela(id,"vendedor")!.length === 0){
-    //         this.erroStatus.insereErro(404)
-    //         throw new Error("Vendedor não possuí notas emitidas no sistema.")
-    //     }
-    //     return this.notaRepository.listaNotasporTabela(id,"vendedor")
-    // }
+    async listaNotasVendedor(id: any): Promise<NotaFiscal[] | undefined >{
+        if(await this.notaRepository.listaNotasVendedor(id) === undefined){
+            this.erroStatus.insereErro(404)
+            throw new Error("Vendedor não possuí notas emitidas no sistema.")
+        }
+        return this.notaRepository.listaNotasVendedor(id)
+    }
 
 }

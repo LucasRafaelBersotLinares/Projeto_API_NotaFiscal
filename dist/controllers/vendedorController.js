@@ -51,6 +51,15 @@ class VendedorController {
             res.status(this.erroStatus.mostraErro()).json({ message: error.message });
         }
     }
+    async listaNotasVendedor(req, res) {
+        try {
+            const notasID = await this.vendedorService.listaNotasVendedor(req.params.id);
+            res.status(200).json(notasID);
+        }
+        catch (error) {
+            res.status(this.erroStatus.mostraErro()).json({ message: error.message });
+        }
+    }
 }
 exports.VendedorController = VendedorController;
 //# sourceMappingURL=vendedorController.js.map

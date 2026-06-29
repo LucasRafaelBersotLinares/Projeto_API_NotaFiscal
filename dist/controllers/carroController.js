@@ -33,14 +33,15 @@ class CarroController {
             res.status(this.erroStatus.mostraErro()).json({ message: error.message });
         }
     }
-    // listaCarroDisponiveis(req: Request, res: Response){
-    //     try{
-    //         const carrosDisponiveis: any = carroService.listaCarroDisponivel()
-    //         res.status(200).json(carrosDisponiveis)
-    //     } catch(error: any){
-    //         res.status(erroStatus.mostraErro()).json({message: error.message})
-    //     }
-    // }
+    async listaCarroDisponivel(req, res) {
+        try {
+            const carrosDisponiveis = await this.carroService.listaCarroDisponivel();
+            res.status(200).json(carrosDisponiveis);
+        }
+        catch (error) {
+            res.status(this.erroStatus.mostraErro()).json({ message: error.message });
+        }
+    }
     async atualizaCarro(req, res) {
         try {
             const carroAtualizado = await this.carroService.atualizaCarro(req.params.id, req.body);

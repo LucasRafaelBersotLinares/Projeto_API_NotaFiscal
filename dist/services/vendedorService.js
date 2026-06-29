@@ -2,10 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.VendedorService = void 0;
 const vendedorRepository_1 = require("../repositories/vendedorRepository");
+const notaFiscalRepository_1 = require("../repositories/notaFiscalRepository");
 const erroStatusRepository_1 = require("../repositories/erroStatusRepository");
 class VendedorService {
     vendedorRepository = vendedorRepository_1.VendedorRepository.getInstance();
-    // notaRepository: NotaFiscalRepository = NotaFiscalRepository.getInstance()
+    notaRepository = notaFiscalRepository_1.NotaFiscalRepository.getInstance();
     erroStatus = erroStatusRepository_1.ErroStatusRepository.getInstance();
     async insereVendedor(vendedorBody) {
         if (!vendedorBody.nome || !vendedorBody.matricula || vendedorBody.comissao_percentual === undefined) {
@@ -63,7 +64,18 @@ class VendedorService {
             this.erroStatus.insereErro(404);
             throw new Error("Vendedor com este ID, não está cadastrado no sistema.");
         }
+        if (await this.notaRepository.verificaVendedor(Number(id)) != undefined) {
+            this.erroStatus.insereErro(422);
+            throw new Error("Vendedor não pode ser excluído por conta que tem nota emitida.");
+        }
         return this.vendedorRepository.deleteVendedor(id);
+    }
+    async listaNotasVendedor(id) {
+        if (await this.notaRepository.listaNotasVendedor(id) === undefined) {
+            this.erroStatus.insereErro(404);
+            throw new Error("Vendedor não possuí notas emitidas no sistema.");
+        }
+        return this.notaRepository.listaNotasVendedor(id);
     }
 }
 exports.VendedorService = VendedorService;

@@ -9,5 +9,6 @@ export declare class ClienteController {
     listaClienteID(req: Request, res: Response): Promise<void>;
     atualizaCliente(req: Request, res: Response): Promise<void>;
     deleteCliente(req: Request, res: Response): Promise<void>;
+    listaNotasCliente(req: Request, res: Response): Promise<void>;
 }
 //# sourceMappingURL=clienteController.d.ts.map

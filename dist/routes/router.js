@@ -15,18 +15,18 @@ const vendedorController = new vendedorController_1.VendedorController();
 router.post("/clientes", (req, res) => { clienteController.insereCliente(req, res); });
 router.get("/clientes", (req, res) => { clienteController.listaClientes(req, res); });
 router.get("/clientes/:id", (req, res) => { clienteController.listaClienteID(req, res); });
-// router.get("/clientes/notas/:id",listaNotasCliente)
+router.get("/clientes/notas/:id", (req, res) => { clienteController.listaNotasCliente(req, res); });
 router.put("/clientes/:id", (req, res) => { clienteController.atualizaCliente(req, res); });
 router.delete("/clientes/:id", (req, res) => { clienteController.deleteCliente(req, res); });
 router.post("/vendedores", (req, res) => { vendedorController.insereVendedor(req, res); });
 router.get("/vendedores", (req, res) => { vendedorController.listaVendedores(req, res); });
 router.get("/vendedores/:id", (req, res) => { vendedorController.listaVendedorID(req, res); });
-// router.get("/vendedores/notas/:id",listaNotasVendedor)
+router.get("/vendedores/notas/:id", (req, res) => { vendedorController.listaNotasVendedor(req, res); });
 router.put("/vendedores/:id", (req, res) => { vendedorController.atualizaVendedor(req, res); });
 router.delete("/vendedores/:id", (req, res) => { vendedorController.deleteVendedor(req, res); });
 router.post("/carros", (req, res) => { carroController.insereCarro(req, res); });
 router.get("/carros", (req, res) => { carroController.listaCarros(req, res); });
-// router.get("/carros/disponiveis",listaCarroDisponiveis)
+router.get("/carros/disponiveis", (req, res) => { carroController.listaCarroDisponivel(req, res); });
 router.get("/carros/:id", (req, res) => { carroController.listaCarroID(req, res); });
 router.put("/carros/:id", (req, res) => { carroController.atualizaCarro(req, res); });
 router.delete("/carros/:id", (req, res) => { carroController.deleteCarro(req, res); });
