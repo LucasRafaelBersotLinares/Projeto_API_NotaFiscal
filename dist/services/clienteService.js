@@ -38,9 +38,11 @@ class ClienteService {
             this.erroStatus.insereErro(404);
             throw new Error("Cliente com este ID, não existe no sistema.");
         }
-        if (this.clienteRepository.cpfRepetido(clienteBody.cpf) != -1) {
+        const indexId = this.clienteRepository.indexCliente(Number(id));
+        const indexCPF = this.clienteRepository.cpfRepetido(clienteBody.cpf);
+        if (indexCPF !== -1 && indexCPF !== indexId) {
             this.erroStatus.insereErro(409);
-            throw new Error("Não pode atualizar o CPF de um cliente que já tenha outro cadastrado. Use CPF diferente.");
+            throw new Error("Não pode ter um vendedor com uma matrícula já cadastrada. Atualize com outra matrícula.");
         }
         return this.clienteRepository.atualizaCliente(Number(id), clienteBody);
     }

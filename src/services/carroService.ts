@@ -65,10 +65,14 @@ export class CarroService {
             this.erroStatus.insereErro(404)
             throw new Error("Carro com este ID, não existe no sistema.")
         }
-        if(this.carroRepository.placaRepetida(carroBody.placa) != -1){
+
+        const indexId = this.carroRepository.indexCarro(Number(id));
+        const indexPlaca = this.carroRepository.placaRepetida(carroBody.cpf);
+        if(indexPlaca !== -1 && indexPlaca !== indexId){
             this.erroStatus.insereErro(409)
-            throw new Error("Não pode colocar uma placa de uma carro já registrado no sistema. Coloque outra placa.")
+            throw new Error("Não pode ter um vendedor com uma matrícula já cadastrada. Atualize com outra matrícula.")
         }
+
         if(!(carroBody.ano >= 1950 && carroBody.ano <= (anoAtual.getFullYear()+1))){
             this.erroStatus.insereErro(400)
             throw new Error("O ano do carro deve ser maior que 1950 ou um ano válido antes do próximo ano atual. (Ex: 2027 = (anoAtual: 2026) + (próximoAno: 1)= 2027)")
