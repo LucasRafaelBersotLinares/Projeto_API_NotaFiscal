@@ -8,6 +8,8 @@ exports.inicializarBanco = inicializarBanco;
 const mysql2_1 = __importDefault(require("mysql2"));
 const clienteRepository_1 = require("../repositories/clienteRepository");
 const vendedorRepository_1 = require("../repositories/vendedorRepository");
+const carroRepository_1 = require("../repositories/carroRepository");
+const estoqueRepository_1 = require("../repositories/estoqueRepository");
 const dbConfig = {
     host: 'localhost',
     port: 3306,
@@ -38,7 +40,9 @@ async function inicializarBanco() {
     console.log("Sincronizando schemas do banco de dados...");
     const schemas = [
         clienteRepository_1.ClienteRepository.getCreateTableQuery(),
-        vendedorRepository_1.VendedorRepository.getCreateTableQuery()
+        vendedorRepository_1.VendedorRepository.getCreateTableQuery(),
+        carroRepository_1.CarroRepository.getCreateTableQuery(),
+        estoqueRepository_1.EstoqueRepository.getCreateTableQuery()
     ];
     try {
         await executarComandoSQL(`USE ${dbConfig.database}`, []);

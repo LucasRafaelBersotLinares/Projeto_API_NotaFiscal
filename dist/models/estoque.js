@@ -7,15 +7,12 @@ class Estoque {
     quantidade;
     localizacao_patio;
     data_entrada;
-    constructor(id_carro, quantidade, localizacao_patio, data_entrada) {
-        this.id_estoque = this.geraId();
+    constructor(id_estoque, id_carro, quantidade, localizacao_patio, data_entrada) {
+        this.id_estoque = id_estoque;
         this.id_carro = id_carro;
         this.quantidade = quantidade;
         this.localizacao_patio = localizacao_patio;
         this.data_entrada = data_entrada;
-    }
-    geraId() {
-        return Date.now();
     }
 }
 exports.Estoque = Estoque;

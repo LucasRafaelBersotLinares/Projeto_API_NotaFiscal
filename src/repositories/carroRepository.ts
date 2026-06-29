@@ -1,55 +1,89 @@
-// import { Carro } from "../models/carro"
+import { executarComandoSQL } from "../database/mysql"
+import { Carro } from "../models/carro"
 
-// export class CarroRepository {
-//     private static instance: CarroRepository
-//     private carroList: Carro[] = []
-//     private constructor() {}
+export class CarroRepository {
+    private static instance: CarroRepository
+    private constructor() {}
 
-//     public static getInstance(): CarroRepository {
-//         if(!this.instance){
-//             this.instance = new CarroRepository()
-//         }
-//         return this.instance
-//     }
+    public static getInstance(): CarroRepository {
+        if(!this.instance){
+            this.instance = new CarroRepository()
+        }
+        return this.instance
+    }
 
-//     listaCarros(): Carro[] {
-//         return this.carroList
-//     }
+    static getCreateTableQuery(): string {
+        return `
+            CREATE TABLE IF NOT EXISTS Carros (
+            id_carro INT AUTO_INCREMENT PRIMARY KEY,
+            marca VARCHAR(255) NOT NULL,
+            modelo VARCHAR(255) NOT NULL,
+            ano INT (255) NOT NULL,
+            placa VARCHAR(255) NOT NULL,
+            preco INT (255) NOT NULL,
+            cor VARCHAR(255) NOT NULL
+            );
+        `;
+    }
 
-//     listaCarroID(id: number): Carro | undefined{
-//         return this.carroList.find(carro => carro.id_carro === id)
-//     }
+    async insereCarro(carro: Carro): Promise<Carro> {
+        const resultado = await executarComandoSQL(
+            "INSERT INTO Carros (marca, modelo, ano, placa, preco, cor) VALUES (?, ?, ?, ?, ?, ?)",
+            [carro.marca, carro.modelo, carro.ano, carro.placa, carro.preco, carro.cor]
+        );
 
-//     placaRepetida(placa: string): number{
-//         return this.carroList.findIndex(carro => carro.placa === placa)
-//     }
+        const idGerado = resultado.insertId;
 
-//     insereCarro(carro: any): Carro {
-//         const newCarro = new Carro(carro.marca,carro.modelo,carro.ano,carro.placa,carro.preco,carro.cor)
-//         this.carroList.push(newCarro)
-//         return newCarro
-//     }
+        const newCarro = new Carro(
+            idGerado,
+            carro.marca,
+            carro.modelo,
+            carro.ano,
+            carro.placa,
+            carro.preco,
+            carro.cor
+        );
 
-//     indexCarro(id: any){
-//         return this.carroList.findIndex((carro => carro.id_carro === id))
-//     }
+        console.log("Carro inserido com sucesso:", newCarro);
+        return newCarro;
+    }
+
+    async listaCarros(): Promise<Carro[]> {
+        const linhas = await executarComandoSQL("SELECT * FROM Carros", []);
+        const carros: Carro[] = linhas.map((linha: any) => {
+            return new Carro(linha.id_carro, linha.marca, linha.modelo, linha.ano, linha.placa, linha.preco, linha.cor)
+        })
+        return carros
+    }
+
+    async listaCarroID(id: any): Promise<Carro | undefined>{
+        const linhas = await executarComandoSQL("SELECT * FROM Carros WHERE id_carro = ?", [id])
+        const carro: Carro = linhas.map((linha: any) => {
+            return new Carro(linha.id_carro, linha.marca, linha.modelo, linha.ano, linha.placa, linha.preco, linha.cor)
+        })
+        return carro
+    }
 
 
+    async atualizaCarro(id: any, carroBody: any): Promise<Carro> {
+        await executarComandoSQL(
+            `UPDATE Carros
+            SET 
+                marca = ?,
+                modelo = ?,
+                ano = ?,
+                placa = ?,
+                preco = ?,
+                cor = ?
+            WHERE id_carro = ?;`,
+            [carroBody.marca, carroBody.modelo, carroBody.ano, carroBody.placa, carroBody.preco,carroBody.cor, id]
+        );
+        return await executarComandoSQL("SELECT * FROM Carros WHERE id_carro = ?", [id])
+    }
 
-//     atualizaCarro(id: number, carroBody: any): Carro | undefined {
-//         let carroIndex: number = this.indexCarro(id)
-
-//         this.carroList[carroIndex]!.marca = carroBody.marca ?? this.carroList[carroIndex]!.marca
-//         this.carroList[carroIndex]!.modelo = carroBody.modelo ?? this.carroList[carroIndex]!.modelo
-//         this.carroList[carroIndex]!.ano = carroBody.ano ?? this.carroList[carroIndex]!.ano
-//         this.carroList[carroIndex]!.placa = carroBody.placa ?? this.carroList[carroIndex]!.placa
-//         this.carroList[carroIndex]!.preco = carroBody.preco ?? this.carroList[carroIndex]!.preco
-//         this.carroList[carroIndex]!.cor = carroBody.cor ?? this.carroList[carroIndex]!.cor
-//         return this.carroList[carroIndex]
-//     }
-
-//     deletaCarro(id: number): Carro[] | undefined {
-//         this.carroList = this.carroList.filter(carro => carro.id_carro != id)
-//         return this.carroList
-//     }
-// }
+    async deleteCarro(id: any): Promise<Carro | undefined> {
+        const carro = await this.listaCarroID(id)
+        await executarComandoSQL("DELETE FROM Carros WHERE id_carro = ?", [id])
+        return carro
+    }
+}

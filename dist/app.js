@@ -9,7 +9,7 @@ const mysql_1 = require("./database/mysql");
 const app = (0, express_1.default)();
 const PORT = process.env.PORT ?? 3000;
 app.use(express_1.default.json());
-app.use("/api", router_1.default);
+app.use("/", router_1.default);
 async function startServer() {
     await (0, mysql_1.inicializarBanco)();
     app.listen(PORT, () => {

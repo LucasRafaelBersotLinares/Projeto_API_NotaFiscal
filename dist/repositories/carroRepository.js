@@ -1,46 +1,68 @@
 "use strict";
-// import { Carro } from "../models/carro"
 Object.defineProperty(exports, "__esModule", { value: true });
-// export class CarroRepository {
-//     private static instance: CarroRepository
-//     private carroList: Carro[] = []
-//     private constructor() {}
-//     public static getInstance(): CarroRepository {
-//         if(!this.instance){
-//             this.instance = new CarroRepository()
-//         }
-//         return this.instance
-//     }
-//     listaCarros(): Carro[] {
-//         return this.carroList
-//     }
-//     listaCarroID(id: number): Carro | undefined{
-//         return this.carroList.find(carro => carro.id_carro === id)
-//     }
-//     placaRepetida(placa: string): number{
-//         return this.carroList.findIndex(carro => carro.placa === placa)
-//     }
-//     insereCarro(carro: any): Carro {
-//         const newCarro = new Carro(carro.marca,carro.modelo,carro.ano,carro.placa,carro.preco,carro.cor)
-//         this.carroList.push(newCarro)
-//         return newCarro
-//     }
-//     indexCarro(id: any){
-//         return this.carroList.findIndex((carro => carro.id_carro === id))
-//     }
-//     atualizaCarro(id: number, carroBody: any): Carro | undefined {
-//         let carroIndex: number = this.indexCarro(id)
-//         this.carroList[carroIndex]!.marca = carroBody.marca ?? this.carroList[carroIndex]!.marca
-//         this.carroList[carroIndex]!.modelo = carroBody.modelo ?? this.carroList[carroIndex]!.modelo
-//         this.carroList[carroIndex]!.ano = carroBody.ano ?? this.carroList[carroIndex]!.ano
-//         this.carroList[carroIndex]!.placa = carroBody.placa ?? this.carroList[carroIndex]!.placa
-//         this.carroList[carroIndex]!.preco = carroBody.preco ?? this.carroList[carroIndex]!.preco
-//         this.carroList[carroIndex]!.cor = carroBody.cor ?? this.carroList[carroIndex]!.cor
-//         return this.carroList[carroIndex]
-//     }
-//     deletaCarro(id: number): Carro[] | undefined {
-//         this.carroList = this.carroList.filter(carro => carro.id_carro != id)
-//         return this.carroList
-//     }
-// }
+exports.CarroRepository = void 0;
+const mysql_1 = require("../database/mysql");
+const carro_1 = require("../models/carro");
+class CarroRepository {
+    static instance;
+    constructor() { }
+    static getInstance() {
+        if (!this.instance) {
+            this.instance = new CarroRepository();
+        }
+        return this.instance;
+    }
+    static getCreateTableQuery() {
+        return `
+            CREATE TABLE IF NOT EXISTS Carros (
+            id_carro INT AUTO_INCREMENT PRIMARY KEY,
+            marca VARCHAR(255) NOT NULL,
+            modelo VARCHAR(255) NOT NULL,
+            ano INT (255) NOT NULL,
+            placa VARCHAR(255) NOT NULL,
+            preco INT (255) NOT NULL,
+            cor VARCHAR(255) NOT NULL
+            );
+        `;
+    }
+    async insereCarro(carro) {
+        const resultado = await (0, mysql_1.executarComandoSQL)("INSERT INTO Carros (marca, modelo, ano, placa, preco, cor) VALUES (?, ?, ?, ?, ?, ?)", [carro.marca, carro.modelo, carro.ano, carro.placa, carro.preco, carro.cor]);
+        const idGerado = resultado.insertId;
+        const newCarro = new carro_1.Carro(idGerado, carro.marca, carro.modelo, carro.ano, carro.placa, carro.preco, carro.cor);
+        console.log("Carro inserido com sucesso:", newCarro);
+        return newCarro;
+    }
+    async listaCarros() {
+        const linhas = await (0, mysql_1.executarComandoSQL)("SELECT * FROM Carros", []);
+        const carros = linhas.map((linha) => {
+            return new carro_1.Carro(linha.id_carro, linha.marca, linha.modelo, linha.ano, linha.placa, linha.preco, linha.cor);
+        });
+        return carros;
+    }
+    async listaCarroID(id) {
+        const linhas = await (0, mysql_1.executarComandoSQL)("SELECT * FROM Carros WHERE id_carro = ?", [id]);
+        const carro = linhas.map((linha) => {
+            return new carro_1.Carro(linha.id_carro, linha.marca, linha.modelo, linha.ano, linha.placa, linha.preco, linha.cor);
+        });
+        return carro;
+    }
+    async atualizaCarro(id, carroBody) {
+        await (0, mysql_1.executarComandoSQL)(`UPDATE Carros
+            SET 
+                marca = ?,
+                modelo = ?,
+                ano = ?,
+                placa = ?,
+                preco = ?,
+                cor = ?
+            WHERE id_carro = ?;`, [carroBody.marca, carroBody.modelo, carroBody.ano, carroBody.placa, carroBody.preco, carroBody.cor, id]);
+        return await (0, mysql_1.executarComandoSQL)("SELECT * FROM Carros WHERE id_carro = ?", [id]);
+    }
+    async deleteCarro(id) {
+        const carro = await this.listaCarroID(id);
+        await (0, mysql_1.executarComandoSQL)("DELETE FROM Carros WHERE id_carro = ?", [id]);
+        return carro;
+    }
+}
+exports.CarroRepository = CarroRepository;
 //# sourceMappingURL=carroRepository.js.map

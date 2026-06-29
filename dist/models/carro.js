@@ -9,17 +9,14 @@ class Carro {
     placa;
     preco;
     cor;
-    constructor(marca, modelo, ano, placa, preco, cor) {
-        this.id_carro = this.geraId();
+    constructor(id_carro, marca, modelo, ano, placa, preco, cor) {
+        this.id_carro = id_carro;
         this.marca = marca;
         this.modelo = modelo;
         this.ano = ano;
         this.placa = placa;
         this.preco = preco;
         this.cor = cor;
-    }
-    geraId() {
-        return Date.now();
     }
 }
 exports.Carro = Carro;

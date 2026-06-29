@@ -1,66 +1,106 @@
-// import { Estoque } from "../models/estoque"
+import { executarComandoSQL } from "../database/mysql"
+import { Estoque } from "../models/estoque"
 
-// export class EstoqueRepository {
-//     private static instance: EstoqueRepository
-//     private estoqueList: Estoque[] = []
-//     private constructor() {}
+export class EstoqueRepository {
+    private static instance: EstoqueRepository
+    private constructor() {}
 
-//     public static getInstance(): EstoqueRepository {
-//         if(!this.instance){
-//             this.instance = new EstoqueRepository()
-//         }
-//         return this.instance
-//     }
+    public static getInstance(): EstoqueRepository {
+        if(!this.instance){
+            this.instance = new EstoqueRepository()
+        }
+        return this.instance
+    }
 
-//     insereEstoque(estoque: any): Estoque {
-//         const newEstoque = new Estoque(estoque.id_carro,estoque.quantidade,estoque.localizacao_patio,estoque.data_entrada)
-//         this.estoqueList.push(newEstoque)
-//         return newEstoque
-//     }
-
-//     indexEstoque(id: number){
-//         return this.estoqueList.findIndex(estoque => estoque.id_estoque === id)
-//     }
-
-//     idCarroDuplicado(id: number): number {
-//         return this.estoqueList.findIndex(estoque => estoque.id_carro === id)
-//     }
-
-//     listaEstoque(): Estoque[] {
-//         return this.estoqueList
-//     }
-
-//     listaEstoqueID(id: number): Estoque | undefined{
-//         return this.estoqueList.find(estoque => estoque.id_estoque === id)
-//     }
-
-//     listaEstoqueIDCarro(id_carro: number): Estoque | undefined{
-//         return this.estoqueList.find(estoque => estoque.id_carro === id_carro)
-//     }
-    
-//     listaCarroDisponivel(id_carro: number): Estoque | undefined {
-//         return this.estoqueList.find(estoque => estoque.id_carro === id_carro)
-//     }
+     static getCreateTableQuery(): string {
+        return `
+            CREATE TABLE IF NOT EXISTS Estoques (
+            id_estoque INT AUTO_INCREMENT PRIMARY KEY,
+            id_carro INT NOT NULL,
+            quantidade INT NOT NULL,
+            localizacao_patio VARCHAR(255) NOT NULL,
+            data_entrada DATE,
+            FOREIGN KEY (id_carro) REFERENCES Carros(id_carro)
+            );
+        `;
+    }
 
 
-//     atualizaEstoque(id: number, estoqueBody: any): Estoque | undefined {
-//         let estoqueIndex: number = this.indexEstoque(Number(id))
+    async insereEstoque(estoque: Estoque): Promise<Estoque> {
+        const resultado = await executarComandoSQL(
+            "INSERT INTO Estoques (id_carro, quantidade, localizacao_patio, data_entrada) VALUES (?, ?, ?, ?)",
+            [estoque.id_carro, estoque.quantidade, estoque.localizacao_patio, estoque.data_entrada]
+        );
 
-//         this.estoqueList[estoqueIndex]!.quantidade = estoqueBody.quantidade ?? this.estoqueList[estoqueIndex]!.quantidade
-//         this.estoqueList[estoqueIndex]!.localizacao_patio = estoqueBody.localizacao_patio ?? this.estoqueList[estoqueIndex]!.localizacao_patio
-//         return this.estoqueList[estoqueIndex]
-//     }
+        const idGerado = resultado.insertId;
 
-//     deletaEstoque(id: number): Estoque[] | undefined {
-//         this.estoqueList = this.estoqueList.filter(estoque => estoque.id_estoque != id)
-//         return this.estoqueList
-//     }
+        const newEstoque = new Estoque(
+            idGerado,
+            estoque.id_carro,
+            estoque.quantidade,
+            estoque.localizacao_patio,
+            estoque.data_entrada
+        );
 
-//     diminuirEstoque(id: number){
-//         let estoqueIndex: number = this.estoqueList.findIndex(estoque => estoque.id_estoque === id)
-//         this.estoqueList[estoqueIndex]!.quantidade -= 1
-//     }
+        console.log("Estoque inserido com sucesso:", newEstoque);
+        return newEstoque;
+    }
+
+    async listaEstoques(): Promise<Estoque[]> {
+        const linhas = await executarComandoSQL("SELECT * FROM Estoques", []);
+        const estoques: Estoque[] = linhas.map((linha: any) => {
+            return new Estoque(linha.id_estoque,linha.id_carro, linha.quantidade, linha.localizacao_patio, linha.data_entrada)
+        })
+        return estoques
+    }
+
+    async listaEstoqueID(id: any): Promise<Estoque | undefined>{
+        const linhas = await executarComandoSQL("SELECT * FROM Estoques WHERE id_estoque = ?", [id])
+        const estoque: Estoque = linhas.map((linha: any) => {
+            return new Estoque(linha.id_estoque, linha.id_carro, linha.quantidade, linha.localizacao_patio, linha.data_entrada)
+        })
+        return estoque
+    }
+
+    async atualizaEstoque(id: any, estoqueBody: any): Promise<Estoque> {
+        await executarComandoSQL(
+            `UPDATE Estoques
+            SET 
+                quantidade = ?,
+                localizacao_patio = ?
+            WHERE id_estoque = ?;`,
+            [estoqueBody.quantidade, estoqueBody.localizacao_patio, id]
+        );
+        return await executarComandoSQL("SELECT * FROM Estoques WHERE id_estoque = ?", [id])
+    }
+
+    async carroDuplicado(id: any): Promise<Estoque | undefined>{
+        const linhas = await executarComandoSQL("SELECT * FROM Estoques WHERE id_carro = ?", [id])
+        const estoque: Estoque = linhas.map((linha: any) => {
+            return new Estoque(linha.id_estoque, linha.id_carro, linha.quantidade, linha.localizacao_patio, linha.data_entrada)
+        })
+        return estoque
+    }
+
+    async deleteEstoque(id: any): Promise<Estoque | undefined> {
+        const estoque = await this.listaEstoqueID(id)
+        await executarComandoSQL("DELETE FROM Estoques WHERE id_estoque = ?", [id])
+        return estoque
+    }
 
 
+    // async listaEstoqueCarroID(id: any): Promise<Estoque | undefined>{
+    //     const linhas = await executarComandoSQL("SELECT * FROM Estoques WHERE id_carro = ?", [id])
+    //     const estoque: Estoque = linhas.map((linha: any) => {
+    //         return new Estoque(linha.id_estoque, linha.id_carro, linha.quantidade, linha.localizacao_patio, linha.data_entrada)
+    //     })
+    //     return estoque
+    // }
 
-// }
+
+    // diminuirEstoque(id: number){
+    //     let estoqueIndex: number = this.estoqueList.findIndex(estoque => estoque.id_estoque === id)
+    //     this.estoqueList[estoqueIndex]!.quantidade -= 1
+    // }
+
+}
