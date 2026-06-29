@@ -2,23 +2,23 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const clienteController_1 = require("../controllers/clienteController");
-// import { CarroController } from "./controllers/carroController"
-// import { EstoqueController } from "./controllers/estoqueController"
-// import { NotaFiscalController } from "./controllers/notaFiscalController"
-// import { VendedorController } from "./controllers/vendedorController"
+// import { CarroController } from "../controllers/carroController"
+// import { EstoqueController } from "../controllers/estoqueController"
+// import { NotaFiscalController } from "../controllers/notaFiscalController"
+const vendedorController_1 = require("../controllers/vendedorController");
 const router = (0, express_1.Router)();
 const clienteController = new clienteController_1.ClienteController();
 // const carroController = new CarroController();
 // const estoqueController = new EstoqueController();
 // const notaFiscalController = new NotaFiscalController();
-// const vendedorController = new VendedorController();
+const vendedorController = new vendedorController_1.VendedorController();
 router.post("/clientes", (req, res) => { clienteController.insereCliente(req, res); });
 router.get("/clientes", (req, res) => { clienteController.listaClientes(req, res); });
 router.get("/clientes/:id", (req, res) => { clienteController.listaClienteID(req, res); });
 // router.get("/clientes/notas/:id",listaNotasCliente)
 router.put("/clientes/:id", (req, res) => { clienteController.atualizaCliente(req, res); });
 router.delete("/clientes/:id", (req, res) => { clienteController.deleteCliente(req, res); });
-// router.post("/vendedores",insereVendedor)
+router.post("/vendedores", (req, res) => { vendedorController.insereVendedor(req, res); });
 // router.get("/vendedores",listaVendedores)
 // router.get("/vendedores/:id",listaVendedorID)
 // router.get("/vendedores/notas/:id",listaNotasVendedor)

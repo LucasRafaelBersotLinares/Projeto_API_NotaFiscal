@@ -1,8 +1,8 @@
+import { executarComandoSQL } from "../database/mysql"
 import { Vendedor } from "../models/vendedor"
 
 export class VendedorRepository {
     private static instance: VendedorRepository
-    private vendedorList: Vendedor[] = []
     private constructor() {}
 
     public static getInstance(): VendedorRepository {
@@ -12,40 +12,42 @@ export class VendedorRepository {
         return this.instance
     }
 
-    listaVendedores(): Vendedor[] {
-        return this.vendedorList
+    static getCreateTableQuery(): string {
+        return `
+            CREATE TABLE IF NOT EXISTS Vendedores (
+            id_vendedor INT AUTO_INCREMENT PRIMARY KEY,
+            nome VARCHAR(255) NOT NULL,
+            matricula VARCHAR(255) NOT NULL,
+            comissao_percentual INT NOT NULL
+            );
+        `;
     }
 
-    listaVendedorID(id: number): Vendedor | undefined{
-        return this.vendedorList.find(vendedor => vendedor.id_vendedor === id)
+    async insereVendedor(vendedor: Vendedor): Promise<Vendedor> {
+        const resultado = await executarComandoSQL(
+            "INSERT INTO Vendedores (nome, matricula, comissao_percentual) VALUES (?, ?, ?)",
+            [vendedor.nome, vendedor.matricula, vendedor.comissao_percentual]
+        );
+
+        const idGerado = resultado.insertId;
+
+        const newCliente = new Vendedor(
+            idGerado,
+            vendedor.nome,
+            vendedor.matricula,
+            vendedor.comissao_percentual
+        );
+
+        console.log("Cliente inserido com sucesso:", newCliente);
+        return newCliente;
     }
 
-    matriculaRepetida(matricula: string): number{
-        return this.vendedorList.findIndex(vendedor => vendedor.matricula === matricula)
-    }
+    // matriculaRepetida(matricula: string): number{
+    //     return this.vendedorList.findIndex(vendedor => vendedor.matricula === matricula)
+    // }
 
-    insereVendedor(vendedor: any): Vendedor {
-        const newVendedor = new Vendedor(vendedor.nome,vendedor.matricula,vendedor.comissao_percentual)
-        this.vendedorList.push(newVendedor)
-        return newVendedor
-    }
+    // indexVendedor(id: any){
+    //     return this.vendedorList.findIndex((vendedor => vendedor.id_vendedor === id))
+    // }
 
-    indexVendedor(id: any){
-        return this.vendedorList.findIndex((vendedor => vendedor.id_vendedor === id))
-    }
-
-
-    atualizaVendedor(id: number, vendedorBody: any): Vendedor | undefined {
-        let vendedorIndex: number = this.indexVendedor(id)
-
-        this.vendedorList[vendedorIndex]!.nome = vendedorBody.nome ?? this.vendedorList[vendedorIndex]!.nome
-        this.vendedorList[vendedorIndex]!.matricula = vendedorBody.matricula ?? this.vendedorList[vendedorIndex]!.matricula
-        this.vendedorList[vendedorIndex]!.comissao_percentual = vendedorBody.comissao_percentual ?? this.vendedorList[vendedorIndex]!.comissao_percentual
-        return this.vendedorList[vendedorIndex]
-    }
-
-    deletaVendedor(id: number): Vendedor[] | undefined {
-        this.vendedorList = this.vendedorList.filter(vendedor => vendedor.id_vendedor != id)
-        return this.vendedorList
-    }
 }

@@ -1,16 +1,16 @@
 import express, { Request, Response, Router } from "express"
 import { ClienteController } from "../controllers/clienteController"
-// import { CarroController } from "./controllers/carroController"
-// import { EstoqueController } from "./controllers/estoqueController"
-// import { NotaFiscalController } from "./controllers/notaFiscalController"
-// import { VendedorController } from "./controllers/vendedorController"
+// import { CarroController } from "../controllers/carroController"
+// import { EstoqueController } from "../controllers/estoqueController"
+// import { NotaFiscalController } from "../controllers/notaFiscalController"
+import { VendedorController } from "../controllers/vendedorController"
 
 const router = Router();
 const clienteController = new ClienteController();
 // const carroController = new CarroController();
 // const estoqueController = new EstoqueController();
 // const notaFiscalController = new NotaFiscalController();
-// const vendedorController = new VendedorController();
+const vendedorController = new VendedorController();
 
 
 
@@ -21,7 +21,7 @@ router.get("/clientes/:id",(req: Request, res: Response) => {clienteController.l
 router.put("/clientes/:id",(req: Request, res: Response) => {clienteController.atualizaCliente(req,res)})
 router.delete("/clientes/:id", (req: Request, res: Response) => {clienteController.deleteCliente(req,res)})
 
-// router.post("/vendedores",insereVendedor)
+router.post("/vendedores",(req: Request, res: Response) => {vendedorController.insereVendedor(req,res)})
 // router.get("/vendedores",listaVendedores)
 // router.get("/vendedores/:id",listaVendedorID)
 // router.get("/vendedores/notas/:id",listaNotasVendedor)

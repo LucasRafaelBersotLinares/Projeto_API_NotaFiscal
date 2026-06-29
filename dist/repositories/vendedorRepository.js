@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.VendedorRepository = void 0;
+const mysql_1 = require("../database/mysql");
 const vendedor_1 = require("../models/vendedor");
 class VendedorRepository {
     static instance;
-    vendedorList = [];
     constructor() { }
     static getInstance() {
         if (!this.instance) {
@@ -12,33 +12,22 @@ class VendedorRepository {
         }
         return this.instance;
     }
-    listaVendedores() {
-        return this.vendedorList;
+    static getCreateTableQuery() {
+        return `
+            CREATE TABLE IF NOT EXISTS Vendedores (
+            id_vendedor INT AUTO_INCREMENT PRIMARY KEY,
+            nome VARCHAR(255) NOT NULL,
+            matricula VARCHAR(255) NOT NULL,
+            comissao_percentual INT NOT NULL
+            );
+        `;
     }
-    listaVendedorID(id) {
-        return this.vendedorList.find(vendedor => vendedor.id_vendedor === id);
-    }
-    matriculaRepetida(matricula) {
-        return this.vendedorList.findIndex(vendedor => vendedor.matricula === matricula);
-    }
-    insereVendedor(vendedor) {
-        const newVendedor = new vendedor_1.Vendedor(vendedor.nome, vendedor.matricula, vendedor.comissao_percentual);
-        this.vendedorList.push(newVendedor);
-        return newVendedor;
-    }
-    indexVendedor(id) {
-        return this.vendedorList.findIndex((vendedor => vendedor.id_vendedor === id));
-    }
-    atualizaVendedor(id, vendedorBody) {
-        let vendedorIndex = this.indexVendedor(id);
-        this.vendedorList[vendedorIndex].nome = vendedorBody.nome ?? this.vendedorList[vendedorIndex].nome;
-        this.vendedorList[vendedorIndex].matricula = vendedorBody.matricula ?? this.vendedorList[vendedorIndex].matricula;
-        this.vendedorList[vendedorIndex].comissao_percentual = vendedorBody.comissao_percentual ?? this.vendedorList[vendedorIndex].comissao_percentual;
-        return this.vendedorList[vendedorIndex];
-    }
-    deletaVendedor(id) {
-        this.vendedorList = this.vendedorList.filter(vendedor => vendedor.id_vendedor != id);
-        return this.vendedorList;
+    async insereVendedor(vendedor) {
+        const resultado = await (0, mysql_1.executarComandoSQL)("INSERT INTO Vendedores (nome, matricula, comissao_percentual) VALUES (?, ?, ?)", [vendedor.nome, vendedor.matricula, vendedor.comissao_percentual]);
+        const idGerado = resultado.insertId;
+        const newCliente = new vendedor_1.Vendedor(idGerado, vendedor.nome, vendedor.matricula, vendedor.comissao_percentual);
+        console.log("Cliente inserido com sucesso:", newCliente);
+        return newCliente;
     }
 }
 exports.VendedorRepository = VendedorRepository;

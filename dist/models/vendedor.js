@@ -6,14 +6,11 @@ class Vendedor {
     nome;
     matricula;
     comissao_percentual;
-    constructor(nome, matricula, comissao_percentual) {
-        this.id_vendedor = this.geraId();
+    constructor(id_vendedor, nome, matricula, comissao_percentual) {
+        this.id_vendedor = id_vendedor;
         this.nome = nome;
         this.matricula = matricula;
         this.comissao_percentual = comissao_percentual;
-    }
-    geraId() {
-        return Date.now();
     }
 }
 exports.Vendedor = Vendedor;

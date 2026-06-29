@@ -1,11 +1,11 @@
 import { Cliente } from "../models/cliente"
 import { ClienteRepository } from "../repositories/clienteRepository"
-import { NotaFiscalRepository } from "../repositories/notaFiscalRepository"
+// import { NotaFiscalRepository } from "../repositories/notaFiscalRepository"
 import { NotaFiscal } from "../models/notaFiscal"
 import { ErroStatusRepository } from "../repositories/erroStatusRepository"
 export class ClienteService {
     clienteRepository: ClienteRepository = ClienteRepository.getInstance()
-    notaRepository: NotaFiscalRepository = NotaFiscalRepository.getInstance()
+    // notaRepository: NotaFiscalRepository = NotaFiscalRepository.getInstance()
     erroStatus: ErroStatusRepository = ErroStatusRepository.getInstance()
 
     async insereCliente(clienteBody: any): Promise<Cliente> {

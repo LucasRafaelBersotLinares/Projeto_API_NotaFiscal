@@ -3,11 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ClienteService = void 0;
 const cliente_1 = require("../models/cliente");
 const clienteRepository_1 = require("../repositories/clienteRepository");
-const notaFiscalRepository_1 = require("../repositories/notaFiscalRepository");
 const erroStatusRepository_1 = require("../repositories/erroStatusRepository");
 class ClienteService {
     clienteRepository = clienteRepository_1.ClienteRepository.getInstance();
-    notaRepository = notaFiscalRepository_1.NotaFiscalRepository.getInstance();
+    // notaRepository: NotaFiscalRepository = NotaFiscalRepository.getInstance()
     erroStatus = erroStatusRepository_1.ErroStatusRepository.getInstance();
     async insereCliente(clienteBody) {
         if (!clienteBody.nome || !clienteBody.cpf || !clienteBody.telefone) {

@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
-export declare function insereVendedor(req: Request, res: Response): void;
-export declare function listaVendedores(req: Request, res: Response): void;
-export declare function listaVendedorID(req: Request, res: Response): void;
-export declare function atualizaVendedor(req: Request, res: Response): void;
-export declare function deletaVendedor(req: Request, res: Response): void;
-export declare function listaNotasVendedor(req: Request, res: Response): void;
+import { VendedorService } from "../services/vendedorService";
+import { ErroStatusRepository } from "../repositories/erroStatusRepository";
+export declare class VendedorController {
+    vendedorService: VendedorService;
+    erroStatus: ErroStatusRepository;
+    insereVendedor(req: Request, res: Response): Promise<void>;
+}
 //# sourceMappingURL=vendedorController.d.ts.map

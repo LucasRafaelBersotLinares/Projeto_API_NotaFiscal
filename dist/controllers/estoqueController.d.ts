@@ -1,8 +1,2 @@
-import { Request, Response } from "express";
-export declare function insereEstoque(req: Request, res: Response): void;
-export declare function listaEstoque(req: Request, res: Response): void;
-export declare function listaEstoqueID(req: Request, res: Response): void;
-export declare function listaEstoqueIDCarro(req: Request, res: Response): void;
-export declare function atualizaEstoque(req: Request, res: Response): void;
-export declare function deletaEstoque(req: Request, res: Response): void;
+export {};
 //# sourceMappingURL=estoqueController.d.ts.map
