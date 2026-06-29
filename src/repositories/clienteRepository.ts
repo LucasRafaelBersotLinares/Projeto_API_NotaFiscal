@@ -25,6 +25,28 @@ export class ClienteRepository {
         `;
     }
 
+    async cpfDuplicado(cpf: string): Promise<Cliente | undefined> {
+        const linhas = await executarComandoSQL(
+            "SELECT * FROM Clientes WHERE cpf = ?",
+            [cpf]
+        );
+
+        if (linhas.length === 0) {
+            return undefined;
+        }
+
+        const linha = linhas[0];
+
+        return new Cliente(
+            linha.id_cliente,
+            linha.nome,
+            linha.cpf,
+            linha.telefone,
+            linha.email,
+            linha.cidade
+        );
+    }   
+
     async insereCliente(cliente: Cliente): Promise<Cliente> {
         const resultado = await executarComandoSQL(
             "INSERT INTO Clientes (nome, cpf, telefone, email, cidade) VALUES (?, ?, ?, ?, ?)",
@@ -54,12 +76,26 @@ export class ClienteRepository {
         return clientes
     }
 
-    async listaClienteID(id: any): Promise<Cliente | undefined>{
-        const linhas = await executarComandoSQL("SELECT * FROM Clientes WHERE id_cliente = ?", [id])
-        const cliente: Cliente = linhas.map((linha: any) => {
-            return new Cliente(linha.id_cliente, linha.nome, linha.cpf, linha.telefone, linha.email, linha.cidade)
-        })
-        return cliente
+    async listaClienteID(id: number): Promise<Cliente | undefined> {
+        const linhas = await executarComandoSQL(
+            "SELECT * FROM Clientes WHERE id_cliente = ?",
+            [id]
+        );
+
+        if (linhas.length === 0) {
+            return undefined;
+        }
+
+        const linha = linhas[0];
+
+        return new Cliente(
+            linha.id_cliente,
+            linha.nome,
+            linha.cpf,
+            linha.telefone,
+            linha.email,
+            linha.cidade
+        );
     }
 
     async atualizaCliente(id: any, clienteBody: any): Promise<Cliente> {

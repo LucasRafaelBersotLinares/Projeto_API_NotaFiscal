@@ -4,9 +4,10 @@ export declare class ClienteRepository {
     private constructor();
     static getInstance(): ClienteRepository;
     static getCreateTableQuery(): string;
+    cpfDuplicado(cpf: string): Promise<Cliente | undefined>;
     insereCliente(cliente: Cliente): Promise<Cliente>;
     listaClientes(): Promise<Cliente[]>;
-    listaClienteID(id: any): Promise<Cliente | undefined>;
+    listaClienteID(id: number): Promise<Cliente | undefined>;
     atualizaCliente(id: any, clienteBody: any): Promise<Cliente>;
     deleteCliente(id: any): Promise<Cliente | undefined>;
 }

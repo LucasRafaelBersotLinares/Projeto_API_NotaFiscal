@@ -13,9 +13,14 @@ export class ClienteService {
             this.erroStatus.insereErro(400)
             throw new Error("Dados obrigatórios faltantes!!! [Nome, CPF, Telefone].")
         }
-        const novoCliente = new Cliente(null, clienteBody.nome,clienteBody.cpf,clienteBody.telefone,clienteBody.email,clienteBody.cidade)
-    
-        return this.clienteRepository.insereCliente(novoCliente)
+        
+        if(await this.clienteRepository.cpfDuplicado(clienteBody.cpf) === undefined){
+            const novoCliente = new Cliente(null, clienteBody.nome,clienteBody.cpf,clienteBody.telefone,clienteBody.email,clienteBody.cidade)
+            return await this.clienteRepository.insereCliente(novoCliente)
+        }else{
+            this.erroStatus.insereErro(409)
+            throw new Error("Cliente ja possui este CPF")
+        }
     }
 
     async listaClientes(): Promise<Cliente[]> {

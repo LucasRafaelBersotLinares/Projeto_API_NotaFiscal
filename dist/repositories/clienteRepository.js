@@ -24,6 +24,14 @@ class ClienteRepository {
             );
         `;
     }
+    async cpfDuplicado(cpf) {
+        const linhas = await (0, mysql_1.executarComandoSQL)("SELECT * FROM Clientes WHERE cpf = ?", [cpf]);
+        if (linhas.length === 0) {
+            return undefined;
+        }
+        const linha = linhas[0];
+        return new cliente_1.Cliente(linha.id_cliente, linha.nome, linha.cpf, linha.telefone, linha.email, linha.cidade);
+    }
     async insereCliente(cliente) {
         const resultado = await (0, mysql_1.executarComandoSQL)("INSERT INTO Clientes (nome, cpf, telefone, email, cidade) VALUES (?, ?, ?, ?, ?)", [cliente.nome, cliente.cpf, cliente.telefone, cliente.email, cliente.cidade]);
         const idGerado = resultado.insertId;
@@ -40,10 +48,11 @@ class ClienteRepository {
     }
     async listaClienteID(id) {
         const linhas = await (0, mysql_1.executarComandoSQL)("SELECT * FROM Clientes WHERE id_cliente = ?", [id]);
-        const cliente = linhas.map((linha) => {
-            return new cliente_1.Cliente(linha.id_cliente, linha.nome, linha.cpf, linha.telefone, linha.email, linha.cidade);
-        });
-        return cliente;
+        if (linhas.length === 0) {
+            return undefined;
+        }
+        const linha = linhas[0];
+        return new cliente_1.Cliente(linha.id_cliente, linha.nome, linha.cpf, linha.telefone, linha.email, linha.cidade);
     }
     async atualizaCliente(id, clienteBody) {
         await (0, mysql_1.executarComandoSQL)(`UPDATE Clientes
